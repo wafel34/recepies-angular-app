@@ -5,8 +5,8 @@
   },
   "apps": [
     {
-      "root": "src",
-      "outDir": "dist",
+      "root": "src/client",
+      "outDir": "src/server/public",
       "assets": [
         "assets",
         "favicon.ico"
@@ -22,10 +22,10 @@
         "styles.sass"
       ],
       "scripts": [],
-      "environmentSource": "environments/environment.ts",
+      "environmentSource": "client/environments/environment.ts",
       "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
+        "dev": "client/environments/environment.ts",
+        "prod": "client/environments/environment.prod.ts"
       }
     }
   ],
