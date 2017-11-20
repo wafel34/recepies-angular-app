@@ -1,0 +1,21 @@
+[
+    {
+        "name": "",
+        "summary": "",
+        "category": "",
+        "time": "",
+        "ingredients": [
+            {
+            "ingredient": "",
+            "amount": "",
+            },
+            {
+            "ingredient": "",
+            "amount": "",
+            },
+        ],
+        "instructions": "",
+        "photoUrl": "",
+        "createdBy": ""
+    }
+]
