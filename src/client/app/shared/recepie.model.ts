@@ -1,5 +1,6 @@
 export interface Recepie {
     name: string;
+    shortName: string;
     headline: string;
     summary: string;
     category: string;

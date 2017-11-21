@@ -1,6 +1,7 @@
 [
     {
         "name": "Egg & mango chutney flatbreads",
+        "shortName": "egg_mango_chutney_flatbreads",
         "headline": "WITH A KICK OF FRESH CHILLI",
         "summary": "WITH A KICK OF FRESH CHILLI",
         "category": "breakfast",
@@ -19,6 +20,7 @@
     },
     {
         "name": "One-cup pancakes with blueberries",
+        "shortName": "one_cup_pancakes_with_blueberries",
         "headline": "AND A DOLLOP OF NATURAL YOGHURT",
         "summary": "These are the simplest pancakes to make with kids. You don’t even need scales to weigh out the ingredients - all you need is a cup or a mug. As long as you use the same cup for measuring both the flour and the milk, you’ll be laughing! ",
         "category": "breakfast",
@@ -32,15 +34,13 @@
             "olive oil",
             "4 tablespoons natural yoghurt"
         ],
-        "instructions": "1. Crack the egg into a large mixing bowl, add the flour, milk and a tiny pinch of sea salt.\n
-        2. Whisk everything together until you have a lovely smooth batter, then fold through the blueberries.\n
-        3. Heat ½ a tablespoon of olive oil in a large non-stick frying pan over a medium heat, carefully tilting the pan to spread the oil out evenly.\n4. Add a few ladles of batter to the pan, leaving space between each one so they have room to spread out slightly – each ladleful will make one pancake, and you’ll need to work in batches.
-        \n5. Cook for 1 to 2 minutes, or until little bubbles appear on the surface and the bases are golden, then carefully flip them over. \n6. When the pancakes are golden on both sides, remove to a plate. \n7. Repeat with the remaining batter, adding a little more oil to the pan between batches, if needed. \n8. Serve the pancakes while they’re still hot, with a dollop of yoghurt and some extra fresh berries, if you like.",
+        "instructions": "1. Crack the egg into a large mixing bowl, add the flour, milk and a tiny pinch of sea salt.\n2. Whisk everything together until you have a lovely smooth batter, then fold through the blueberries.\n3. Heat ½ a tablespoon of olive oil in a large non-stick frying pan over a medium heat, carefully tilting the pan to spread the oil out evenly.\n4. Add a few ladles of batter to the pan, leaving space between each one so they have room to spread out slightly – each ladleful will make one pancake, and you’ll need to work in batches.\n5. Cook for 1 to 2 minutes, or until little bubbles appear on the surface and the bases are golden, then carefully flip them over.\n6. When the pancakes are golden on both sides, remove to a plate. \n7. Repeat with the remaining batter, adding a little more oil to the pan between batches, if needed. \n8. Serve the pancakes while they’re still hot, with a dollop of yoghurt and some extra fresh berries, if you like.",
         "photoUrl": "",
         "createdBy": "admin"
     },
     {
         "name": "Black rice pudding",
+        "shortName": "black_rice_pudding",
         "headline": "MANGO, LIME, PASSION FRUIT & COCONUT",
         "summary": "This healthy rice pudding recipe is super-tasty for breakfast. Hazelnut milk contains vitamin B12, helping us to think properly and stay alert, while hazelnuts are super-high in vitamin E, protecting our cells against damage. Enjoy! ",
         "category": "breakfast",
@@ -59,17 +59,13 @@
             "4 heaped tablespoons natural yoghurt",
             "2 wrinkly passion fruit"
         ],
-        "instructions": "1. Cook the black rice according to the packet instructions, overcooking it slightly so it’s plump and sticky, then drain and cool.
-        \n2. Meanwhile, peel and destone the mango, blitz the flesh in a blender with the lime juice until smooth, and pour into a bowl.
-        \n3. Separately, toast the hazelnuts and coconut in a dry frying pan until lightly golden, then bash up in a pestle and mortar.
-        \n4. Peel the bananas and tear into the blender, then blitz with the hazelnut milk, vanilla extract and two-thirds of the black rice – depending on the sweetness of your bananas, you could also add a teaspoon of honey.
-        \n5. Once smooth, stir that back through the rest of the rice – this will give you great texture and colour. Divide between four nice jars or bowls.
-        \n6. Spoon over the blitzed mango, squeeze half a passion fruit over each one, then delicately spoon over the yoghurt and sprinkle with the hazelnuts and coconut.",
+        "instructions": "1. Cook the black rice according to the packet instructions, overcooking it slightly so it’s plump and sticky, then drain and cool.\n2. Meanwhile, peel and destone the mango, blitz the flesh in a blender with the lime juice until smooth, and pour into a bowl.\n3. Separately, toast the hazelnuts and coconut in a dry frying pan until lightly golden, then bash up in a pestle and mortar. \n4. Peel the bananas and tear into the blender, then blitz with the hazelnut milk, vanilla extract and two-thirds of the black rice – depending on the sweetness of your bananas, you could also add a teaspoon of honey.\n5. Once smooth, stir that back through the rest of the rice – this will give you great texture and colour. Divide between four nice jars or bowls.\n6. Spoon over the blitzed mango, squeeze half a passion fruit over each one, then delicately spoon over the yoghurt and sprinkle with the hazelnuts and coconut.",
         "photoUrl": "",
         "createdBy": "admin"
     },
     {
         "name": "Simple cheese omelette",
+        "shortName": "simple_cheese_omelette",
         "headline": "SIMPLE, QUICK AND NUTRITIOUS",
         "summary": "This is a great quick meal at any time of the day. Eggs are a fantastic, affordable source of protein, helping our muscles to grow and repair and helping us to feel fuller for longer. Serve your omelette with wholemeal bread and a simple tomato salad for a healthy, balanced meal. ",
         "category": "breakfast",
@@ -80,19 +76,13 @@
             "olive oil",
             "10 g Cheddar cheese"
         ],
-        "instructions": "1. Crack the eggs into a mixing bowl, season with a pinch of sea salt and black pepper, then beat well with a fork until fully combined.
-        \n2. Place a small non-stick frying pan on a low heat to warm up.
-        \n3. Grate the cheese onto a board and set aside.
-        \n4. Add ½ tablespoon of oil to the hot pan, then carefully pour in the eggs.
-        \n5. Tilt the pan to spread them out evenly, using a fork to swirl the eggs around the pan a little.
-        \n6. When the omelette begins to cook and firm up, but still has a little raw egg on top, sprinkle over the cheese.
-        \n7. Using a spatula, ease around the edges of the omelette, then fold it over in half.
-        \n8. When it starts to turn golden brown underneath, remove the pan from the heat and slide the omelette onto a plate. \n9. Delicious with a tomato salad and wholemeal bread.",
+        "instructions": "1. Crack the eggs into a mixing bowl, season with a pinch of sea salt and black pepper, then beat well with a fork until fully combined.\n2. Place a small non-stick frying pan on a low heat to warm up.\n3. Grate the cheese onto a board and set aside.\n4. Add ½ tablespoon of oil to the hot pan, then carefully pour in the eggs.\n5. Tilt the pan to spread them out evenly, using a fork to swirl the eggs around the pan a little.\n6. When the omelette begins to cook and firm up, but still has a little raw egg on top, sprinkle over the cheese.\n7. Using a spatula, ease around the edges of the omelette, then fold it over in half.\n8. When it starts to turn golden brown underneath, remove the pan from the heat and slide the omelette onto a plate.\n9. Delicious with a tomato salad and wholemeal bread.",
         "photoUrl": "",
         "createdBy": "admin"
     },
     {
         "name": "Omelette aux fines herbes",
+        "shortName": "omelette_aux_fines_herbes",
         "headline": "TASTY AND DIFFERENT",
         "summary": "The original, and best, simple Sunday supper for one.",
         "category": "breakfast",
@@ -104,13 +94,9 @@
             "tarragon, chervil and parsley",
             "1 large knob of butter"
         ],
-        "instructions": "1. Break the eggs into a bowl and whisk lightly with a fork. Chop and add the herbs and season with sea salt and black pepper.
-        \n2. Heat the butter in a 23cm non-stick or cast-iron pan over a medium-high heat until foaming.
-        \n3. Once the foam dies down, pour in the egg mixture and gently shake the pan to distribute. Cook for 20 seconds or so, until it begins to bubble, then draw it into the centre with a wooden spoon and shake the pan again to redistribute the uncooked egg.
-        \n4. Cook the omelette until the base is set, but it is still slightly runny in the middle (unless you don’t like that).
-        \n5. Remove the pan from the heat and fold 2 sides into the middle. Shake the pan so the edges roll together then turn the omelette onto a plate, folding it over in the process. Serve with crusty bread.",
+        "instructions": "1. Break the eggs into a bowl and whisk lightly with a fork. Chop and add the herbs and season with sea salt and black pepper.\n2. Heat the butter in a 23cm non-stick or cast-iron pan over a medium-high heat until foaming.\n3. Once the foam dies down, pour in the egg mixture and gently shake the pan to distribute. Cook for 20 seconds or so, until it begins to bubble, then draw it into the centre with a wooden spoon and shake the pan again to redistribute the uncooked egg.\n4. Cook the omelette until the base is set, but it is still slightly runny in the middle (unless you don’t like that).\n5. Remove the pan from the heat and fold 2 sides into the middle. Shake the pan so the edges roll together then turn the omelette onto a plate, folding it over in the process. Serve with crusty bread.",
         "photoUrl": "",
         "createdBy": "admin"
-    },
+    }
 
 ]
