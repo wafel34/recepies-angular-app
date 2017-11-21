@@ -1,20 +1,19 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const ApiRouter = require('./api-router');
 
 function createExpressApp(database) {
+
+    //midlewares
+    app.use(bodyParser.json());
+
+    //routers
+    app.use('/api', ApiRouter(database));
+
+    //listen
     app.listen(3000, ()=>{
         console.log('App listening on port 3000');
-    });
-
-    app.get('/api/recepies', (req, res)=>{
-        const recepies = database.collection('recepies');
-        const result = recepies.find().toArray((err,result)=>{
-            if (err) {
-                res.status(500).send({error: "Database error."});
-            }
-            return res.json(result).status(200);
-        });
-
     });
 }
 

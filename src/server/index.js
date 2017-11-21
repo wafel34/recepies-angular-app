@@ -7,9 +7,8 @@ MongoClient.connect(databaseURL, (err, db) => {
         console.log(err);
         return;
     }
-
     console.log('Connected to database...');
+
+    //create express application with detabase details
     createExpressApp(db);
-
-
 });
