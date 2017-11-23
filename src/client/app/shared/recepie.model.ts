@@ -5,6 +5,7 @@ export interface Recepie {
     summary: string;
     category: string;
     time: number;
+    serves: number;
     ingredients: string[];
     instructions: string[];
     photoUrl: string;

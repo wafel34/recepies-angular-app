@@ -1,49 +1,14 @@
 <div class="app-container">
+
     <div class="list-grid">
-        <div class="list-grid__item">
+        <div class="list-grid__item" *ngFor="let recepie of recepies">
             <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        <div class="list-grid__item">
-            <mat-card>
-                <img class="list-grid__image"src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-            </mat-card>
-        </div>
-        
+            <mat-card-title>{{recepie.name}}</mat-card-title>
+            <mat-card-subtitle>{{recepie.headline}}</mat-card-subtitle>
+            <mat-card-content [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}"></mat-card-content>
 
-
-
+            </mat-card>
+        </div>
     </div>
 
 

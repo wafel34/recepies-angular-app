@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {
 
-    private baseUrl = enviroment.apiUrl;
+    private baseUrl = environment.apiUrl;
     constructor(private http: Http) { }
 
     get(url: string) {
@@ -24,13 +24,13 @@ export class ApiService {
     }
 
 
-    request(url: string, requestType: RequestMethod, body?: Object) {
+    request(url: string, method: RequestMethod, body?: Object) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
         const requestOptions = new RequestOptions({
-            url: `${baseUrl}/${url}`,
-            method: requestType,
+            url: `${this.baseUrl}/${url}`,
+            method: method,
             headers: headers
         });
 
@@ -41,8 +41,7 @@ export class ApiService {
         const request = new Request(requestOptions);
 
         return this.http.request(request)
-            .map((res: Response) => {
-                return res.json();
-            });
+            .map((res: Response) => res.json());
   }
+
 }

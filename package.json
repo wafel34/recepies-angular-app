@@ -11,6 +11,7 @@
     "start": "ng serve",
     "watch:client": "ng serve --proxy-config proxy.conf.json",
     "watch:server": "nodemon src/server/index.js",
+    "watch": "run-p watch:*",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
