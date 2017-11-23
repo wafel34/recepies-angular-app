@@ -1,8 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav class="sidenav" mode="over" opened="true" #sidenav>
+    <mat-sidenav class="sidenav" opened="false" mode="over" #sidenav>
         <button class="sidenav__button" mat-button (click)="sidenav.toggle()">
             <mat-icon color="accent">close</mat-icon>
         </button>
+
 
     </mat-sidenav>
     <mat-toolbar class="toolbar" color="primary">
@@ -22,5 +23,6 @@
             </button>
         </div>
     </mat-toolbar>
+    <app-recepies-list></app-recepies-list>
+    <router-outlet></router-outlet>
 </mat-sidenav-container>
-<router-outlet></router-outlet>

@@ -11,16 +11,20 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatGridListModule
 } from '@angular/material';
 // components
 import { AppComponent } from './app.component';
+import { RecepiesListComponent } from './recepies-list/recepies-list.component';
+
 
 import 'hammerjs';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RecepiesListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,8 @@ import 'hammerjs';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
