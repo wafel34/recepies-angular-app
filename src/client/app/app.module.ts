@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-
+import { HttpModule } from '@angular/http';
 // material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -18,6 +18,9 @@ import {
 import { AppComponent } from './app.component';
 import { RecepiesListComponent } from './recepies-list/recepies-list.component';
 
+// services
+import { ApiService } from './shared/api.service';
+
 
 import 'hammerjs';
 
@@ -29,6 +32,7 @@ import 'hammerjs';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
@@ -38,7 +42,7 @@ import 'hammerjs';
     MatSidenavModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
