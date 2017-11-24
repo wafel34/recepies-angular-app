@@ -1,14 +1,7 @@
 <div class="app-container">
 
     <div class="list-grid">
-        <div class="list-grid__item" *ngFor="let recepie of recepies">
-            <mat-card>
-            <mat-card-title>{{recepie.name}}</mat-card-title>
-            <mat-card-subtitle>{{recepie.headline}}</mat-card-subtitle>
-            <mat-card-content [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}"></mat-card-content>
-
-            </mat-card>
-        </div>
+        <app-recepie-card class="list-grid__item" *ngFor="let recepie of recepies" [recepie]="recepie"></app-recepie-card>
     </div>
 
 

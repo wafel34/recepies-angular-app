@@ -17,6 +17,7 @@ import {
 // components
 import { AppComponent } from './app.component';
 import { RecepiesListComponent } from './recepies-list/recepies-list.component';
+import { RecepieCardComponent } from './recepie-card/recepie-card.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -27,7 +28,8 @@ import 'hammerjs';
 @NgModule({
   declarations: [
     AppComponent,
-    RecepiesListComponent
+    RecepiesListComponent,
+    RecepieCardComponent
   ],
   imports: [
     BrowserModule,
