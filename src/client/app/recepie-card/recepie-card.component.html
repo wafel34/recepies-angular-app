@@ -3,10 +3,10 @@
     <mat-card-subtitle class="recepie-card__subtitle">
         {{recepie.headline}}
     </mat-card-subtitle>
-    <mat-card-content class="recepie-card__content" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
+    <!--<mat-card-content class="recepie-card__content" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
 
-    </mat-card-content>
-    <!--<img mat-card-image src="{{recepie.photoUrl}}">-->
+    </mat-card-content>-->
+    <img mat-card-image src="{{recepie.photoUrl}}">
     <mat-card-actions class="recepie-card__actions">
         <button mat-raised-button color="accent">
             View <mat-icon>visibility</mat-icon>
