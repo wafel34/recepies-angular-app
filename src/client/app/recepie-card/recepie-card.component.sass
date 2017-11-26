@@ -1,3 +1,7 @@
+@import '~@angular/material/theming'
+@import '../../custom_theme.sass'
+@include angular-material-theme($recepies-app-theme)
+
 .list-grid
     &__item
         width: 100%
@@ -9,19 +13,36 @@
     display: flex
     flex-direction: column
     justify-content: space-between
+
     &__title
         flex-grow: 1
+        margin-bottom: 8px
+        cursor: pointer
     &__subtitle
         flex-grow: 1
-    &__content
+        margin-bottom: 8px
+        text-transform: uppercase
+    &__image
         height: 225px
-        width: 100%
         background-position: center
         background-size: cover
-        border-radius: 5px
+        margin-right: -16px
+        margin-left: -16px
+        margin-bottom: 8px
+    &__content
+        display: flex
+        justify-content: space-between
+        margin-bottom: 8px
+    &__content-details
+        display: flex
+        align-items: center
     &__actions
         display: flex
         justify-content: space-between
-    img
-        max-height: 225px
-        object-fit: cover
+
+
+@media screen and (min-width: 600px)
+    .recepie-card
+        &__image
+            margin-right: -24px
+            margin-left: -24px
