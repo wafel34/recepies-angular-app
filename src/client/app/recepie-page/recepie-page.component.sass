@@ -1,0 +1,28 @@
+.recepie-page
+    &__details-container
+        display: flex
+        flex-direction: column
+    &__image
+        display: block
+        width: 100%
+        height: 225px
+        img
+            max-width: 100%
+
+
+
+@media screen and (min-width: 600px)
+    .recepie-page
+        &__image
+            height: 300px
+
+@media screen and (min-width: 768px)
+    .recepie-page
+        &__details-container
+            flex-direction: row
+        &__image
+            align-self: stretch
+            height: auto
+            width: 50%
+            img
+                max-width: 100%

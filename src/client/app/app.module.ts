@@ -12,7 +12,8 @@ import {
   MatIconModule,
   MatCardModule,
   MatSidenavModule,
-  MatGridListModule
+  MatGridListModule,
+  MatListModule
 } from '@angular/material';
 // components
 import { AppComponent } from './app.component';
@@ -44,7 +45,8 @@ import 'hammerjs';
     MatIconModule,
     MatCardModule,
     MatSidenavModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

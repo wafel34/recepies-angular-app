@@ -1,6 +1,36 @@
-<div class="app-container">
-    <h1>{{recepie?.name}}</h1>
-    <h1>{{recepie?.summary}}</h1>
+<div class="app-container" *ngIf="recepie !== undefined">
+    <mat-card class="recepie-page">
+        <div class="recepie-page__details-container">
+            <!--<div class="recepie-page__image" [ngStyle]="{'background-image': 'url(' + recepie?.photoUrl + ')'}"></div>-->
+            <div class="recepie-page__image" >
+                <img src="{{recepie.photoUrl}}" alt="">
+            </div>
+            <div class="recepie-page__details">
+                <mat-card-actions class="recepie-page__actions">
+                    <button mat-raised-button color="accent">
+                        Favourite <mat-icon>favorite_border</mat-icon>
+                    </button>
+                    <button mat-raised-button color="warn">
+                        Delete <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </mat-card-actions>
+
+                <mat-card-title class="recepie-page__title">{{recepie?.name}}</mat-card-title>
+                <mat-card-subtitle class="recepie-page__subtitle">{{recepie?.headline}}</mat-card-subtitle>
+                <ul>Ingredients:
+                    <li *ngFor="let ingredient of recepie.ingredients"> {{ingredient}} </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <mat-card-content class="recepie-page__content">
+            <ul>
+                <li *ngFor="let instruction of recepie.instructions"> {{instruction}} </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+
 
 
 </div>
