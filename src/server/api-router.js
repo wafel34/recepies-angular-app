@@ -40,9 +40,22 @@ function ApiRouter(database) {
                 });
             }
         });
-
     });
+    
 
+    router.get('/recepies/:shortName', (req, res) => {
+        const name = req.params.shortName;
+        const result = recepies.findOne({shortName: name}, (err, dbRecord) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            if (dbRecord === null) {
+                return res.sendStatus(404);
+            }
+
+            return res.json(dbRecord).status(200);
+        });
+    });
 
     return router;
 }

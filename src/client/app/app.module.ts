@@ -18,6 +18,7 @@ import {
 import { AppComponent } from './app.component';
 import { RecepiesListComponent } from './recepies-list/recepies-list.component';
 import { RecepieCardComponent } from './recepie-card/recepie-card.component';
+import { RecepiePageComponent } from './recepie-page/recepie-page.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -29,7 +30,8 @@ import 'hammerjs';
   declarations: [
     AppComponent,
     RecepiesListComponent,
-    RecepieCardComponent
+    RecepieCardComponent,
+    RecepiePageComponent
   ],
   imports: [
     BrowserModule,

@@ -15,7 +15,7 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="recepie-card__actions">
-        <button routerLink="/recepies/{{recepie.shortName}}" mat-raised-button color="primary">
+        <button [routerLink]="['/recepies', recepie.shortName]" mat-raised-button color="primary">
             View <mat-icon>visibility</mat-icon>
         </button>
         <button mat-raised-button color="accent">
