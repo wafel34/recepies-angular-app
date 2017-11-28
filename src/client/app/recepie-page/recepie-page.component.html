@@ -1,22 +1,40 @@
 <div class="app-container" *ngIf="recepie !== undefined">
     <mat-card class="recepie-page">
             <div class="recepie-page__image" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
-                <!--<img src="{{recepie.photoUrl}}" alt="">-->
-            </div>
-            <div class="recepie-page__details">
+            </div><!--recepie-page__image"-->
 
-                <button mat-raised-button color="accent">
-                    Favourite <mat-icon>favorite_border</mat-icon>
-                </button>
-                <button mat-raised-button color="warn">
-                    Delete <mat-icon>remove_circle_outline</mat-icon>
-                </button>
+            <div class="recepie-page__panel-right">
+
+                <div class="recepie-page__buttons-container">
+                    <button class="recepie-page__button" mat-raised-button color="accent">
+                        Favourite <mat-icon>favorite_border</mat-icon>
+                    </button>
+                    <button class="recepie-page__button" mat-raised-button color="warn">
+                        Delete <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div><!--buttons-container-->
 
                 <mat-card-title class="recepie-page__title">{{recepie?.name}}</mat-card-title>
                 <mat-card-subtitle class="recepie-page__subtitle">{{recepie?.headline}}</mat-card-subtitle>
+
+                <div class="recepie-page__details">
+                    <div class="details-icons">
+                        <mat-icon class="details-icons__icon">timer</mat-icon>
+                        <span class="details-icons__text">Time: {{recepie?.time}} minutes</span>
+                    </div>
+                    <div class="details-icons">
+                        <mat-icon class="details-icons__icon">room_service</mat-icon>
+                        <span class="details-icons__text">Serves: {{recepie?.serves}}</span>
+                    </div>
+                    <div class="details-icons">
+                        <mat-icon class="details-icons__icon">restaurant</mat-icon>
+                        <span class="details-icons__text">Category: {{recepie?.category}}</span>
+                    </div>
+                </div><!--details (icons)-->
+
                 <ul class="recepie-details-list">Ingredients:
                     <li class="recepie-details-list__item" *ngFor="let ingredient of recepie.ingredients"> {{ingredient}} </li>
-                </ul>
+                </ul><!--ingredients list-->
             </div>
 
         <mat-card-content class="recepie-page__content">
