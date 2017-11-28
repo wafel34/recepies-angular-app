@@ -31,13 +31,18 @@
                         <span class="details-icons__text">Category: {{recepie?.category}}</span>
                     </div>
                 </div><!--details (icons)-->
-
-                <ul class="recepie-details-list">Ingredients:
+                <p>Ingredients:</p>
+                <ul class="recepie-details-list">
                     <li class="recepie-details-list__item" *ngFor="let ingredient of recepie.ingredients"> {{ingredient}} </li>
                 </ul><!--ingredients list-->
             </div>
 
         <mat-card-content class="recepie-page__content">
+            <blockquote >
+
+                <p>{{recepie.summary}}</p>
+            </blockquote>
+            <p>How to prepare:</p>
             <ul class="recepie-details-list">
                 <li class="recepie-details-list__item" *ngFor="let instruction of recepie.instructions"> {{instruction}} </li>
             </ul>
