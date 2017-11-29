@@ -14,6 +14,7 @@ export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
     routeUrl: string;
+    editing: boolean = false;
     constructor(route: ActivatedRoute,
                 private api: ApiService) {
         //get shortname form url
@@ -26,5 +27,12 @@ export class RecepiePageComponent implements OnInit {
             .subscribe((result) => {
                 this.recepie = result;
             });
+    }
+
+    edit() {
+        this.editing = true;
+    }
+    finishEditing() {
+        this.editing = false;
     }
 }

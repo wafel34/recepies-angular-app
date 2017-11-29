@@ -1,5 +1,5 @@
 <div class="app-container" *ngIf="recepie !== undefined">
-    <mat-card class="recepie-page">
+    <mat-card class="recepie-page" [class.hidden]="editing">
             <div class="recepie-page__image" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
             </div><!--recepie-page__image"-->
 
@@ -8,6 +8,9 @@
                 <div class="recepie-page__buttons-container">
                     <button class="recepie-page__button" mat-raised-button color="accent">
                         Favourite <mat-icon>favorite_border</mat-icon>
+                    </button>
+                    <button class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
+                        Edit  <mat-icon>edit</mat-icon>
                     </button>
                     <button class="recepie-page__button" mat-raised-button color="warn">
                         Delete <mat-icon>remove_circle_outline</mat-icon>
@@ -31,18 +34,18 @@
                         <span class="details-icons__text">Category: {{recepie?.category}}</span>
                     </div>
                 </div><!--details (icons)-->
-                <p>Ingredients:</p>
+                <h3>Ingredients:</h3>
                 <ul class="recepie-details-list">
                     <li class="recepie-details-list__item" *ngFor="let ingredient of recepie.ingredients"> {{ingredient}} </li>
                 </ul><!--ingredients list-->
             </div>
 
         <mat-card-content class="recepie-page__content">
-            <blockquote >
-
+            <h3 *ngIf="recepie.summary">About:</h3>
+            <aside *ngIf="recepie.summary" class="content__about">
                 <p>{{recepie.summary}}</p>
-            </blockquote>
-            <p>How to prepare:</p>
+            </aside>
+            <h3>How to prepare:</h3>
             <ul class="recepie-details-list">
                 <li class="recepie-details-list__item" *ngFor="let instruction of recepie.instructions"> {{instruction}} </li>
             </ul>
@@ -50,5 +53,16 @@
     </mat-card>
 
 
+<div [class.hidden]="!editing">
+    <button class="recepie-page__button" mat-raised-button color="primary" (click)="finishEditing()">
+        Edit  <mat-icon>edit</mat-icon>
+    </button>
+    Siemasiema
+
+    Siemasiema
+
+    Siemasiema
+
+</div>
 
 </div>
