@@ -1,4 +1,4 @@
-<form [formGroup]="recepiesForm" novalidate class="recepie-form">
+<form [formGroup]="recepiesForm" novalidate class="recepie-form" (submit)=(onSubmit())>
     <mat-form-field class="recepie-form-field">
         <label class="center-block">Name:
              <input matInput class="form-control" formControlName="name">
@@ -20,15 +20,24 @@
     <mat-form-field class="recepie-form-field">
         <label class="center-block">Main category:
             <mat-select matInput formControlName="category">
-                <mat-option >breakfast</mat-option>
-                <mat-option>dinner</mat-option>
-                <mat-option>salad</mat-option>
+                <mat-option value="breakfast">breakfast</mat-option>
+                <mat-option value="dinner">dinner</mat-option>
+                <mat-option value="salad">salad</mat-option>
             </mat-select>
         </label>
     </mat-form-field>
 
+    <fieldset>
+        <div formArrayName="ingredients">
+            <mat-form-field class="recepie-form-field" *ngFor="let ingredient of recepiesForm.controls.ingredients.controls; let i=index">
+                <label class="center-block">Ingredient {{i+1}}:
+                    <input matInput class="form-control" formControlName="{{i}}">
+                </label>
+            </mat-form-field>
+            <button type="button" mat-raised-button color="primary" (click)=(addIngredient())>Add ingredient</button>
+        </div>
+    </fieldset>
+    
 
-
-
-
+    <button type="submit" mat-raised-button color="warn">Submit</button>
 </form>
