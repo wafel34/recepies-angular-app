@@ -52,17 +52,9 @@
         </mat-card-content>
     </mat-card>
 
-
 <div [class.hidden]="!editing">
-    <button class="recepie-page__button" mat-raised-button color="primary" (click)="finishEditing()">
-        Edit  <mat-icon>edit</mat-icon>
-    </button>
-    Siemasiema
-
-    Siemasiema
-
-    Siemasiema
-
+    <app-recepie-edit-form [recepie]="recepie" ></app-recepie-edit-form>
 </div>
+
 
 </div>

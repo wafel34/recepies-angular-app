@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 // material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -13,13 +14,17 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatGridListModule,
-  MatListModule
+  MatListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule
 } from '@angular/material';
 // components
 import { AppComponent } from './app.component';
 import { RecepiesListComponent } from './recepies-list/recepies-list.component';
 import { RecepieCardComponent } from './recepie-card/recepie-card.component';
 import { RecepiePageComponent } from './recepie-page/recepie-page.component';
+import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -32,13 +37,15 @@ import 'hammerjs';
     AppComponent,
     RecepiesListComponent,
     RecepieCardComponent,
-    RecepiePageComponent
+    RecepiePageComponent,
+    RecepieEditFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -46,7 +53,10 @@ import 'hammerjs';
     MatCardModule,
     MatSidenavModule,
     MatGridListModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

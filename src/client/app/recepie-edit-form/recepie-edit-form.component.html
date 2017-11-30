@@ -1,0 +1,34 @@
+<form [formGroup]="recepiesForm" novalidate class="recepie-form">
+    <mat-form-field class="recepie-form-field">
+        <label class="center-block">Name:
+             <input matInput class="form-control" formControlName="name">
+        </label>
+    </mat-form-field>
+
+    <mat-form-field class="recepie-form-field">
+        <label class="center-block">Headline:
+             <input matInput class="form-control" formControlName="headline">
+        </label>
+    </mat-form-field>
+
+    <mat-form-field class="recepie-form-field">
+        <label class="center-block">Summary:
+            <textarea matInput class="form-control" formControlName="summary"></textarea>
+        </label>
+    </mat-form-field>
+
+    <mat-form-field class="recepie-form-field">
+        <label class="center-block">Main category:
+            <mat-select matInput formControlName="category">
+                <mat-option >breakfast</mat-option>
+                <mat-option>dinner</mat-option>
+                <mat-option>salad</mat-option>
+            </mat-select>
+        </label>
+    </mat-form-field>
+
+
+
+
+
+</form>
