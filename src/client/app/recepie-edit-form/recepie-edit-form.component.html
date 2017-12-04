@@ -1,66 +1,83 @@
+<h1>Edit your recepie</h1>
 <form [formGroup]="recepiesForm" novalidate class="recepie-form" (ngSubmit)=(onSubmit())>
-    <mat-form-field class="recepie-form-field">
-        <label class="center-block">Name:</label>
-        <input matInput class="form-control" formControlName="name">
-        <mat-hint>Siema</mat-hint>
-    </mat-form-field>
 
-    <mat-form-field class="recepie-form-field">
-        <label class="center-block">Headline:</label>
-        <input matInput class="form-control" formControlName="headline">
-        <mat-hint>Siema</mat-hint>
-    </mat-form-field>
+    <section class="recepie-form__section">
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Name:</mat-placeholder>
+            <input matInput class="form-control" formControlName="name">
+            <mat-hint>Enter the name for your recepie.</mat-hint>
+        </mat-form-field>
 
-    <mat-form-field class="recepie-form-field">
-        <label class="center-block">Summary:</label>
-        <textarea matInput class="form-control" formControlName="summary"></textarea>
-        <mat-hint>Siema</mat-hint>
-    </mat-form-field>
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Headline:</mat-placeholder>
+            <input matInput class="form-control" formControlName="headline">
+            <mat-hint>Short, supporing slogan for your meal.</mat-hint>
+        </mat-form-field>
 
-    <mat-form-field class="recepie-form-field">
-        <label class="center-block">Main category:</label>
-        <mat-select matInput formControlName="category">
-            <mat-option value="breakfast">breakfast</mat-option>
-            <mat-option value="dinner">dinner</mat-option>
-            <mat-option value="salad">salad</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Summary:</mat-placeholder>
+            <textarea matInput class="form-control" formControlName="summary"></textarea>
+            <mat-hint>Overview of the meal (more detail than headline, but no instructions yet).</mat-hint>
+        </mat-form-field>
+    </section>
 
-    <mat-form-field class="recepie-form-field">
-        <label class="center-block">Time:</label>
-        <input type="number" matInput class="form-control" formControlName="time">
-        <mat-hint>Enter the time in minutes.</mat-hint>
-    </mat-form-field>
+    <section class="recepie-form__section">
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Main category:</mat-placeholder>
+            <mat-select matInput formControlName="category">
+                <mat-option value="breakfast">breakfast</mat-option>
+                <mat-option value="dinner">dinner</mat-option>
+                <mat-option value="salad">salad</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field class="recepie-form-field">
-        <label class="center-block">Serves:</label>
-        <input type="number" matInput class="form-control" formControlName="serves">
-        <mat-hint>Enter the number of serves.</mat-hint>
-    </mat-form-field>
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Time:</mat-placeholder>
+            <input type="number" matInput class="form-control" formControlName="time"><span matSuffix> minutes.</span>
+            <mat-hint>Full time of meal preparation in minutes.</mat-hint>
+        </mat-form-field>
 
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Serves:</mat-placeholder>
+            <input type="number" matInput class="form-control" formControlName="serves">
+            <mat-hint>How many serves will be made from your recepie.</mat-hint>
+        </mat-form-field>
 
-    <fieldset>
-        <div formArrayName="ingredients">
-            <mat-form-field class="recepie-form-field" *ngFor="let ingredient of recepiesForm.controls.ingredients.controls; let i=index">
-                <label class="center-block">Ingredient {{i+1}}:
-                    <input matInput class="form-control" formControlName="{{i}}">
-                </label>
-            </mat-form-field>
-            <button type="button" mat-raised-button color="primary" (click)=(addIngredient())>Add ingredient</button>
-        </div>
-    </fieldset>
+        <mat-form-field class="section__form-field">
+            <mat-placeholder>Photo URL:</mat-placeholder>
+            <input type="text" matInput class="form-control" formControlName="photoUrl">
+            <mat-hint>Enter the URL address for yours meal photo.</mat-hint>
+        </mat-form-field>
+    </section>
 
-    <fieldset>
-        <div formArrayName="instructions">
-            <mat-form-field class="recepie-form-field" *ngFor="let instruction of recepiesForm.controls.instructions.controls; let i=index">
-                <label class="center-block">Step: {{i+1}}:
-                    <input matInput class="form-control" formControlName="{{i}}">
-                </label>
-            </mat-form-field>
-            <button type="button" mat-raised-button color="primary" (click)=(addInstruction())>Add instruction</button>
-        </div>
-    </fieldset>
+    <section class="recepie-form__section">
+        <fieldset class="section__fieldset">
+            <legend>Ingredients:</legend>
+            <div class="section__array" formArrayName="ingredients">
+                <mat-form-field class="section__form-field" *ngFor="let ingredient of recepiesForm.controls.ingredients.controls; let i=index">
+                    <label class="center-block">Ingredient {{i+1}}:
+                        <input matInput class="form-control" formControlName="{{i}}">
+                    </label>
+                </mat-form-field>
+                <button type="button" mat-raised-button color="primary" (click)=(addIngredient())>Add ingredient</button>
+            </div>
+        </fieldset>
 
+    </section>
+
+    <section class="recepie-form__section">
+        <fieldset class="section__fieldset">
+            <legend>Instructions:</legend>
+            <div class="section__array" formArrayName="instructions">
+                <mat-form-field class="section__form-field" *ngFor="let instruction of recepiesForm.controls.instructions.controls; let i=index">
+                    <label class="center-block">Step: {{i+1}}:
+                        <input matInput class="form-control" formControlName="{{i}}">
+                    </label>
+                </mat-form-field>
+                <button type="button" mat-raised-button color="primary" (click)=(addInstruction())>Add instruction</button>
+            </div>
+        </fieldset>
+    </section>
 
     <button type="submit" mat-raised-button color="warn">Submit</button>
 </form>

@@ -38,7 +38,7 @@ export class RecepieEditFormComponent implements OnInit {
 
 
     initializeArrays() {
-        //set ingredients array of ingredients from recepies
+        // set ingredients array of ingredients from recepies
         this.ingredients = this.formBuilder.array(this.recepie.ingredients);
         this.recepiesForm.setControl('ingredients', this.ingredients);
         this.instructions = this.formBuilder.array(this.recepie.instructions);

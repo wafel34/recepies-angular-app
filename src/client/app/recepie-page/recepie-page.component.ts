@@ -14,15 +14,15 @@ export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
     routeUrl: string;
-    editing: boolean = true;
+    editing = false;
     constructor(route: ActivatedRoute,
                 private api: ApiService) {
-        //get shortname form url
+        // get shortname form url
         this.routeUrl = route.snapshot.params.shortname;
     }
 
     ngOnInit() {
-        //get data from database
+        // get data from database
         this.api.get(`recepies/${this.routeUrl}`)
             .subscribe((result) => {
                 this.recepie = result;

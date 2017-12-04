@@ -58,7 +58,9 @@ import 'hammerjs';
     MatInputModule,
     MatSelectModule
   ],
-  providers: [ApiService],
+  providers: [
+      ApiService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
