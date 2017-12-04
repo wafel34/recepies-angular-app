@@ -12,7 +12,8 @@ export class RecepieEditFormComponent implements OnInit {
 
     @Input() recepie: Recepie;
     recepiesForm: FormGroup;
-    ingredients: any[] = [];
+    ingredients: FormArray;
+    instructions: FormArray;
 
     constructor(private formBuilder: FormBuilder) {
     }
@@ -28,29 +29,34 @@ export class RecepieEditFormComponent implements OnInit {
             time: [this.recepie.time],
             serves: [this.recepie.serves],
             ingredients: this.formBuilder.array([]),
-            instructions: [this.recepie.instructions],
+            instructions: this.formBuilder.array([]),
             photoUrl: [this.recepie.photoUrl]
         });
 
-        this.initializeIngridients();
+        this.initializeArrays();
     }
 
 
-    initializeIngridients() {
+    initializeArrays() {
+        //set ingredients array of ingredients from recepies
         this.ingredients = this.formBuilder.array(this.recepie.ingredients);
         this.recepiesForm.setControl('ingredients', this.ingredients);
+        this.instructions = this.formBuilder.array(this.recepie.instructions);
+        this.recepiesForm.setControl('instructions', this.instructions);
     }
 
     addIngredient() {
-        this.ingredients = this.recepiesForm.get('ingredients');
+        this.ingredients = this.recepiesForm.get('ingredients') as FormArray;
         this.ingredients.push(this.formBuilder.control(''));
+    }
+    addInstruction() {
+        this.instructions = this.recepiesForm.get('instructions') as FormArray;
+        this.instructions.push(this.formBuilder.control(''));
     }
 
     onSubmit() {
         console.log('dyao', this.recepiesForm);
     }
-
-
 
 
 }
