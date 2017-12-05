@@ -16,7 +16,7 @@
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Summary:</mat-placeholder>
-            <textarea matInput class="form-control" formControlName="summary"></textarea>
+            <textarea matInput matTextareaAutosize class="form-control" formControlName="summary"></textarea>
             <mat-hint>Overview of the meal (more detail than headline, but no instructions yet).</mat-hint>
         </mat-form-field>
     </section>
@@ -54,12 +54,16 @@
         <fieldset class="section__fieldset">
             <legend>Ingredients:</legend>
             <div class="section__array" formArrayName="ingredients">
-                <mat-form-field class="section__form-field" *ngFor="let ingredient of recepiesForm.controls.ingredients.controls; let i=index">
-                    <label class="center-block">Ingredient {{i+1}}:
+                <div class="section__record-container" *ngFor="let ingredient of recepiesForm.controls.ingredients.controls; let i=index">
+                    <mat-form-field class="section__form-field">
+                        <mat-placeholder>Ingredient {{i+1}}:</mat-placeholder>
                         <input matInput class="form-control" formControlName="{{i}}">
-                    </label>
-                </mat-form-field>
-                <button type="button" mat-raised-button color="primary" (click)=(addIngredient())>Add ingredient</button>
+                    </mat-form-field>
+                    <button class="section__button" matSuffix mat-button type="button" color="warn" aria-label="delete step" (click)="deleteStep(this.ingredients, i);">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+                <button type="button" mat-raised-button color="primary" (click)="addStep(this.ingredients, 'ingredients')">Add ingredient</button>
             </div>
         </fieldset>
 
@@ -69,12 +73,16 @@
         <fieldset class="section__fieldset">
             <legend>Instructions:</legend>
             <div class="section__array" formArrayName="instructions">
-                <mat-form-field class="section__form-field" *ngFor="let instruction of recepiesForm.controls.instructions.controls; let i=index">
-                    <label class="center-block">Step: {{i+1}}:
+                <div class="section__record-container" *ngFor="let instruction of recepiesForm.controls.instructions.controls; let i=index">
+                    <mat-form-field class="section__form-field">
+                        <mat-placeholder>Step {{i+1}}:</mat-placeholder>
                         <input matInput class="form-control" formControlName="{{i}}">
-                    </label>
-                </mat-form-field>
-                <button type="button" mat-raised-button color="primary" (click)=(addInstruction())>Add instruction</button>
+                    </mat-form-field>
+                    <button class="section__button" matSuffix mat-button type="button" color="warn"aria-label="delete step" (click)="deleteStep(this.instructions,i);">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+                <button type="button" mat-raised-button color="primary" (click)="addStep(this.instructions, 'instructions')">Add instruction</button>
             </div>
         </fieldset>
     </section>

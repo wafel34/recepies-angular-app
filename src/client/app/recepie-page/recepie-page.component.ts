@@ -14,7 +14,7 @@ export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
     routeUrl: string;
-    editing = false;
+    editing = true;
     constructor(route: ActivatedRoute,
                 private api: ApiService) {
         // get shortname form url

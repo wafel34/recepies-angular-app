@@ -45,17 +45,23 @@ export class RecepieEditFormComponent implements OnInit {
         this.recepiesForm.setControl('instructions', this.instructions);
     }
 
-    addIngredient() {
-        this.ingredients = this.recepiesForm.get('ingredients') as FormArray;
-        this.ingredients.push(this.formBuilder.control(''));
+    addStep(array, arrayName) {
+        // takes an Form array (ingredients or instructions) and it's name and pushes new element
+        array = this.recepiesForm.get(arrayName) as FormArray;
+        array.push(this.formBuilder.control(''));
     }
-    addInstruction() {
-        this.instructions = this.recepiesForm.get('instructions') as FormArray;
-        this.instructions.push(this.formBuilder.control(''));
+
+    deleteStep(array, index) {
+        // takes an Form array (ingredients or instructions) and it's index and removes the element from this array.
+        if (array.controls.length !== 1) {
+            array.removeAt(index);
+        } else {
+            array.controls[0].setValue(null);
+        }
     }
 
     onSubmit() {
-        console.log('dyao', this.recepiesForm);
+        console.log(this.recepiesForm);
     }
 
 

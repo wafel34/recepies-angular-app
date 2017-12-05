@@ -1,3 +1,7 @@
+@import '~@angular/material/theming'
+@import '../../custom_theme.sass'
+@include angular-material-theme($recepies-app-theme)
+
 .recepie-form
     display: flex
     flex-direction: column
@@ -6,15 +10,27 @@
         width: 100%
         display: flex
         flex-direction: column
-        padding: 16px
+        padding: 0px
+        margin-bottom: 16px
 
     .section
-        &__fieldset
+        &__record-container
+            width: 100%
+            display: flex
+        &__form-field
+            flex-grow: 1
+            margin-top: 8px
+        &__button
+            align-self: center
+            min-width: 44px
         &__array
             display: flex
             flex-direction: column
             flex-grow: 1
             justify-content: flex-start
+        &__fieldset
+            border-radius: 2px
+            border: 2px solid rgba(mat-color($recepies-app-primary, 300),.35)
 
 
 
@@ -33,3 +49,4 @@
             width: 50%
             flex-grow: 1
             justify-content: space-between
+            padding: 16px
