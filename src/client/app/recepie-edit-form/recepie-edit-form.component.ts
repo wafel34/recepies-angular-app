@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { Recepie } from '../shared/recepie.model';
-import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-recepie-edit-form',
@@ -21,16 +21,16 @@ export class RecepieEditFormComponent implements OnInit {
     ngOnInit() {
 
         this.recepiesForm = this.formBuilder.group({
-            name: [this.recepie.name],
-            shortname: [this.recepie.shortName],
-            headline: [this.recepie.headline],
-            summary: [this.recepie.summary],
-            category: [this.recepie.category],
-            time: [this.recepie.time],
-            serves: [this.recepie.serves],
+            name: [this.recepie.name, [Validators.required]],
+            shortname: [this.recepie.shortName, [Validators.required]],
+            headline: [this.recepie.headline, [Validators.required]],
+            summary: [this.recepie.summary, [Validators.required]],
+            category: [this.recepie.category, [Validators.required]],
+            time: [this.recepie.time, [Validators.required]],
+            serves: [this.recepie.serves, [Validators.required, Validators.max(20), Validators.min(1)]],
             ingredients: this.formBuilder.array([]),
             instructions: this.formBuilder.array([]),
-            photoUrl: [this.recepie.photoUrl]
+            photoUrl: [this.recepie.photoUrl, [Validators.required]]
         });
 
         this.initializeArrays();
@@ -40,7 +40,10 @@ export class RecepieEditFormComponent implements OnInit {
     initializeArrays() {
         // set ingredients array of ingredients from recepies
         this.ingredients = this.formBuilder.array(this.recepie.ingredients);
+        // this.ingredients.setValidators(Validators.minLength(2));
         this.recepiesForm.setControl('ingredients', this.ingredients);
+
+
         this.instructions = this.formBuilder.array(this.recepie.instructions);
         this.recepiesForm.setControl('instructions', this.instructions);
     }
@@ -58,6 +61,8 @@ export class RecepieEditFormComponent implements OnInit {
         } else {
             array.controls[0].setValue(null);
         }
+
+        console.log(this.recepiesForm.controls.ingredients)
     }
 
     onSubmit() {

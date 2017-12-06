@@ -4,20 +4,23 @@
     <section class="recepie-form__section">
         <mat-form-field class="section__form-field">
             <mat-placeholder>Name:</mat-placeholder>
-            <input matInput class="form-control" formControlName="name">
-            <mat-hint>Enter the name for your recepie.</mat-hint>
+            <input matInput maxlength="40" #name class="form-control" formControlName="name">
+            <mat-hint>Enter the name for your recepie (max 40 characters). {{name.value.length}}/40.</mat-hint>
+            <mat-error *ngIf="recepiesForm.controls.name.invalid">Field cannot be empty.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Headline:</mat-placeholder>
-            <input matInput class="form-control" formControlName="headline">
-            <mat-hint>Short, supporing slogan for your meal.</mat-hint>
+            <input matInput maxlength="40" #headline class="form-control" formControlName="headline">
+            <mat-hint>Short slogan of your meal (max 40 characters). {{headline.value.length}}/40</mat-hint>
+            <mat-error *ngIf="recepiesForm.controls.headline.invalid">Field cannot be empty.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Summary:</mat-placeholder>
             <textarea matInput matTextareaAutosize class="form-control" formControlName="summary"></textarea>
             <mat-hint>Overview of the meal (more detail than headline, but no instructions yet).</mat-hint>
+            <mat-error *ngIf="recepiesForm.controls.summary.invalid">Field cannot be empty.</mat-error>
         </mat-form-field>
     </section>
 
@@ -35,18 +38,21 @@
             <mat-placeholder>Time:</mat-placeholder>
             <input type="number" matInput class="form-control" formControlName="time"><span matSuffix> minutes.</span>
             <mat-hint>Full time of meal preparation in minutes.</mat-hint>
+            <mat-error *ngIf="recepiesForm.controls.time.invalid">Field cannot be empty.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Serves:</mat-placeholder>
-            <input type="number" matInput class="form-control" formControlName="serves">
+            <input type="number" min="1" max="20" matInput class="form-control" formControlName="serves">
             <mat-hint>How many serves will be made from your recepie.</mat-hint>
+            <mat-error *ngIf="recepiesForm.controls.serves.invalid">Field cannot be empty and value must be 1-20.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Photo URL:</mat-placeholder>
             <input type="text" matInput class="form-control" formControlName="photoUrl">
             <mat-hint>Enter the URL address for yours meal photo.</mat-hint>
+            <mat-error *ngIf="recepiesForm.controls.photoUrl.invalid">Field cannot be empty.</mat-error>
         </mat-form-field>
     </section>
 
@@ -87,5 +93,5 @@
         </fieldset>
     </section>
 
-    <button type="submit" mat-raised-button color="warn">Submit</button>
+    <button class="recepie-form__submit" type="submit" mat-raised-button color="warn">Submit</button>
 </form>
