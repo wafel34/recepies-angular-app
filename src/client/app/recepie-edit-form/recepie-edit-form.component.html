@@ -1,30 +1,33 @@
-<h1>Edit your recepie</h1>
+<div class="header-container">
+    <h1 class="header-container__h1">Edit your recepie</h1>
+    <button class="recepie-form__button" type="button" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
+</div>
 <form [formGroup]="recepiesForm" novalidate class="recepie-form" (ngSubmit)=(onSubmit())>
 
-    <section class="recepie-form__section">
+    <section class="recepie-form__section"><!-- 1st section of the form: name, headline, summary -->
         <mat-form-field class="section__form-field">
             <mat-placeholder>Name:</mat-placeholder>
             <input matInput maxlength="40" #name class="form-control" formControlName="name">
             <mat-hint>Enter the name for your recepie (max 40 characters). {{name.value.length}}/40.</mat-hint>
             <mat-error *ngIf="recepiesForm.controls.name.invalid">Field cannot be empty.</mat-error>
-        </mat-form-field>
+        </mat-form-field><!-- name form field -->
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Headline:</mat-placeholder>
             <input matInput maxlength="40" #headline class="form-control" formControlName="headline">
             <mat-hint>Short slogan of your meal (max 40 characters). {{headline.value.length}}/40</mat-hint>
             <mat-error *ngIf="recepiesForm.controls.headline.invalid">Field cannot be empty.</mat-error>
-        </mat-form-field>
+        </mat-form-field><!-- headline form field -->
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Summary:</mat-placeholder>
             <textarea matInput matTextareaAutosize class="form-control" formControlName="summary"></textarea>
             <mat-hint>Overview of the meal (more detail than headline, but no instructions yet).</mat-hint>
             <mat-error *ngIf="recepiesForm.controls.summary.invalid">Field cannot be empty.</mat-error>
-        </mat-form-field>
-    </section>
+        </mat-form-field><!-- summary form field -->
+    </section> <!-- 1st section -->
 
-    <section class="recepie-form__section">
+    <section class="recepie-form__section"><!-- 2nd section: category, time, serves, photoUrl -->
         <mat-form-field class="section__form-field">
             <mat-placeholder>Main category:</mat-placeholder>
             <mat-select matInput formControlName="category">
@@ -32,52 +35,50 @@
                 <mat-option value="dinner">dinner</mat-option>
                 <mat-option value="salad">salad</mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field><!-- category form field -->
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Time:</mat-placeholder>
             <input type="number" matInput class="form-control" formControlName="time"><span matSuffix> minutes.</span>
             <mat-hint>Full time of meal preparation in minutes.</mat-hint>
             <mat-error *ngIf="recepiesForm.controls.time.invalid">Field cannot be empty.</mat-error>
-        </mat-form-field>
+        </mat-form-field><!-- time form field -->
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Serves:</mat-placeholder>
             <input type="number" min="1" max="20" matInput class="form-control" formControlName="serves">
             <mat-hint>How many serves will be made from your recepie.</mat-hint>
             <mat-error *ngIf="recepiesForm.controls.serves.invalid">Field cannot be empty and value must be 1-20.</mat-error>
-        </mat-form-field>
+        </mat-form-field><!-- serves form field -->
 
         <mat-form-field class="section__form-field">
             <mat-placeholder>Photo URL:</mat-placeholder>
             <input type="text" matInput class="form-control" formControlName="photoUrl">
             <mat-hint>Enter the URL address for yours meal photo.</mat-hint>
             <mat-error *ngIf="recepiesForm.controls.photoUrl.invalid">Field cannot be empty.</mat-error>
-        </mat-form-field>
-    </section>
+        </mat-form-field><!-- photo form field -->
+    </section><!-- 2nd section -->
 
-    <section class="recepie-form__section">
+    <section class="recepie-form__section"><!-- 3rd section: infredients -->
         <fieldset class="section__fieldset">
             <legend>Ingredients:</legend>
-
             <div class="section__array" formArrayName="ingredients">
                 <div class="section__record-container" *ngFor="let ingredient of recepiesForm.controls.ingredients.controls; let i=index">
                     <mat-form-field class="section__form-field">
                         <mat-placeholder>Ingredient {{i+1}}:</mat-placeholder>
                         <input matInput class="form-control" formControlName="{{i}}">
                         <mat-error *ngIf="recepiesForm.controls.ingredients.controls[i].invalid">Field cannot be empty. Add content or remove field.</mat-error>
-                    </mat-form-field>
+                    </mat-form-field><!-- single ingredient form field -->
                     <button class="section__button" matSuffix mat-button type="button" color="warn" aria-label="delete step" (click)="deleteStep('ingredients', i);">
                         <mat-icon>remove_circle_outline</mat-icon>
-                    </button>
+                    </button><!-- remove button for each form field -->
                 </div>
                 <button type="button" mat-raised-button color="primary" (click)="addStep('ingredients')">Add ingredient</button>
-            </div>
+            </div><!-- form array container fiv -->
         </fieldset>
+    </section><!-- 3rd section -->
 
-    </section>
-
-    <section class="recepie-form__section">
+    <section class="recepie-form__section"><!-- 4th section: instructions -->
         <fieldset class="section__fieldset">
             <legend>Instructions:</legend>
             <div class="section__array" formArrayName="instructions">
@@ -86,15 +87,18 @@
                         <mat-placeholder>Step {{i+1}}:</mat-placeholder>
                         <input matInput class="form-control" formControlName="{{i}}">
                         <mat-error *ngIf="recepiesForm.controls.instructions.controls[i].invalid">Field cannot be empty. Add content or remove field.</mat-error>
-                    </mat-form-field>
+                    </mat-form-field><!-- single instruction form field -->
                     <button class="section__button" matSuffix mat-button type="button" color="warn"aria-label="delete step" (click)="deleteStep('instructions',i);">
-                        <mat-icon>remove_circle_outline</mat-icon>
+                        <mat-icon>remove_circle_outline</mat-icon><!-- remove button for each form field -->
                     </button>
                 </div>
                 <button type="button" mat-raised-button color="primary" (click)="addStep('instructions')">Add instruction</button>
             </div>
         </fieldset>
-    </section>
-    <button class="recepie-form__submit" type="button" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
-    <button class="recepie-form__submit" type="submit" mat-raised-button color="warn">Submit</button>
+    </section><!-- 4th section -->
+
+    <!-- buttons  -->
+    <button class="recepie-form__button" type="button" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
+    <button class="recepie-form__button" type="submit" mat-raised-button color="warn">Submit</button>
+    <!-- end buttons -->
 </form>

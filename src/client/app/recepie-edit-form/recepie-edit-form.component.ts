@@ -21,7 +21,9 @@ export class RecepieEditFormComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.buildForm();
+    }
+    buildForm() {
         this.recepiesForm = this.formBuilder.group({
             name: [this.recepie.name, [Validators.required]],
             shortname: [this.recepie.shortName, [Validators.required]],
@@ -36,19 +38,15 @@ export class RecepieEditFormComponent implements OnInit {
         });
         this.initializeArrays('ingredients');
         this.initializeArrays('instructions');
-
     }
 
-
     initializeArrays(arrayName) {
-
         // set empty array to array of items from RECEPIES array
         this[arrayName] = this.formBuilder.array(this.recepie[arrayName]);
         this[arrayName].controls.map((item) => {
             item.setValidators(Validators.required);
         });
         this.recepiesForm.setControl(arrayName, this[arrayName]);
-
     }
 
     addStep(arrayName) {
@@ -66,16 +64,15 @@ export class RecepieEditFormComponent implements OnInit {
         }
     }
 
-
     onCancel() {
+        this.recepiesForm.reset();
+        this.buildForm();
         this.cancel.emit();
     }
 
     onSubmit() {
         if (this.recepiesForm.valid) {
-
         }
     }
-
 
 }
