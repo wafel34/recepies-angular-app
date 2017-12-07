@@ -12,10 +12,11 @@ export class RecepieEditFormComponent implements OnInit {
 
     @Input() recepie: Recepie;
     recepiesForm: FormGroup;
-    ingredients: FormArray;
+    public ingredients: FormArray;
     instructions: FormArray;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder,
+                private api: ApiService) {
     }
 
     ngOnInit() {
@@ -32,41 +33,42 @@ export class RecepieEditFormComponent implements OnInit {
             instructions: this.formBuilder.array([]),
             photoUrl: [this.recepie.photoUrl, [Validators.required]]
         });
+        this.initializeArrays('ingredients');
+        this.initializeArrays('instructions');
 
-        this.initializeArrays();
     }
 
 
-    initializeArrays() {
-        // set ingredients array of ingredients from recepies
-        this.ingredients = this.formBuilder.array(this.recepie.ingredients);
-        // this.ingredients.setValidators(Validators.minLength(2));
-        this.recepiesForm.setControl('ingredients', this.ingredients);
+    initializeArrays(arrayName) {
 
+        // set empty array to array of items from RECEPIES array
+        this[arrayName] = this.formBuilder.array(this.recepie.ingredients);
+        this[arrayName].controls.map((item)=> {
+            item.setValidators(Validators.required);
+        });
+        this.recepiesForm.setControl(arrayName, this[arrayName]);
 
-        this.instructions = this.formBuilder.array(this.recepie.instructions);
-        this.recepiesForm.setControl('instructions', this.instructions);
     }
 
-    addStep(array, arrayName) {
+    addStep(arrayName) {
         // takes an Form array (ingredients or instructions) and it's name and pushes new element
-        array = this.recepiesForm.get(arrayName) as FormArray;
-        array.push(this.formBuilder.control(''));
+        this[arrayName] = this.recepiesForm.get(arrayName) as FormArray;
+        this[arrayName].push(this.formBuilder.control('', Validators.required));
     }
 
-    deleteStep(array, index) {
+    deleteStep(arrayName, index) {
         // takes an Form array (ingredients or instructions) and it's index and removes the element from this array.
-        if (array.controls.length !== 1) {
-            array.removeAt(index);
+        if (this[arrayName].controls.length !== 1) {
+            this[arrayName].removeAt(index);
         } else {
-            array.controls[0].setValue(null);
+            this[arrayName].controls[0].setValue(null);
         }
-
-        console.log(this.recepiesForm.controls.ingredients)
     }
 
     onSubmit() {
-        console.log(this.recepiesForm);
+        if (this.recepiesForm.valid) {
+            //send PUT requst to server
+        }
     }
 
 
