@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { Recepie } from '../shared/recepie.model';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@ang
 export class RecepieEditFormComponent implements OnInit {
 
     @Input() recepie: Recepie;
+    @Output() cancel = new EventEmitter();
     recepiesForm: FormGroup;
     public ingredients: FormArray;
     instructions: FormArray;
@@ -42,8 +43,8 @@ export class RecepieEditFormComponent implements OnInit {
     initializeArrays(arrayName) {
 
         // set empty array to array of items from RECEPIES array
-        this[arrayName] = this.formBuilder.array(this.recepie.ingredients);
-        this[arrayName].controls.map((item)=> {
+        this[arrayName] = this.formBuilder.array(this.recepie[arrayName]);
+        this[arrayName].controls.map((item) => {
             item.setValidators(Validators.required);
         });
         this.recepiesForm.setControl(arrayName, this[arrayName]);
@@ -65,9 +66,14 @@ export class RecepieEditFormComponent implements OnInit {
         }
     }
 
+
+    onCancel() {
+        this.cancel.emit();
+    }
+
     onSubmit() {
         if (this.recepiesForm.valid) {
-            //send PUT requst to server
+
         }
     }
 

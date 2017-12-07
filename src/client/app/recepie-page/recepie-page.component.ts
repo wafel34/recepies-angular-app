@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { Recepie } from '../shared/recepie.model';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
     routeUrl: string;
-    editing = true;
+    editing = false;
     constructor(route: ActivatedRoute,
                 private api: ApiService) {
         // get shortname form url
@@ -30,9 +30,13 @@ export class RecepiePageComponent implements OnInit {
     }
 
     edit() {
+        // function is called when EDIT button is clicked. then page element is hidden and edit element shown.
         this.editing = true;
     }
-    finishEditing() {
+
+    cancelEdit(element) {
+        // function is called when form component (child) emits a event (which is fired on click of 'Cancel' button in the form)
         this.editing = false;
+        window.scrollTo(0, 0);
     }
 }
