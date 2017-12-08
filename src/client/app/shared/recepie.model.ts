@@ -10,4 +10,5 @@ export interface Recepie {
     instructions: string[];
     photoUrl: string;
     createdBy: string;
+    _id: string;
 }

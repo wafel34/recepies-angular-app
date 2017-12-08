@@ -34,7 +34,8 @@ export class RecepieEditFormComponent implements OnInit {
             serves: [this.recepie.serves, [Validators.required, Validators.max(20), Validators.min(1)]],
             ingredients: this.formBuilder.array([]),
             instructions: this.formBuilder.array([]),
-            photoUrl: [this.recepie.photoUrl, [Validators.required]]
+            photoUrl: [this.recepie.photoUrl, [Validators.required]],
+            _id: [this.recepie._id]
         });
         this.initializeArrays('ingredients');
         this.initializeArrays('instructions');
@@ -72,6 +73,10 @@ export class RecepieEditFormComponent implements OnInit {
 
     onSubmit() {
         if (this.recepiesForm.valid) {
+            this.api.put(`recepies/${this.recepie.shortName}`, this.recepiesForm.value)
+                .subscribe((result) => {
+
+                });
         }
     }
 

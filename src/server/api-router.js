@@ -1,4 +1,5 @@
 const express = require('express');
+const mongodb = require('mongodb');
 const router = express.Router();
 
 function ApiRouter(database) {
@@ -41,7 +42,7 @@ function ApiRouter(database) {
             }
         });
     });
-    
+
 
     router.get('/recepies/:shortName', (req, res) => {
         const name = req.params.shortName;
@@ -52,9 +53,12 @@ function ApiRouter(database) {
             if (dbRecord === null) {
                 return res.sendStatus(404);
             }
-
             return res.json(dbRecord).status(200);
         });
+    });
+
+    router.put('/recepies/:shortName', (req, res) => {
+
     });
 
     return router;
