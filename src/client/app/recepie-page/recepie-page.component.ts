@@ -42,6 +42,6 @@ export class RecepiePageComponent implements OnInit {
     }
 
     updateRecepiePage(event) {
-        this.recepie = event.value;
+        this.recepie = event;
     }
 }

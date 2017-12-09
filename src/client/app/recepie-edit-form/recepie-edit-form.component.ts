@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { CreateUniqueShortNameService } from '../shared/create-unique-short-name.service';
 import { Recepie } from '../shared/recepie.model';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -20,6 +21,7 @@ export class RecepieEditFormComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private api: ApiService,
+                private router: Router,
                 private shortNameService: CreateUniqueShortNameService) {
     }
 
@@ -86,8 +88,9 @@ export class RecepieEditFormComponent implements OnInit {
 
             this.api.put(`recepies/${this.recepie.shortName}`, this.recepiesForm.value)
                 .subscribe((result) => {
-                    this.recepie = result;
+                    this.recepie = result.value;
                     this.emitSubmit();
+                    this.router.navigate(['/recepies', this.recepie.shortName]);
                 });
         }
     }
