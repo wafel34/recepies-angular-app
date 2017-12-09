@@ -53,7 +53,7 @@
     </mat-card>
 
 <div [class.hidden]="!editing">
-    <app-recepie-edit-form [recepie]="recepie" (cancel)="cancelEdit()"></app-recepie-edit-form>
+    <app-recepie-edit-form [recepie]="recepie" (cancel)="cancelEdit()" (submitted)="updateRecepiePage($event)"></app-recepie-edit-form>
 </div>
 
 

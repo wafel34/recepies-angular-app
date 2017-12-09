@@ -58,6 +58,31 @@ function ApiRouter(database) {
     });
 
     router.put('/recepies/:shortName', (req, res) => {
+        const record = req.body;
+        const mongoId = new mongodb.ObjectID(record._id);
+        const result = recepies.findOneAndUpdate({_id: mongoId},{
+            $set: {
+                name: record.name,
+                shortName: record.shortname,
+                headline: record.headline,
+                summary: record.summary,
+                category: record.category,
+                time: record.time,
+                serves: record.serves,
+                ingredients: record.ingredients,
+                instructions: record.instructions,
+                photoUrl: record.photoUrl
+            }
+        },
+        {
+            returnOriginal: false
+        },
+        (err, dbRecord) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            return res.json(dbRecord).status(200);
+        });
 
     });
 

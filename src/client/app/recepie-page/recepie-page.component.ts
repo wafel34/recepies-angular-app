@@ -40,4 +40,8 @@ export class RecepiePageComponent implements OnInit {
         this.editing = false;
         window.scrollTo(0, 0);
     }
+
+    updateRecepiePage(event) {
+        this.recepie = event.value;
+    }
 }

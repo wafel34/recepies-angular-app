@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../shared/api.service';
+import { CreateUniqueShortNameService } from '../shared/create-unique-short-name.service';
 import { Recepie } from '../shared/recepie.model';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
@@ -12,21 +13,24 @@ export class RecepieEditFormComponent implements OnInit {
 
     @Input() recepie: Recepie;
     @Output() cancel = new EventEmitter();
+    @Output() submitted = new EventEmitter();
     recepiesForm: FormGroup;
     public ingredients: FormArray;
     instructions: FormArray;
 
     constructor(private formBuilder: FormBuilder,
-                private api: ApiService) {
+                private api: ApiService,
+                private shortNameService: CreateUniqueShortNameService) {
     }
 
     ngOnInit() {
         this.buildForm();
     }
+
     buildForm() {
         this.recepiesForm = this.formBuilder.group({
             name: [this.recepie.name, [Validators.required]],
-            shortname: [this.recepie.shortName, [Validators.required]],
+            shortname: [this.recepie.shortName],
             headline: [this.recepie.headline, [Validators.required]],
             summary: [this.recepie.summary, [Validators.required]],
             category: [this.recepie.category, [Validators.required]],
@@ -73,11 +77,24 @@ export class RecepieEditFormComponent implements OnInit {
 
     onSubmit() {
         if (this.recepiesForm.valid) {
+            if (this.recepiesForm.value.name !== this.recepie.name) {
+                // if name has been changed, generate new unique shortName for routing
+                const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
+                this.recepiesForm.get('shortname').setValue(uniqueShortname);
+            }
+
+
             this.api.put(`recepies/${this.recepie.shortName}`, this.recepiesForm.value)
                 .subscribe((result) => {
-
+                    this.recepie = result;
+                    this.emitSubmit();
                 });
         }
+    }
+
+    emitSubmit() {
+        this.cancel.emit();
+        this.submitted.emit(this.recepie);
     }
 
 }

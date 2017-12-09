@@ -28,6 +28,7 @@ import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.
 
 // services
 import { ApiService } from './shared/api.service';
+import { CreateUniqueShortNameService } from './shared/create-unique-short-name.service';
 
 
 import 'hammerjs';
@@ -59,7 +60,8 @@ import 'hammerjs';
     MatSelectModule
   ],
   providers: [
-      ApiService
+      ApiService,
+      CreateUniqueShortNameService
     ],
   bootstrap: [AppComponent]
 })
