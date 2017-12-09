@@ -77,6 +77,21 @@
         color: rgba(0,0,0,.65)
 
 
+.deleted
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    padding: 0 0 16px 0
+    &__message
+        display: block
+        border-radius: 2px
+        margin: 16px
+        padding: 32px 16px
+        border: 2px solid mat-color($recepies-app-warn, 700)
+        color: mat-color($recepies-app-warn, 900)
+        background-color: mat-color($recepies-app-accent, 100)
+
 // MEDIA QUERIES
 
 @media screen and (min-width: 600px)

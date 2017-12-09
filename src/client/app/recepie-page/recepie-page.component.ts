@@ -15,6 +15,7 @@ export class RecepiePageComponent implements OnInit {
     recepie: Recepie;
     routeUrl: string;
     editing = false;
+    deleted = false;
     constructor(route: ActivatedRoute,
                 private api: ApiService) {
         // get shortname form url
@@ -33,6 +34,18 @@ export class RecepiePageComponent implements OnInit {
     edit() {
         // function is called when EDIT button is clicked. then page element is hidden and edit element shown.
         this.editing = true;
+    }
+
+    deleteRecepie() {
+        // function is called when DELETE button is clicked.
+        const confirmation = confirm('This will permanently delete recepie. Do you still want to continue?');
+
+        if (confirmation) {
+            this.api.delete(`recepies/${this.routeUrl}`)
+                .subscribe((result) => {
+                    this.deleted = true;
+                });
+        }
     }
 
     cancelEdit(element) {

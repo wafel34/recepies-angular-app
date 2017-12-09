@@ -86,6 +86,17 @@ function ApiRouter(database) {
 
     });
 
+    router.delete('/recepies/:shortName', (req, res) => {
+        const name = req.params.shortName;
+
+        const result = recepies.deleteOne({shortName: name}, (err, dbRecord) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            return res.json(dbRecord).status(200);
+        });
+    });
+
     return router;
 }
 

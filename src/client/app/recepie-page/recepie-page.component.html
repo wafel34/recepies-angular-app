@@ -1,5 +1,5 @@
 <div class="app-container" *ngIf="recepie !== undefined">
-    <mat-card class="recepie-page" [class.hidden]="editing">
+    <mat-card class="recepie-page" [class.hidden]="editing || deleted">
             <div class="recepie-page__image" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
             </div><!--recepie-page__image"-->
 
@@ -12,7 +12,7 @@
                     <button class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
                         Edit  <mat-icon>edit</mat-icon>
                     </button>
-                    <button class="recepie-page__button" mat-raised-button color="warn">
+                    <button class="recepie-page__button" mat-raised-button color="warn" (click)="deleteRecepie()">
                         Delete <mat-icon>remove_circle_outline</mat-icon>
                     </button>
                 </div><!--buttons-container-->
@@ -54,6 +54,11 @@
 
 <div [class.hidden]="!editing">
     <app-recepie-edit-form [recepie]="recepie" (cancel)="cancelEdit()" (submitted)="updateRecepiePage($event)"></app-recepie-edit-form>
+</div>
+
+<div [class.hidden]="!deleted" class="deleted">
+    <span class="deleted__message">Recepie has been deleted. <mat-icon>done</mat-icon></span>
+    <a routerLink="/recepies" mat-raised-button color="accent">Go to Home Page</a>
 </div>
 
 
