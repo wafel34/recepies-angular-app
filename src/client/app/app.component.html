@@ -3,6 +3,33 @@
         <button class="sidenav__button" mat-button (click)="sidenav.toggle()">
             <mat-icon color="accent">close</mat-icon>
         </button>
+
+        <!--sidenav elements -->
+        <div class="sidenav__group">
+            <a class="sidenav__link" routerLink="/home" (click)="sidenav.toggle()">
+                <mat-icon>home</mat-icon>
+                Home
+            </a>
+            <a class="sidenav__link" routerLink="/recepies" (click)="sidenav.toggle()">
+                <mat-icon>room_service</mat-icon>
+                Recepies
+            </a>
+        </div>
+        <div class="sidenav__group">
+            <a class="sidenav__link" routerLink="" (click)="sidenav.toggle()">
+                <mat-icon>face</mat-icon>
+                Your recepies
+            </a>
+            <a class="sidenav__link" routerLink="" (click)="sidenav.toggle()">
+                <mat-icon>favorite_border</mat-icon>
+                Faivourites
+            </a>
+            <a class="sidenav__link" routerLink="/add" (click)="sidenav.toggle()">
+                <mat-icon>add_circle_outline</mat-icon>
+                Add recepie
+            </a>
+        </div>
+        <!-- sidenav elements end -->
     </mat-sidenav>
     <mat-toolbar class="toolbar">
         <div class="toolbar__item">
