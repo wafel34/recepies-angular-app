@@ -20,9 +20,8 @@ function ApiRouter(database) {
 
     router.post('/recepies', (req, res) => {
         const record = req.body;
-
         //check if record with the same shortName as request exists
-        recepies.findOne({shortName: record.shortName}, (err, dbRecord) => {
+        recepies.findOne({shortName: record.shortname}, (err, dbRecord) => {
             if (err) {
                 return res.status(500).send({error: err});
             }
@@ -32,7 +31,18 @@ function ApiRouter(database) {
             } else {
 
                 //if shortName doesn't exist - go ahead and insert the recepie
-                recepies.insertOne(record, (err, result) => {
+                recepies.insertOne({
+                    name: record.name,
+                    shortName: record.shortname,
+                    headline: record.headline,
+                    summary: record.summary,
+                    category: record.category,
+                    time: record.time,
+                    serves: record.serves,
+                    ingredients: record.ingredients,
+                    instructions: record.instructions,
+                    photoUrl: record.photoUrl
+                }, (err, result) => {
                     if (err) {
                         res.status(500).send({error: "Database error."});
                     }

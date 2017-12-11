@@ -3,6 +3,7 @@ import { ApiService } from '../shared/api.service';
 import { CreateUniqueShortNameService } from '../shared/create-unique-short-name.service';
 import { Recepie } from '../shared/recepie.model';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
@@ -23,7 +24,8 @@ export class RecepieEditFormComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
                 private api: ApiService,
                 private router: Router,
-                private shortNameService: CreateUniqueShortNameService) {
+                private shortNameService: CreateUniqueShortNameService,
+                private location: Location) {
 
     }
 
@@ -52,7 +54,7 @@ export class RecepieEditFormComponent implements OnInit {
         });
 
         if (!this.addNew) {
-            //fill form array with values from Recepie data (do it only if users is editing form, not creating new)
+            // fill form array with values from Recepie data (do it only if users is editing form, not creating new)
             this.initializeArrays('ingredients');
             this.initializeArrays('instructions');
         }
@@ -86,7 +88,11 @@ export class RecepieEditFormComponent implements OnInit {
     onCancel() {
         this.recepiesForm.reset();
         this.buildForm();
-        this.cancel.emit();
+        if (this.addNew) {
+            this.location.back();
+        } else {
+            this.cancel.emit();
+        }
     }
 
     onSubmit() {
@@ -104,16 +110,16 @@ export class RecepieEditFormComponent implements OnInit {
 
     onAddSubmit() {
         // handling form submition when new recepie is added
-        console.log(this.recepiesForm.value)
-        /*this.api.post(`recepies`, this.recepiesForm.value)
+
+        const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
+        this.recepiesForm.get('shortname').setValue(uniqueShortname);
+        this.api.post(`recepies`, this.recepiesForm.value)
             .subscribe((result) => {
-                this.recepie = result.value;
-                this.emitSubmit();
-                this.router.navigate(['/recepies', this.recepie.shortName]);
-            });*/
+                this.router.navigate(['/recepies', uniqueShortname]);
+            });
     }
 
-    onEditSubmit(){
+    onEditSubmit() {
         // handling form submition when existing recepie is edited
         if (this.recepiesForm.value.name !== this.recepie.name) {
             // if name has been changed, generate new unique shortName for routing
