@@ -16,35 +16,47 @@ export class RecepieEditFormComponent implements OnInit {
     @Output() cancel = new EventEmitter();
     @Output() submitted = new EventEmitter();
     recepiesForm: FormGroup;
-    public ingredients: FormArray;
+    addNew = false; // checks if users is editing or adding new recepie
+    ingredients: FormArray;
     instructions: FormArray;
 
     constructor(private formBuilder: FormBuilder,
                 private api: ApiService,
                 private router: Router,
                 private shortNameService: CreateUniqueShortNameService) {
+
     }
 
     ngOnInit() {
+        this.addNew = (this.router.url === '/add') ? true : false;
         this.buildForm();
     }
 
     buildForm() {
         this.recepiesForm = this.formBuilder.group({
-            name: [this.recepie.name, [Validators.required]],
-            shortname: [this.recepie.shortName],
-            headline: [this.recepie.headline, [Validators.required]],
-            summary: [this.recepie.summary, [Validators.required]],
-            category: [this.recepie.category, [Validators.required]],
-            time: [this.recepie.time, [Validators.required]],
-            serves: [this.recepie.serves, [Validators.required, Validators.max(20), Validators.min(1)]],
-            ingredients: this.formBuilder.array([]),
-            instructions: this.formBuilder.array([]),
-            photoUrl: [this.recepie.photoUrl, [Validators.required]],
-            _id: [this.recepie._id]
+            name: [(this.addNew) ? '' : this.recepie.name, [Validators.required]],
+            shortname: [(this.addNew) ? '' : this.recepie.shortName],
+            headline: [(this.addNew) ? '' : this.recepie.headline, [Validators.required]],
+            summary: [(this.addNew) ? '' : this.recepie.summary, [Validators.required]],
+            category: [(this.addNew) ? '' : this.recepie.category, [Validators.required]],
+            time: [(this.addNew) ? '' : this.recepie.time, [Validators.required]],
+            serves: [(this.addNew) ? '' : this.recepie.serves, [Validators.required, Validators.max(20), Validators.min(1)]],
+            ingredients: this.formBuilder.array([
+                    this.formBuilder.control('', [Validators.required])            ]
+            ),
+            instructions: this.formBuilder.array([
+                this.formBuilder.control('', [Validators.required])
+            ]),
+            photoUrl: [(this.addNew) ? '' : this.recepie.photoUrl, [Validators.required]],
+            _id: [(this.addNew) ? '' : this.recepie._id]
         });
-        this.initializeArrays('ingredients');
-        this.initializeArrays('instructions');
+
+        if (!this.addNew) {
+            //fill form array with values from Recepie data (do it only if users is editing form, not creating new)
+            this.initializeArrays('ingredients');
+            this.initializeArrays('instructions');
+        }
+
     }
 
     initializeArrays(arrayName) {
@@ -79,21 +91,44 @@ export class RecepieEditFormComponent implements OnInit {
 
     onSubmit() {
         if (this.recepiesForm.valid) {
-            if (this.recepiesForm.value.name !== this.recepie.name) {
-                // if name has been changed, generate new unique shortName for routing
-                const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
-                this.recepiesForm.get('shortname').setValue(uniqueShortname);
+
+            if (this.addNew) {
+                // submition when new recepie is added
+                this.onAddSubmit();
+            } else {
+                // submition when existing recepie is edited
+                this.onEditSubmit();
             }
-
-
-            this.api.put(`recepies/${this.recepie.shortName}`, this.recepiesForm.value)
-                .subscribe((result) => {
-                    this.recepie = result.value;
-                    this.emitSubmit();
-                    this.router.navigate(['/recepies', this.recepie.shortName]);
-                });
         }
     }
+
+    onAddSubmit() {
+        // handling form submition when new recepie is added
+        console.log(this.recepiesForm.value)
+        /*this.api.post(`recepies`, this.recepiesForm.value)
+            .subscribe((result) => {
+                this.recepie = result.value;
+                this.emitSubmit();
+                this.router.navigate(['/recepies', this.recepie.shortName]);
+            });*/
+    }
+
+    onEditSubmit(){
+        // handling form submition when existing recepie is edited
+        if (this.recepiesForm.value.name !== this.recepie.name) {
+            // if name has been changed, generate new unique shortName for routing
+            const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
+            this.recepiesForm.get('shortname').setValue(uniqueShortname);
+        }
+
+        this.api.put(`recepies/${this.recepie.shortName}`, this.recepiesForm.value)
+            .subscribe((result) => {
+                this.recepie = result.value;
+                this.emitSubmit();
+                this.router.navigate(['/recepies', this.recepie.shortName]);
+            });
+    }
+
 
     emitSubmit() {
         this.cancel.emit();
