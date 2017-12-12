@@ -1,8 +1,35 @@
 <div class="app-container">
+    <mat-tab-group dynamicHeight="true">
+        <mat-tab label="All">
+            <div class="list-grid">
+                <ng-container *ngFor="let recepie of recepies">
+                    <app-recepie-card class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Breakfast">
+            <div class="list-grid">
+                <ng-container *ngFor="let recepie of recepies">
+                    <app-recepie-card *ngIf="recepie.category === 'breakfast'" class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Dinner">
+            <div class="list-grid">
+                <ng-container *ngFor="let recepie of recepies">
+                    <app-recepie-card *ngIf="recepie.category === 'dinner'" class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Salad">
+            <div class="list-grid">
+                <ng-container *ngFor="let recepie of recepies">
+                    <app-recepie-card *ngIf="recepie.category === 'salad'" class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 
-    <div class="list-grid">
-        <app-recepie-card class="list-grid__item" *ngFor="let recepie of recepies" [recepie]="recepie"></app-recepie-card>
-    </div>
 
 
 </div>
