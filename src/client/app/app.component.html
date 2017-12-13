@@ -10,9 +10,9 @@
                 <mat-icon>home</mat-icon>
                 Home
             </a>
-            <a class="sidenav__link" routerLink="/recepies" (click)="sidenav.toggle()">
-                <mat-icon>room_service</mat-icon>
-                Recepies
+            <a class="sidenav__link" routerLink="/about" (click)="sidenav.toggle()">
+                <mat-icon>info_outline</mat-icon>
+                About
             </a>
         </div>
         <div class="sidenav__group">
@@ -50,5 +50,5 @@
     </mat-toolbar>
 
     <router-outlet></router-outlet>
-
+    <app-footer></app-footer>
 </mat-sidenav-container>

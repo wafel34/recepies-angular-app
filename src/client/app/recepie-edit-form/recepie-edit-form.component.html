@@ -1,6 +1,7 @@
 <div [class.app-container]="addNew">
     <div class="header-container">
-        <h1 class="header-container__h1">Edit your recepie</h1>
+        <h1 *ngIf="!addNew" class="header-container__h1">Edit your recepie</h1>
+        <h1 *ngIf="addNew" class="header-container__h1">Add new recepie</h1>
         <button class="recepie-form__button" type="button" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
     </div>
     <form [formGroup]="recepiesForm" novalidate class="recepie-form" (ngSubmit)="onSubmit()">
