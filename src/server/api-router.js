@@ -6,7 +6,6 @@ function ApiRouter(database) {
     const recepies = database.collection('recepies');
     const users = database.collection('users');
 
-
     router.get('/recepies', (req, res) => {
 
         //find all elements, convert to array and send back as json
