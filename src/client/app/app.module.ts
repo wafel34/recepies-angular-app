@@ -27,6 +27,8 @@ import { RecepieCardComponent } from './recepie-card/recepie-card.component';
 import { RecepiePageComponent } from './recepie-page/recepie-page.component';
 import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.component';
 import { FooterComponent } from './footer/footer.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -42,7 +44,9 @@ import 'hammerjs';
     RecepieCardComponent,
     RecepiePageComponent,
     RecepieEditFormComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

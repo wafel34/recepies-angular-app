@@ -1,0 +1,34 @@
+<div class="app-container">
+    <form [formGroup]="registerForm" class="register-form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field class="register-form__form-field">
+            <mat-placeholder>Your name:</mat-placeholder>
+            <input matInput maxlength="20" class="" formControlName="name">
+            <mat-error >Field cannot be empty.</mat-error>
+        </mat-form-field><!-- headline form field -->
+
+        <mat-form-field class="register-form__form-field">
+            <mat-placeholder>E-mail:</mat-placeholder>
+            <input type="email" matInput maxlength="40" class="" formControlName="email">
+            <mat-error >Field cannot be empty.</mat-error>
+        </mat-form-field><!-- headline form field -->
+
+        <mat-form-field class="register-form__form-field">
+            <mat-placeholder>Login:</mat-placeholder>
+            <input matInput maxlength="40" class="" formControlName="login">
+            <mat-error >Field cannot be empty.</mat-error>
+        </mat-form-field><!-- headline form field -->
+
+        <mat-form-field class="register-form__form-field">
+            <mat-placeholder>Password:</mat-placeholder>
+            <input matInput type="password" maxlength="40" class="" formControlName="password">
+            <mat-error >Field cannot be empty.</mat-error>
+        </mat-form-field><!-- headline form field -->
+        <mat-form-field class="register-form__form-field">
+            <mat-placeholder>Repeat password:</mat-placeholder>
+            <input matInput type="password" maxlength="40" class="" formControlName="passwordRepeat">
+            <mat-error >Field cannot be empty.</mat-error>
+        </mat-form-field><!-- headline form field -->
+        <button type="submit" mat-raised-button color="warn">Submit</button>
+    </form>
+</div>
