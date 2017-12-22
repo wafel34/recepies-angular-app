@@ -1,7 +1,12 @@
 [
     {
-        "username": "",
-        "password": "",
-        "favourites": ["", ""]
+        "username": "admin",
+        "password": "password",
+        "favourites": []
+    },
+    {
+        "username": "wafel34",
+        "password": "wafel34",
+        "favourites": []
     }
 ]

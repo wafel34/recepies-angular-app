@@ -1,10 +1,14 @@
 const express = require('express');
 const mongodb = require('mongodb');
+const AuthRouter = require('./auth-router');
 const router = express.Router();
 
 function ApiRouter(database) {
     const recepies = database.collection('recepies');
     const users = database.collection('users');
+    
+
+    router.use('/authenticate', AuthRouter(database));
 
     router.get('/recepies', (req, res) => {
 
