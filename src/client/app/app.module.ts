@@ -33,6 +33,7 @@ import { LoginComponent } from './login/login.component';
 // services
 import { ApiService } from './shared/api.service';
 import { CreateUniqueShortNameService } from './shared/create-unique-short-name.service';
+import { AuthenticationService } from './shared/authentication.service';
 
 
 import 'hammerjs';
@@ -69,7 +70,8 @@ import 'hammerjs';
   ],
   providers: [
       ApiService,
-      CreateUniqueShortNameService
+      CreateUniqueShortNameService,
+      AuthenticationService
     ],
   bootstrap: [AppComponent]
 })

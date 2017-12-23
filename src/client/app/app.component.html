@@ -15,7 +15,7 @@
                 About
             </a>
         </div>
-        <div class="sidenav__group">
+        <div class="sidenav__group" *ngIf="this.auth.isLoggedIn()">
             <a class="sidenav__link" routerLink="" (click)="sidenav.toggle()">
                 <mat-icon>face</mat-icon>
                 Your recepies

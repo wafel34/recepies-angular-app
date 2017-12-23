@@ -9,10 +9,10 @@
                     <button class="recepie-page__button" mat-raised-button color="accent">
                         Favourite <mat-icon>favorite_border</mat-icon>
                     </button>
-                    <button class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
+                    <button *ngIf="this.auth.isLoggedIn()" class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
                         Edit  <mat-icon>edit</mat-icon>
                     </button>
-                    <button class="recepie-page__button" mat-raised-button color="warn" (click)="deleteRecepie()">
+                    <button *ngIf="this.auth.isLoggedIn()" class="recepie-page__button" mat-raised-button color="warn" (click)="deleteRecepie()">
                         Delete <mat-icon>remove_circle_outline</mat-icon>
                     </button>
                 </div><!--buttons-container-->

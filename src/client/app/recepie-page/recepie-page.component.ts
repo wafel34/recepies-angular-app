@@ -1,7 +1,8 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Recepie } from '../shared/recepie.model';
-import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '../shared/authentication.service';
 
 
 @Component({
@@ -11,13 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecepiePageComponent implements OnInit {
 
-
     recepie: Recepie;
     routeUrl: string;
     editing = false;
     deleted = false;
     constructor(route: ActivatedRoute,
-                private api: ApiService) {
+                private api: ApiService,
+                private auth: AuthenticationService) {
         // get shortname form url
         this.routeUrl = route.snapshot.params.shortname;
     }

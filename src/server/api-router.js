@@ -1,12 +1,25 @@
 const express = require('express');
 const mongodb = require('mongodb');
 const AuthRouter = require('./auth-router');
+const jwt = require('express-jwt');
 const router = express.Router();
 
 function ApiRouter(database) {
     const recepies = database.collection('recepies');
     const users = database.collection('users');
-    
+
+    router.use(jwt({secret: process.env.SECRET}).unless({path: [
+        { url: '/api/authenticate'},
+        { url: '/api/recepies', methods: ['GET']},
+        { url: /\/api\/recepies\/.*/g, methods: ['GET']}
+        ]})
+    );
+
+    router.use((err, req, res, next) => {
+        if (err.name === 'UnauthorizedError') {
+            return res.status(401).json({error: err.message});
+        }
+    });
 
     router.use('/authenticate', AuthRouter(database));
 
