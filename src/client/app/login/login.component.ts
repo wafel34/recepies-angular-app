@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     errorMsg: object;
     constructor(private formBuilder: FormBuilder,
                 private api: ApiService,
-                private auth: AuthenticationService
+                private auth: AuthenticationService,
                 private snackBar: MatSnackBar,
                 private router: Router) { }
 
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
                 if (this.errorMsg) {
                     this.errorMsg = null;
                 }
-            }, (error) {
+            }, (error) => {
                 this.errorMsg = JSON.parse(error._body);
             });
     }
