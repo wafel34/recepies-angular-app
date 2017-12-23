@@ -11,7 +11,7 @@ function AuthRouter(database) {
 
         users.findOne({username: postData.username}, (err, result) => {
             if (!result) {
-                return res.sendStatus(404);
+                return res.status(404).json({error: `User doesn't exist.`});
             }
             if (!bcrypt.compareSync(postData.password, result.password)) {
                  return res.status(401).json({error: 'Invalid password'});

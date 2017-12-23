@@ -1,3 +1,19 @@
-<p>
-  login works!
-</p>
+<div class="app-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <fieldset class="login-fieldset">
+            <legend>Login:</legend>
+            <div class="login-form">
+                <mat-form-field class="login-form__field">
+                    <mat-placeholder>Login</mat-placeholder>
+                    <input matInput type="text" formControlName="username">
+                </mat-form-field>
+                <mat-form-field class="login-form__field">
+                    <mat-placeholder>Password</mat-placeholder>
+                    <input matInput type="password" formControlName="password">
+                </mat-form-field>
+                <mat-error *ngIf="this.errorMsg" class="login-form__error">Invalid login or password.</mat-error>
+                <button type="submit" mat-raised-button color="primary">Login</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

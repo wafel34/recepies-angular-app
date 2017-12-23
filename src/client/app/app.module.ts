@@ -18,7 +18,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSnackBarModule
 } from '@angular/material';
 // components
 import { AppComponent } from './app.component';
@@ -66,7 +67,8 @@ import 'hammerjs';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   providers: [
       ApiService,

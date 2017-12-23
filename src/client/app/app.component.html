@@ -38,12 +38,16 @@
             </button>
         </div>
         <div class="toolbar__item">
-            <a class="toolbar__button" mat-button routerLink="/register">
+            <a *ngIf="!this.auth.isLoggedIn()" class="toolbar__button" mat-button routerLink="/register">
                 <span>Register</span>
                 <mat-icon color="accent">add_circle</mat-icon>
             </a>
-            <a class="toolbar__button" mat-button routerLink="/login">
+            <a *ngIf="!this.auth.isLoggedIn()" class="toolbar__button" mat-button routerLink="/login">
                 <span>Login</span>
+                <mat-icon color="accent">account_circle</mat-icon>
+            </a>
+            <a *ngIf="this.auth.isLoggedIn()" class="toolbar__button" mat-button (click)="logout()">
+                <span>Logout</span>
                 <mat-icon color="accent">account_circle</mat-icon>
             </a>
         </div>
