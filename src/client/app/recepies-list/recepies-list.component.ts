@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Recepie } from '../shared/recepie.model';
 import { ApiService } from '../shared/api.service';
 
@@ -9,14 +9,11 @@ import { ApiService } from '../shared/api.service';
 })
 export class RecepiesListComponent implements OnInit {
 
-    recepies: Recepie[];
-    constructor(public api: ApiService) { }
+    @Input() recepies: Recepie[];
+    constructor() {}
 
     ngOnInit() {
-        this.api.get('recepies')
-            .subscribe((result) => {
-                this.recepies = result;
-            });
+
     }
 
 }

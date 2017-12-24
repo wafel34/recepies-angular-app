@@ -1,13 +1,12 @@
-<div class="app-container">
-    <div class="home-header" [ngStyle]="{'background-image': 'url(assets/italian-cuisine-2378729_1280.jpg)'}">
-        <h1 class="home-header__h1">Cooking is easy!</h1>
-    </div>
     <mat-tab-group class="tab-group" dynamicHeight="true">
         <mat-tab label="All">
             <div class="list-grid">
-                <ng-container *ngFor="let recepie of recepies">
-                    <app-recepie-card class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                <ng-container *ngIf="activeRoute !== 'favorites'">
+                    <ng-container *ngFor="let recepie of recepies">
+                        <app-recepie-card class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                    </ng-container>
                 </ng-container>
+
             </div>
         </mat-tab>
         <mat-tab label="Breakfast">
@@ -32,7 +31,3 @@
             </div>
         </mat-tab>
     </mat-tab-group>
-
-
-
-</div>

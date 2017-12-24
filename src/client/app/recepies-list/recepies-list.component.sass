@@ -3,24 +3,9 @@
 @include angular-material-theme($recepies-app-theme)
 
 
-.home-header
-    height: 150px
-    border-radius: 2px
-    background-position: bottom
-    background-size: cover
-    margin-bottom: 16px
-    display: flex
-    align-items: center
-    justify-content: center
-    &__h1
-        background-color: rgba(mat-color($recepies-app-primary), .85)
-        padding: 4px 16px
-        border-bottom: 2px solid mat-color($recepies-app-accent)
-        border-top: 2px solid mat-color($recepies-app-accent)
-        color: mat-color($recepies-app-accent)
-
+// below rule prevents from scrolling to top when tab with recepie type is clicked
 .tab-group
-    min-height: inherit
+    min-height: 50vh
 
 .list-grid
     display: flex
@@ -34,18 +19,12 @@
 
 
 @media screen and (min-width: 560px)
-    .home-header
-        height: 200px
-
     .list-grid
         &__item
             width: 50%
 
 
 @media screen and (min-width: 820px)
-    .home-header
-        height: 250px
-
     .list-grid
         &__item
             width: 33.3%
@@ -53,8 +32,6 @@
 
 
 @media screen and (min-width: 1080px)
-    .home-header
-        height: 300px
     .list-grid
         &__item
             width: 25%

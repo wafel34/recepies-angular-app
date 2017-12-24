@@ -30,6 +30,9 @@ import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.
 import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -48,7 +51,10 @@ import 'hammerjs';
     RecepieEditFormComponent,
     FooterComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    FavoritesComponent,
+    HomePageComponent,
+    UserRecepiesComponent
   ],
   imports: [
     BrowserModule,

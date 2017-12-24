@@ -5,11 +5,15 @@ import { RecepiePageComponent } from './recepie-page/recepie-page.component';
 import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'recepies', component: RecepiesListComponent},
-    {path: 'home', component: RecepiesListComponent},
+    {path: 'home', component: HomePageComponent},
+    {path: 'favorites', component: RecepiesListComponent},
+    {path: 'my_recepies', component: UserRecepiesComponent},
     {path: 'add', component: RecepieEditFormComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},

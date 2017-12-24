@@ -16,13 +16,13 @@
             </a>
         </div>
         <div class="sidenav__group" *ngIf="this.auth.isLoggedIn()">
-            <a class="sidenav__link" routerLink="" (click)="sidenav.toggle()">
+            <a class="sidenav__link" routerLink="/my_recepies" (click)="sidenav.toggle()">
                 <mat-icon>face</mat-icon>
-                Your recepies
+                My recepies
             </a>
-            <a class="sidenav__link" routerLink="" (click)="sidenav.toggle()">
+            <a class="sidenav__link" routerLink="/favorites" (click)="sidenav.toggle()">
                 <mat-icon>favorite_border</mat-icon>
-                Faivourites
+                Faivorites
             </a>
             <a class="sidenav__link" routerLink="/add" (click)="sidenav.toggle()">
                 <mat-icon>add_circle_outline</mat-icon>
