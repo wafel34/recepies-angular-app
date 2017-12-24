@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         const loginDetails = this.loginForm.value;
         this.api.post('authenticate', loginDetails)
             .subscribe((result) => {
-                this.auth.logIn(result.token);
+                this.auth.logIn(result);
                 this.snackBar.open('Sucesfully Logged In.', 'OK', {
                   duration: 2500,
                 });

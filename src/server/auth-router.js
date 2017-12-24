@@ -20,6 +20,7 @@ function AuthRouter(database) {
             const token = JWT.sign(postData, process.env.SECRET, {expiresIn: '4h'});
             return res.status(200).json({
                 token: token,
+                username: postData.username,
                 message: 'Successfully logged in.'
             });
         });

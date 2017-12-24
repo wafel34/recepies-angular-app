@@ -29,7 +29,6 @@ export class RecepiePageComponent implements OnInit {
             .subscribe((result) => {
                 this.recepie = result;
             });
-
     }
 
     edit() {

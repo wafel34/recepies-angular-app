@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
+import { AuthenticationService } from './authentication.service';
 import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
@@ -7,7 +8,8 @@ import 'rxjs/add/operator/map';
 export class ApiService {
 
     private baseUrl = environment.apiUrl;
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+                private auth: AuthenticationService) { }
 
     get(url: string) {
         return this.request(url, RequestMethod.Get);
@@ -27,6 +29,11 @@ export class ApiService {
     request(url: string, method: RequestMethod, body?: Object) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
+
+        if (this.auth.isLoggedIn()) {
+            const token = this.auth.getToken();
+            headers.append('Authorization', 'Bearer ' + token);
+        }
 
         const requestOptions = new RequestOptions({
             url: `${this.baseUrl}/${url}`,
