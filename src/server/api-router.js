@@ -123,6 +123,19 @@ function ApiRouter(database) {
         });
     });
 
+    router.get('/:users/recepies', (req, res) => {
+        const user = req.params.users;
+        const result = recepies.find({createdBy: user}).toArray((err, result) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            if (!result[0]) {
+                return res.sendStatus(404);
+            }
+            return res.json({result}).status(200);
+        });
+    });
+
     return router;
 }
 
