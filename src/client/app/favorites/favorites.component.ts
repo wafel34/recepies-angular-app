@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Recepie } from '../shared/recepie.model';
+import { ApiService } from '../shared/api.service';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-favorites',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor() { }
+    recepies: Recepie[];
+    user: string;
+    constructor(private auth: AuthenticationService,
+                private api: ApiService) {
+                    this.user = this.auth.getUserName();
+                }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.api.get(`${this.user}/favorites`)
+            .subscribe((result) => {
+                this.recepies = result;
+            });
+    }
 
 }

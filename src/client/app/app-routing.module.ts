@@ -7,11 +7,12 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomePageComponent},
-    {path: 'favorites', component: RecepiesListComponent},
+    {path: 'favorites', component: FavoritesComponent},
     {path: 'my_recepies', component: UserRecepiesComponent},
     {path: 'add', component: RecepieEditFormComponent},
     {path: 'register', component: RegisterComponent},

@@ -152,6 +152,9 @@ function ApiRouter(database) {
                 return item = new mongodb.ObjectID(item);
             });
             recepies.find({_id: { $in: convertedFavorites}}).toArray((err, data) => {
+                if (err) {
+                    return res.status(500).send({error: err});
+                }
                 res.json(data);
             });
         });
