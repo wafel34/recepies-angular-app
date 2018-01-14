@@ -10,7 +10,6 @@ import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
-    {path: 'recepies', component: RecepiesListComponent},
     {path: 'home', component: HomePageComponent},
     {path: 'favorites', component: RecepiesListComponent},
     {path: 'my_recepies', component: UserRecepiesComponent},

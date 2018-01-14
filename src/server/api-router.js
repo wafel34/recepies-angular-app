@@ -11,7 +11,8 @@ function ApiRouter(database) {
     router.use(jwt({secret: process.env.SECRET}).unless({path: [
         { url: '/api/authenticate'},
         { url: '/api/recepies', methods: ['GET']},
-        { url: /\/api\/recepies\/.*/g, methods: ['GET']}
+        { url: /\/api\/recepies\/.*/g, methods: ['GET']},
+        { url: /\/api\/.{1,}\/recepies/g, methods: ['GET']}
         ]})
     );
 
@@ -123,16 +124,29 @@ function ApiRouter(database) {
         });
     });
 
-    router.get('/:users/recepies', (req, res) => {
-        const user = req.params.users;
-        const result = recepies.find({createdBy: user}).toArray((err, result) => {
+    router.get('/:user/recepies', (req, res) => {
+        const user = req.params.user;
+        recepies.find({createdBy: user}).toArray((err, result) => {
             if (err) {
                 return res.status(500).send({error: err});
             }
             if (!result[0]) {
                 return res.sendStatus(404);
             }
-            return res.json({result}).status(200);
+            return res.json(result).status(200);
+        });
+    });
+
+    router.get('/:user/favorites', (req, res) => {
+        const user = req.params.user;
+        recepies.find({createdBy: user}).toArray((err, result) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            if (!result[0]) {
+                return res.sendStatus(404);
+            }
+            return res.json(result).status(200);
         });
     });
 
