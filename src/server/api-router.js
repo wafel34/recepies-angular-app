@@ -139,6 +139,25 @@ function ApiRouter(database) {
 
     router.get('/:user/favorites', (req, res) => {
         const user = req.params.user;
+        var favorites;
+        users.findOne({username: user}, (err, result) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            if (!result) {
+                return res.sendStatus(404);
+            }
+            favorites = result.favorites;
+            let convertedFavorites = favorites.map((item) => {
+                return item = new mongodb.ObjectID(item);
+            });
+            recepies.find({_id: { $in: convertedFavorites}}).toArray((err, data) => {
+                res.json(data);
+            });
+        });
+
+
+        /*
         recepies.find({createdBy: user}).toArray((err, result) => {
             if (err) {
                 return res.status(500).send({error: err});
@@ -147,7 +166,7 @@ function ApiRouter(database) {
                 return res.sendStatus(404);
             }
             return res.json(result).status(200);
-        });
+        });*/
     });
 
     return router;
