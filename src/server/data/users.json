@@ -1,12 +1,10 @@
 [
     {
         "username": "admin",
-        "password": "password",
-        "favorites": ["5a5b4b34538209207899fae5", "5a5b4b34538209207899fae6"]
+        "password": "password"
     },
     {
         "username": "sample-user",
-        "password": "sample-password",
-        "favorites": []
+        "password": "sample-password"
     }
 ]

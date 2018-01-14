@@ -30,5 +30,5 @@ function seedDatabase(collectionName, data) {
     });
 }
 
-//seedDatabase('recepies', recepies);
+seedDatabase('recepies', recepies);
 seedDatabase('users', users);

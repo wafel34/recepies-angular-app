@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../shared/api.service';
+import { AuthenticationService } from '../shared/authentication.service';
 import { CreateUniqueShortNameService } from '../shared/create-unique-short-name.service';
 import { Recepie } from '../shared/recepie.model';
 import { Router } from '@angular/router';
@@ -23,6 +24,7 @@ export class RecepieEditFormComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private api: ApiService,
+                private auth: AuthenticationService,
                 private router: Router,
                 private shortNameService: CreateUniqueShortNameService,
                 private location: Location) {
@@ -50,7 +52,9 @@ export class RecepieEditFormComponent implements OnInit {
                 this.formBuilder.control('', [Validators.required])
             ]),
             photoUrl: [(this.addNew) ? '' : this.recepie.photoUrl, [Validators.required]],
-            _id: [(this.addNew) ? '' : this.recepie._id]
+            _id: [(this.addNew) ? '' : this.recepie._id],
+            createdBy: [(this.addNew) ? this.auth.getUserName() : this.recepie.createdBy],
+            favoriteFor: [(this.addNew) ? [] : this.recepie.favoriteFor]
         });
 
         if (!this.addNew) {
@@ -110,7 +114,6 @@ export class RecepieEditFormComponent implements OnInit {
 
     onAddSubmit() {
         // handling form submition when new recepie is added
-
         const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
         this.recepiesForm.get('shortname').setValue(uniqueShortname);
         this.api.post(`recepies`, this.recepiesForm.value)

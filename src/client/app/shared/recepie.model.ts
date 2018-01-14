@@ -11,4 +11,5 @@ export interface Recepie {
     photoUrl: string;
     createdBy: string;
     _id: string;
+    favoriteFor: string[];
 }

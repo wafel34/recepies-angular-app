@@ -58,7 +58,9 @@ function ApiRouter(database) {
                     serves: record.serves,
                     ingredients: record.ingredients,
                     instructions: record.instructions,
-                    photoUrl: record.photoUrl
+                    photoUrl: record.photoUrl,
+                    createdBy: record.createdBy,
+                    favoriteFor: []
                 }, (err, result) => {
                     if (err) {
                         res.status(500).send({error: "Database error."});
@@ -139,29 +141,7 @@ function ApiRouter(database) {
 
     router.get('/:user/favorites', (req, res) => {
         const user = req.params.user;
-        var favorites;
-        users.findOne({username: user}, (err, result) => {
-            if (err) {
-                return res.status(500).send({error: err});
-            }
-            if (!result) {
-                return res.sendStatus(404);
-            }
-            favorites = result.favorites;
-            let convertedFavorites = favorites.map((item) => {
-                return item = new mongodb.ObjectID(item);
-            });
-            recepies.find({_id: { $in: convertedFavorites}}).toArray((err, data) => {
-                if (err) {
-                    return res.status(500).send({error: err});
-                }
-                res.json(data);
-            });
-        });
-
-
-        /*
-        recepies.find({createdBy: user}).toArray((err, result) => {
+        recepies.find({favoriteFor: user}).toArray((err, result) => {
             if (err) {
                 return res.status(500).send({error: err});
             }
@@ -169,7 +149,8 @@ function ApiRouter(database) {
                 return res.sendStatus(404);
             }
             return res.json(result).status(200);
-        });*/
+        });
+
     });
 
     return router;
