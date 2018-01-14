@@ -17,7 +17,9 @@ const routes: Routes = [
     {path: 'add', component: RecepieEditFormComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'recepies/:shortname', component: RecepiePageComponent}
+    {path: 'recepies/:shortname', component: RecepiePageComponent},
+    {path: '**', redirectTo: '/home', pathMatch: 'full'},
+
 
 ];
 

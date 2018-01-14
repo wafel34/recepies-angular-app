@@ -18,7 +18,7 @@
         <button [routerLink]="['/recepies', recepie.shortName]" mat-raised-button color="primary">
             View <mat-icon>visibility</mat-icon>
         </button>
-        <button mat-raised-button color="accent">
+        <button mat-raised-button color="accent" (click)="handleFavorite();">
             Favourite<mat-icon>favorite_border</mat-icon>
         </button>
     </mat-card-actions>

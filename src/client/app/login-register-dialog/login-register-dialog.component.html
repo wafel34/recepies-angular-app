@@ -1,0 +1,8 @@
+<div class="dialog">
+    <button class="dialog__close-button" mat-icon-button color="primary" (click)="this.closeDialog();"><mat-icon>close</mat-icon></button>
+    <span class="dialog__header">You are not logged in.</span>
+    <span class="dialog__options">
+        <a (click)="this.navigate();" routerLink="/register" class="dialog__link">Click here to register</a>
+        <span>or<a (click)="this.navigate();" routerLink="/login" class="dialog__link">Click here to login</a></span>
+    </span>
+</div>

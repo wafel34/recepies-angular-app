@@ -19,7 +19,9 @@ import {
   MatInputModule,
   MatSelectModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatDialogModule
 } from '@angular/material';
 // components
 import { AppComponent } from './app.component';
@@ -33,6 +35,7 @@ import { LoginComponent } from './login/login.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
+import { LoginRegisterDialogComponent } from './login-register-dialog/login-register-dialog.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -54,7 +57,8 @@ import 'hammerjs';
     LoginComponent,
     FavoritesComponent,
     HomePageComponent,
-    UserRecepiesComponent
+    UserRecepiesComponent,
+    LoginRegisterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,13 +78,17 @@ import 'hammerjs';
     MatInputModule,
     MatSelectModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [
       ApiService,
       CreateUniqueShortNameService,
       AuthenticationService
     ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  entryComponents: [LoginRegisterDialogComponent],
 })
 export class AppModule { }

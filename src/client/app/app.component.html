@@ -46,7 +46,7 @@
                 <span>Login</span>
                 <mat-icon color="accent">account_circle</mat-icon>
             </button>
-            <span *ngIf="this.auth.isLoggedIn()" class="toolbar__username">
+            <span *ngIf="this.auth.isLoggedIn()" class="toolbar__username" matTooltip="{{this.auth.getUserName()}}">
                 {{this.auth.getUserName()}}
             </span>
             <button *ngIf="this.auth.isLoggedIn()" class="toolbar__button" mat-button (click)="logout()">
