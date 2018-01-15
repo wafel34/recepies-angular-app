@@ -6,8 +6,10 @@
             <div class="recepie-page__panel-right">
 
                 <div class="recepie-page__buttons-container">
-                    <button class="recepie-page__button" mat-raised-button color="accent">
-                        Favourite <mat-icon>favorite_border</mat-icon>
+                    <button class="recepie-page__button" mat-raised-button color="accent" (click)="handleFavorite();">
+                        Favourite
+                        <mat-icon *ngIf="!this.isFavorite">favorite_border</mat-icon>
+                        <mat-icon *ngIf="this.isFavorite" color="warn">favorite</mat-icon>
                     </button>
                     <button *ngIf="this.auth.getUserName() === this.recepie.createdBy" class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
                         Edit  <mat-icon>edit</mat-icon>

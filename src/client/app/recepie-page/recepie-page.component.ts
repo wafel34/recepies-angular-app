@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Recepie } from '../shared/recepie.model';
 import { AuthenticationService } from '../shared/authentication.service';
-
+import { MatDialog } from '@angular/material';
+import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
 
 @Component({
   selector: 'app-recepie-page',
@@ -16,9 +17,12 @@ export class RecepiePageComponent implements OnInit {
     routeUrl: string;
     editing = false;
     deleted = false;
+    isFavorite: boolean;
+    username: string;
     constructor(route: ActivatedRoute,
                 private api: ApiService,
-                private auth: AuthenticationService) {
+                private auth: AuthenticationService,
+                public dialog: MatDialog) {
         // get shortname form url
         this.routeUrl = route.snapshot.params.shortname;
     }
@@ -28,7 +32,15 @@ export class RecepiePageComponent implements OnInit {
         this.api.get(`recepies/${this.routeUrl}`)
             .subscribe((result) => {
                 this.recepie = result;
+                if (this.auth.isLoggedIn()) {
+                    // check if user login is in the 'favoriteFor' section in recepie,
+                    // which means that user added this recepie to his favorites
+                    this.username = this.auth.getUserName();
+                    this.isFavorite = this.recepie.favoriteFor.indexOf(this.username) > -1;
+                }
             });
+
+
     }
 
     edit() {
@@ -56,5 +68,16 @@ export class RecepiePageComponent implements OnInit {
 
     updateRecepiePage(event) {
         this.recepie = event;
+    }
+
+    handleFavorite() {
+        if (!this.auth.isLoggedIn()) {
+            this.dialog.open(LoginRegisterDialogComponent);
+        }
+        this.isFavorite = !this.isFavorite;
+        this.api.put(`recepies/${this.recepie.shortName}/favorites`, {username: this.username})
+            .subscribe((result) => {
+                this.recepie = result.result.value;
+            });
     }
 }

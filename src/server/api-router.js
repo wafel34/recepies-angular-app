@@ -8,6 +8,7 @@ function ApiRouter(database) {
     const recepies = database.collection('recepies');
     const users = database.collection('users');
 
+    // protect paths for unauthorized users with execptions below (.unless({}))
     router.use(jwt({secret: process.env.SECRET}).unless({path: [
         { url: '/api/authenticate'},
         { url: '/api/recepies', methods: ['GET']},
@@ -16,6 +17,7 @@ function ApiRouter(database) {
         ]})
     );
 
+    // catch error when user is unauthorized
     router.use((err, req, res, next) => {
         if (err.name === 'UnauthorizedError') {
             return res.status(401).json({error: err.message});
@@ -24,8 +26,8 @@ function ApiRouter(database) {
 
     router.use('/authenticate', AuthRouter(database));
 
+    // GET all recepies
     router.get('/recepies', (req, res) => {
-
         //find all elements, convert to array and send back as json
         const result = recepies.find().toArray((err,result)=>{
             if (err) {
@@ -35,6 +37,7 @@ function ApiRouter(database) {
         });
     });
 
+    // ADD NEW recepie
     router.post('/recepies', (req, res) => {
         const record = req.body;
         //check if record with the same shortName as request exists
@@ -72,7 +75,7 @@ function ApiRouter(database) {
         });
     });
 
-
+    // GET one recepie
     router.get('/recepies/:shortName', (req, res) => {
         const name = req.params.shortName;
         const result = recepies.findOne({shortName: name}, (err, dbRecord) => {
@@ -86,6 +89,7 @@ function ApiRouter(database) {
         });
     });
 
+    // UPDATE ONE recepie
     router.put('/recepies/:shortName', (req, res) => {
         const record = req.body;
         const mongoId = new mongodb.ObjectID(record._id);
@@ -114,6 +118,7 @@ function ApiRouter(database) {
         });
     });
 
+    // DELETE ONE recepie
     router.delete('/recepies/:shortName', (req, res) => {
         const name = req.params.shortName;
 
@@ -125,44 +130,76 @@ function ApiRouter(database) {
         });
     });
 
+    // UPDATE ONE recepie - actually update information about user that add this recepie as favourite
     router.put('/recepies/:shortName/favorites', (req, res) => {
         const name = req.params.shortName;
         const username = req.body.username;
 
+        /*
+            Below query is responsible for updateing 'favoritesFor' section in recepie record.
+            This happens in both situations - when user is adding item to favorites and when is removing it.
+        */
+        recepies.findOneAndUpdate({
+            // First I send a query for a record with recepies shortName that don't have current username in it's favoritesFor
+            // (hence the {$ne: username} query)
+            shortName: name,
+            favoriteFor: {
+                $ne: username
+            }
+            },
+            {
+                $push: {
+                    // when search was sucesfull i'm pushing username to recepies 'favoriteFor' array
+                    favoriteFor: username
+                }
+            },
+            {
+                returnOriginal: false
+            }, (err, result) => {
+                if (err) {
+                    return res.status(500).send({error: err});
+                }
 
-        let dbrecord = recepies.findOneAndUpdate({shortName: name, favoriteFor: name},{
-            $push: {
-                favoriteFor: name
-            }
-        }, (err, result) => {
-            if (err) {
-                return res.status(500).send({error: err});
-            }
-            console.log(result);
-            if (result.favoriteFor.indexOf(username) === -1) {
-                result.favoriteFor.push(username);
-            } else {
-                let tempArray = result.favoriteFor.filter((item) => {
-                    return item !== username;
-                });
-            }
+                if (result.lastErrorObject.updatedExisting) {
+                    // when query was found, username has been added to favorites and i'm sending back updated data.
+                    return res.status(200).json({
+                        message: 'Added to favorites',
+                        result: result
+                    });
+                }
+
+                if (!result.lastErrorObject.updatedExisting) {
+                    // if record hasn't been updated it means that username was already in recepies 'favoritesFor' array
+                    // In this case i'm performing the same query, but instead of pushing elemnt to 'favoritesFor' toArray
+                    // I will pull it out of array, which will remove username from favorites.
+                    recepies.findOneAndUpdate(
+                        {shortName: name},
+                        {
+                            $pull:
+                            // pulling username from 'favoritesFor' array
+                                {
+                                    favoriteFor: username
+                                }
+                        },
+                        {
+                            returnOriginal: false
+                        }, (err, secondResult) => {
+                            if (err) {
+                                return res.status(500).send({error: err});
+                            }
+                            if (secondResult.lastErrorObject.updatedExisting) {
+                                // once this has been done i'm sending secondResult (result of second query) back to user
+                                return res.status(200).json({
+                                    message: 'Removed to favorites',
+                                    result: secondResult
+                                });
+                            }
+                        });
+                } // end IF (!result.lastErrorObject.updatedExisting)
         });
-        /*const result = recepies.findOneAndUpdate({shortName: name},{
-            $push: {
-                favoriteFor: username
-            }
-        },
-        {
-            returnOriginal: false
-        },
-        (err, dbRecord) => {
-            if (err) {
-                return res.status(500).send({error: err});
-            }
-            return res.json(dbRecord.value.favoriteFor).status(200);
-        });*/
     });
 
+    // GET all USER recepies
     router.get('/:user/recepies', (req, res) => {
         const user = req.params.user;
         recepies.find({createdBy: user}).toArray((err, result) => {
@@ -176,6 +213,7 @@ function ApiRouter(database) {
         });
     });
 
+    // GET all USER FAVORITE recepies
     router.get('/:user/favorites', (req, res) => {
         const user = req.params.user;
         recepies.find({favoriteFor: user}).toArray((err, result) => {
