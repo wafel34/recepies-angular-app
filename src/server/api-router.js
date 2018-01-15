@@ -112,7 +112,6 @@ function ApiRouter(database) {
             }
             return res.json(dbRecord).status(200);
         });
-
     });
 
     router.delete('/recepies/:shortName', (req, res) => {
@@ -124,6 +123,44 @@ function ApiRouter(database) {
             }
             return res.json(dbRecord).status(200);
         });
+    });
+
+    router.put('/recepies/:shortName/favorites', (req, res) => {
+        const name = req.params.shortName;
+        const username = req.body.username;
+
+
+        let dbrecord = recepies.findOneAndUpdate({shortName: name, favoriteFor: name},{
+            $push: {
+                favoriteFor: name
+            }
+        }, (err, result) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            console.log(result);
+            if (result.favoriteFor.indexOf(username) === -1) {
+                result.favoriteFor.push(username);
+            } else {
+                let tempArray = result.favoriteFor.filter((item) => {
+                    return item !== username;
+                });
+            }
+        });
+        /*const result = recepies.findOneAndUpdate({shortName: name},{
+            $push: {
+                favoriteFor: username
+            }
+        },
+        {
+            returnOriginal: false
+        },
+        (err, dbRecord) => {
+            if (err) {
+                return res.status(500).send({error: err});
+            }
+            return res.json(dbRecord.value.favoriteFor).status(200);
+        });*/
     });
 
     router.get('/:user/recepies', (req, res) => {
@@ -150,7 +187,6 @@ function ApiRouter(database) {
             }
             return res.json(result).status(200);
         });
-
     });
 
     return router;
