@@ -31,12 +31,14 @@ export class RecepieCardComponent implements OnInit {
     handleFavorite() {
         if (!this.auth.isLoggedIn()) {
             this.dialog.open(LoginRegisterDialogComponent);
+        } else {
+            this.isFavorite = !this.isFavorite;
+            this.api.put(`recepies/${this.recepie.shortName}/favorites`, {username: this.username})
+                .subscribe((result) => {
+                    this.recepie = result.result.value;
+                });
         }
-        this.isFavorite = !this.isFavorite;
-        this.api.put(`recepies/${this.recepie.shortName}/favorites`, {username: this.username})
-            .subscribe((result) => {
-                this.recepie = result.result.value;
-            });
+
     }
 
 }
