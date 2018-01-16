@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Recepie } from '../shared/recepie.model';
 import { AuthenticationService } from '../shared/authentication.service';
 import { ApiService } from '../shared/api.service';
@@ -13,6 +13,7 @@ import { LoginRegisterDialogComponent } from '../login-register-dialog/login-reg
 export class RecepieCardComponent implements OnInit {
 
     @Input() recepie: Recepie;
+    @Output() removeFavorite = new EventEmitter();
     isFavorite: boolean;
     username: string;
     constructor(private auth: AuthenticationService,
@@ -36,6 +37,10 @@ export class RecepieCardComponent implements OnInit {
             this.api.put(`recepies/${this.recepie.shortName}/favorites`, {username: this.username})
                 .subscribe((result) => {
                     this.recepie = result.result.value;
+
+                    if (this.isFavorite === false) {
+                        this.removeFavorite.emit(this.recepie);
+                    }
                 });
         }
 

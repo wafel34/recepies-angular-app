@@ -12,6 +12,7 @@ export class FavoritesComponent implements OnInit {
 
     recepies: Recepie[];
     user: string;
+    notFound: boolean;
     constructor(private auth: AuthenticationService,
                 private api: ApiService) {
                     this.user = this.auth.getUserName();
@@ -21,6 +22,8 @@ export class FavoritesComponent implements OnInit {
         this.api.get(`${this.user}/favorites`)
             .subscribe((result) => {
                 this.recepies = result;
+            }, (error) => {
+                this.notFound = true;
             });
     }
 

@@ -1,9 +1,9 @@
     <mat-tab-group class="tab-group" dynamicHeight="true">
         <mat-tab label="All">
             <div class="list-grid">
-                <ng-container *ngIf="activeRoute !== 'favorites'">
+                <ng-container >
                     <ng-container *ngFor="let recepie of recepies">
-                        <app-recepie-card class="list-grid__item" [recepie]="recepie"></app-recepie-card>
+                        <app-recepie-card (removeFavorite)="removeFromFavoritesList($event)" class="list-grid__item" [recepie]="recepie"></app-recepie-card>
                     </ng-container>
                 </ng-container>
 

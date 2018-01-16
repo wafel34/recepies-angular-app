@@ -17,7 +17,7 @@ function AuthRouter(database) {
                  return res.status(401).json({error: 'Invalid password'});
             }
 
-            const token = JWT.sign(postData, process.env.SECRET, {expiresIn: '4h'});
+            const token = JWT.sign(postData, process.env.SECRET, {expiresIn: '7d'});
             return res.status(200).json({
                 token: token,
                 username: postData.username,
