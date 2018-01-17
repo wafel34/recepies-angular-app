@@ -2,5 +2,6 @@
     <div class="home-header" [ngStyle]="{'background-image': 'url(assets/blueberries-2278921_1280.jpg)'}">
         <h1 class="home-header__h1">My recepies:</h1>
     </div>
+    <div class="not-found" *ngIf="this.notFound">You don't have any favorite recepies yet.</div>
     <app-recepies-list [recepies]="recepies"></app-recepies-list>
 </div>

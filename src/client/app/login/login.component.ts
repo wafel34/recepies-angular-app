@@ -29,20 +29,23 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         const loginDetails = this.loginForm.value;
-        this.api.post('authenticate', loginDetails)
-            .subscribe((result) => {
-                this.auth.logIn(result);
-                this.snackBar.open('Sucesfully Logged In.', 'OK', {
-                  duration: 2500,
-                });
-                this.router.navigate(['/home']);
+            if(this.loginForm.valid) {
+                this.api.post('authenticate', loginDetails)
+                    .subscribe((result) => {
+                        this.auth.logIn(result);
+                        this.snackBar.open('Sucesfully Logged In.', 'OK', {
+                          duration: 2500,
+                        });
+                        this.router.navigate(['/home']);
 
-                if (this.errorMsg) {
-                    this.errorMsg = null;
-                }
-            }, (error) => {
-                this.errorMsg = JSON.parse(error._body);
-            });
+                        if (this.errorMsg) {
+                            this.errorMsg = null;
+                        }
+                    }, (error) => {
+                        this.errorMsg = JSON.parse(error._body);
+                    });
+        }
+
     }
 
 }

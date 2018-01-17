@@ -12,6 +12,7 @@ export class UserRecepiesComponent implements OnInit {
 
     recepies: Recepie[];
     user: string;
+    notFound: boolean;
     constructor(private api: ApiService,
                 private auth: AuthenticationService) {
                     this.user = this.auth.getUserName();
@@ -21,6 +22,10 @@ export class UserRecepiesComponent implements OnInit {
         this.api.get(`${this.user}/recepies`)
             .subscribe((result) => {
                 this.recepies = result;
+            }, (error) => {
+                if (error.status === 404) {
+                    this.notFound = true;
+                }
             });
     }
 

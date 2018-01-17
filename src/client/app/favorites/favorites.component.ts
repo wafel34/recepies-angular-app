@@ -23,7 +23,10 @@ export class FavoritesComponent implements OnInit {
             .subscribe((result) => {
                 this.recepies = result;
             }, (error) => {
-                this.notFound = true;
+
+                if (error.status === 404) {
+                    this.notFound = true;
+                }
             });
     }
 

@@ -5,11 +5,13 @@
             <div class="login-form">
                 <mat-form-field class="login-form__field">
                     <mat-placeholder>Login</mat-placeholder>
+                    <mat-error>Please enter login.</mat-error>
                     <input matInput type="text" formControlName="username">
                 </mat-form-field>
                 <mat-form-field class="login-form__field">
                     <mat-placeholder>Password</mat-placeholder>
                     <input matInput type="password" formControlName="password">
+                    <mat-error>Please enter password.</mat-error>
                 </mat-form-field>
                 <mat-error *ngIf="this.errorMsg" class="login-form__error">Invalid login or password.</mat-error>
                 <button type="submit" mat-raised-button color="primary">Login</button>
