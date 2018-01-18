@@ -41,6 +41,7 @@ import { LoginRegisterDialogComponent } from './login-register-dialog/login-regi
 import { ApiService } from './shared/api.service';
 import { CreateUniqueShortNameService } from './shared/create-unique-short-name.service';
 import { AuthenticationService } from './shared/authentication.service';
+import { RouteGuard } from './shared/route.guard';
 
 
 import 'hammerjs';
@@ -85,7 +86,8 @@ import 'hammerjs';
   providers: [
       ApiService,
       CreateUniqueShortNameService,
-      AuthenticationService
+      AuthenticationService,
+      RouteGuard
     ],
   bootstrap: [AppComponent],
 

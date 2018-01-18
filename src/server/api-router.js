@@ -12,8 +12,7 @@ function ApiRouter(database) {
     router.use(jwt({secret: process.env.SECRET}).unless({path: [
         { url: '/api/authenticate'},
         { url: '/api/recepies', methods: ['GET']},
-        { url: /\/api\/recepies\/.*/g, methods: ['GET']},
-        { url: /\/api\/.{1,}\/recepies/g, methods: ['GET']}
+        { url: /\/api\/recepies\/.*/g, methods: ['GET']}
         ]})
     );
 
