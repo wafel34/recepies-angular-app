@@ -15,8 +15,7 @@ export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
     routeUrl: string;
-    editing = false;
-    deleted = false;
+    state = 'viewing'; // can take 3 states: viewing(default), editing, deleted
     isFavorite: boolean;
     username: string;
     constructor(route: ActivatedRoute,
@@ -45,7 +44,7 @@ export class RecepiePageComponent implements OnInit {
 
     edit() {
         // function is called when EDIT button is clicked. then page element is hidden and edit element shown.
-        this.editing = true;
+        this.state = 'editing';
     }
 
     deleteRecepie() {
@@ -55,14 +54,14 @@ export class RecepiePageComponent implements OnInit {
         if (confirmation) {
             this.api.delete(`recepies/${this.routeUrl}`)
                 .subscribe((result) => {
-                    this.deleted = true;
+                    this.state = 'deleted';
                 });
         }
     }
 
     cancelEdit(element) {
         // function is called when form component (child) emits a event (which is fired on click of 'Cancel' button in the form)
-        this.editing = false;
+        this.state = 'viewing';
         window.scrollTo(0, 0);
     }
 
