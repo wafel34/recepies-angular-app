@@ -1,67 +1,70 @@
 <div class="app-container" *ngIf="recepie !== undefined">
-    <mat-card class="recepie-page" [class.hidden]="this.state==='editing' || this.state==='deleted'">
-            <div class="recepie-page__image" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
-            </div><!--recepie-page__image"-->
+    <div class="parent" [@recepiePageAnimation]="this.state"
+        (@recepiePageAnimation.start)="animationStart(this.state)"
+        (@recepiePageAnimation.done)="animationDone(this.state)">
+        <mat-card id="viewHook" class="recepie-page" >
+                <div class="recepie-page__image" [ngStyle]="{'background-image': 'url(' + recepie.photoUrl + ')'}">
+                </div><!--recepie-page__image"-->
 
-            <div class="recepie-page__panel-right">
+                <div class="recepie-page__panel-right">
 
-                <div class="recepie-page__buttons-container">
-                    <button class="recepie-page__button" mat-raised-button color="accent" (click)="handleFavorite();">
-                        Favourite
-                        <mat-icon *ngIf="!this.isFavorite">favorite_border</mat-icon>
-                        <mat-icon *ngIf="this.isFavorite" color="warn">favorite</mat-icon>
-                    </button>
-                    <button *ngIf="this.auth.getUserName() === this.recepie.createdBy" class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
-                        Edit  <mat-icon>edit</mat-icon>
-                    </button>
-                    <button *ngIf="this.auth.getUserName() === this.recepie.createdBy" class="recepie-page__button" mat-raised-button color="warn" (click)="deleteRecepie()">
-                        Delete <mat-icon>remove_circle_outline</mat-icon>
-                    </button>
-                </div><!--buttons-container-->
+                    <div class="recepie-page__buttons-container">
+                        <button class="recepie-page__button" mat-raised-button color="accent" (click)="handleFavorite();">
+                            Favourite
+                            <mat-icon *ngIf="!this.isFavorite">favorite_border</mat-icon>
+                            <mat-icon *ngIf="this.isFavorite" color="warn">favorite</mat-icon>
+                        </button>
+                        <button *ngIf="this.auth.getUserName() === this.recepie.createdBy" class="recepie-page__button" mat-raised-button color="primary" (click)="edit()">
+                            Edit  <mat-icon>edit</mat-icon>
+                        </button>
+                        <button *ngIf="this.auth.getUserName() === this.recepie.createdBy" class="recepie-page__button" mat-raised-button color="warn" (click)="deleteRecepie()">
+                            Delete <mat-icon>remove_circle_outline</mat-icon>
+                        </button>
+                    </div><!--buttons-container-->
 
-                <mat-card-title class="recepie-page__title">{{recepie?.name}}</mat-card-title>
-                <mat-card-subtitle class="recepie-page__subtitle">{{recepie?.headline}}</mat-card-subtitle>
+                    <mat-card-title class="recepie-page__title">{{recepie?.name}}</mat-card-title>
+                    <mat-card-subtitle class="recepie-page__subtitle">{{recepie?.headline}}</mat-card-subtitle>
 
-                <div class="recepie-page__details">
-                    <div class="details-icons">
-                        <mat-icon class="details-icons__icon">timer</mat-icon>
-                        <span class="details-icons__text">Time: {{recepie?.time}} minutes</span>
-                    </div>
-                    <div class="details-icons">
-                        <mat-icon class="details-icons__icon">room_service</mat-icon>
-                        <span class="details-icons__text">Serves: {{recepie?.serves}}</span>
-                    </div>
-                    <div class="details-icons">
-                        <mat-icon class="details-icons__icon">restaurant</mat-icon>
-                        <span class="details-icons__text">Category: {{recepie?.category}}</span>
-                    </div>
-                </div><!--details (icons)-->
-                <h3>Ingredients:</h3>
+                    <div class="recepie-page__details">
+                        <div class="details-icons">
+                            <mat-icon class="details-icons__icon">timer</mat-icon>
+                            <span class="details-icons__text">Time: {{recepie?.time}} minutes</span>
+                        </div>
+                        <div class="details-icons">
+                            <mat-icon class="details-icons__icon">room_service</mat-icon>
+                            <span class="details-icons__text">Serves: {{recepie?.serves}}</span>
+                        </div>
+                        <div class="details-icons">
+                            <mat-icon class="details-icons__icon">restaurant</mat-icon>
+                            <span class="details-icons__text">Category: {{recepie?.category}}</span>
+                        </div>
+                    </div><!--details (icons)-->
+                    <h3>Ingredients:</h3>
+                    <ul class="recepie-details-list">
+                        <li class="recepie-details-list__item" *ngFor="let ingredient of recepie.ingredients"> {{ingredient}} </li>
+                    </ul><!--ingredients list-->
+                </div>
+
+            <mat-card-content class="recepie-page__content">
+                <h3 *ngIf="recepie.summary">About:</h3>
+                <aside *ngIf="recepie.summary" class="content__about">
+                    <p>{{recepie.summary}}</p>
+                </aside>
+                <h3>How to prepare:</h3>
                 <ul class="recepie-details-list">
-                    <li class="recepie-details-list__item" *ngFor="let ingredient of recepie.ingredients"> {{ingredient}} </li>
-                </ul><!--ingredients list-->
-            </div>
+                    <li class="recepie-details-list__item" *ngFor="let instruction of recepie.instructions"> {{instruction}} </li>
+                </ul>
+            </mat-card-content>
+        </mat-card>
 
-        <mat-card-content class="recepie-page__content">
-            <h3 *ngIf="recepie.summary">About:</h3>
-            <aside *ngIf="recepie.summary" class="content__about">
-                <p>{{recepie.summary}}</p>
-            </aside>
-            <h3>How to prepare:</h3>
-            <ul class="recepie-details-list">
-                <li class="recepie-details-list__item" *ngFor="let instruction of recepie.instructions"> {{instruction}} </li>
-            </ul>
-        </mat-card-content>
-    </mat-card>
+        <div id="editHook">
+            <app-recepie-edit-form [recepie]="recepie" (cancel)="cancelEdit()" (submitted)="updateRecepiePage($event)"></app-recepie-edit-form>
+        </div>
 
-<div [class.hidden]="this.state==='viewing' || this.state==='deleted'">
-    <app-recepie-edit-form [recepie]="recepie" (cancel)="cancelEdit()" (submitted)="updateRecepiePage($event)"></app-recepie-edit-form>
-</div>
-
-<div [class.hidden]="this.state==='editing' || this.state==='viewing'" class="deleted">
-    <span class="deleted__message">Recepie has been deleted. <mat-icon>done</mat-icon></span>
-    <a routerLink="/recepies" mat-raised-button color="accent">Go to Home Page</a>
-</div>
-
+        <div id="deleteHook" [class.hidden]="this.state==='editing' || this.state==='viewing'" class="deleted">
+            <span class="deleted__message">Recepie has been deleted. <mat-icon>done</mat-icon></span>
+            <a routerLink="/recepies" mat-raised-button color="accent">Go to Home Page</a>
+        </div>
+    </div>
 
 </div>

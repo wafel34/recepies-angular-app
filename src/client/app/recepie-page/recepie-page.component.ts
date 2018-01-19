@@ -5,12 +5,37 @@ import { Recepie } from '../shared/recepie.model';
 import { AuthenticationService } from '../shared/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
+import { trigger, query, style, transition, animate, group} from '@angular/animations';
 
 @Component({
   selector: 'app-recepie-page',
   templateUrl: './recepie-page.component.html',
-  styleUrls: ['./recepie-page.component.sass']
+  styleUrls: ['./recepie-page.component.sass'],
+  animations: [
+      trigger('recepiePageAnimation', [
+          transition('viewing => editing', [
+              style({height: '!'}),
+              query('#editHook', style({transform: 'translateX(100%)'})),
+              query('#editHook, #viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
+              group([
+                  query('#viewHook', [animate('.3s ease-out', style({transform: 'translateX(-100%)'}))]),
+                  query('#editHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))])
+              ])
+          ]), // transitions
+          transition('editing => viewing', [
+              style({height: '!'}),
+              query('#viewHook', style({transform: 'translateX(-100%)'})),
+              query('#editHook, #viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
+              group([
+                  query('#viewHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))]),
+                  query('#editHook', [animate('.3s ease-out', style({transform: 'translateX(100%)'}))])
+              ])
+          ]) // transitions
+      ]) // trigger
+  ]
+
 })
+
 export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
@@ -79,6 +104,28 @@ export class RecepiePageComponent implements OnInit {
                     this.recepie = result.result.value;
                 });
         }
+    }
+
+    // below two methods are mainly responsible for hiding element after animation, so no-one can tab into hidden elemenet
+    // because of that we need to also show element befor animation begins to see it animate
+    // this is base on states of animation and the component
+
+    animationStart(state) {
+        if (state === 'viewing') {
+            viewHook.classList.remove('hidden');
+        }
+        if (state === 'editing') {
+            editHook.classList.remove('hidden');
+        }
+    }
+    animationDone(state) {
+        if (state === 'editing') {
+            viewHook.classList.add('hidden');
+        }
+        if (state === 'viewing') {
+            editHook.classList.add('hidden');
+        }
+
 
     }
 }
