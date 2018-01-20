@@ -64,7 +64,7 @@
             <app-recepie-edit-form [recepie]="recepie" (cancel)="cancelEdit()" (submitted)="updateRecepiePage($event)"></app-recepie-edit-form>
         </div>
 
-        <div class="deleteHook" [class.hidden]="this.state==='editing' || this.state==='viewing'" class="deleted">
+        <div class="deleteHook deleted" #deleteHook>
             <span class="deleted__message">Recepie has been deleted. <mat-icon>done</mat-icon></span>
             <a routerLink="/recepies" mat-raised-button color="accent">Go to Home Page</a>
         </div>

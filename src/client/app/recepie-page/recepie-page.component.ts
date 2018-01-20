@@ -30,6 +30,15 @@ import { trigger, query, style, transition, animate, group} from '@angular/anima
                   query('.viewHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))]),
                   query('.editHook', [animate('.3s ease-out', style({transform: 'translateX(100%)'}))])
               ])
+          ]), // transitions
+          transition('viewing => deleted', [
+              style({height: '!'}),
+              query('.deleteHook', style({transform: 'translateX(100%)'})),
+              query('.deleteHook, .viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
+              group([
+                  query('.viewHook', [animate('.3s ease-out', style({transform: 'translateX(-100%)'}))]),
+                  query('.deleteHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))])
+              ])
           ]) // transitions
       ]) // trigger
   ]
@@ -42,6 +51,7 @@ export class RecepiePageComponent implements OnInit {
     routeUrl: string;
     @ViewChild('viewHook') viewHook: ElementRef;
     @ViewChild('editHook') editHook: ElementRef;
+    @ViewChild('deleteHook') deleteHook: ElementRef;
     state = 'viewing'; // can take 3 states: viewing(default), editing, deleted
     isFavorite: boolean;
     username: string;
@@ -119,6 +129,9 @@ export class RecepiePageComponent implements OnInit {
         if (state === 'editing') {
             this.editHook.nativeElement.classList.remove('hidden');
         }
+        if (state === 'deleted') {
+            this.deleteHook.nativeElement.classList.remove('hidden');
+        }
     }
 
     animationDone(state) {
@@ -127,6 +140,10 @@ export class RecepiePageComponent implements OnInit {
         }
         if (state === 'viewing') {
             this.editHook.nativeElement.classList.add('hidden');
+            this.deleteHook.nativeElement.classList.add('hidden');
+        }
+        if (state === 'deleted') {
+            this.viewHook.nativeElement.classList.add('hidden');
         }
     }
 }
