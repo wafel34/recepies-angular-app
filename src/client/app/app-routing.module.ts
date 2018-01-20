@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule,CanActivate } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { RecepiesListComponent } from './recepies-list/recepies-list.component';
 import { RecepiePageComponent } from './recepie-page/recepie-page.component';
 import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.component';
@@ -12,13 +12,13 @@ import { RouteGuard } from './shared/route.guard';
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
-    {path: 'home', component: HomePageComponent},
-    {path: 'favorites', component: FavoritesComponent, canActivate: [RouteGuard]},
-    {path: 'my_recepies', component: UserRecepiesComponent, canActivate: [RouteGuard]},
-    {path: 'add', component: RecepieEditFormComponent, canActivate: [RouteGuard]},
-    {path: 'register', component: RegisterComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'recepies/:shortname', component: RecepiePageComponent},
+    {path: 'home', component: HomePageComponent, data: {depth: 1}},
+    {path: 'favorites', component: FavoritesComponent, canActivate: [RouteGuard], data: {depth: 1}},
+    {path: 'my_recepies', component: UserRecepiesComponent, canActivate: [RouteGuard], data: {depth: 1}},
+    {path: 'add', component: RecepieEditFormComponent, canActivate: [RouteGuard], data: {depth: 2}},
+    {path: 'register', component: RegisterComponent, data: {depth: 2}},
+    {path: 'login', component: LoginComponent, data: {depth: 2}},
+    {path: 'recepies/:shortname', component: RecepiePageComponent, data: {depth: 2}},
     {path: '**', redirectTo: '/home', pathMatch: 'full'},
 
 
