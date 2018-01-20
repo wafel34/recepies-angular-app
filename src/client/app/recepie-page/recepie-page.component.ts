@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Recepie } from '../shared/recepie.model';
@@ -15,20 +15,20 @@ import { trigger, query, style, transition, animate, group} from '@angular/anima
       trigger('recepiePageAnimation', [
           transition('viewing => editing', [
               style({height: '!'}),
-              query('#editHook', style({transform: 'translateX(100%)'})),
-              query('#editHook, #viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
+              query('.editHook', style({transform: 'translateX(100%)'})),
+              query('.editHook, .viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
               group([
-                  query('#viewHook', [animate('.3s ease-out', style({transform: 'translateX(-100%)'}))]),
-                  query('#editHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))])
+                  query('.viewHook', [animate('.3s ease-out', style({transform: 'translateX(-100%)'}))]),
+                  query('.editHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))])
               ])
           ]), // transitions
           transition('editing => viewing', [
               style({height: '!'}),
-              query('#viewHook', style({transform: 'translateX(-100%)'})),
-              query('#editHook, #viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
+              query('.viewHook', style({transform: 'translateX(-100%)'})),
+              query('.editHook, #viewHook', style({position: 'absolute', top: '0', left: '0', right: '0'})),
               group([
-                  query('#viewHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))]),
-                  query('#editHook', [animate('.3s ease-out', style({transform: 'translateX(100%)'}))])
+                  query('.viewHook', [animate('.3s ease-out', style({transform: 'translateX(0)'}))]),
+                  query('.editHook', [animate('.3s ease-out', style({transform: 'translateX(100%)'}))])
               ])
           ]) // transitions
       ]) // trigger
@@ -40,6 +40,8 @@ export class RecepiePageComponent implements OnInit {
 
     recepie: Recepie;
     routeUrl: string;
+    @ViewChild('viewHook') viewHook: ElementRef;
+    @ViewChild('editHook') editHook: ElementRef;
     state = 'viewing'; // can take 3 states: viewing(default), editing, deleted
     isFavorite: boolean;
     username: string;
@@ -112,20 +114,19 @@ export class RecepiePageComponent implements OnInit {
 
     animationStart(state) {
         if (state === 'viewing') {
-            viewHook.classList.remove('hidden');
+            this.viewHook.nativeElement.classList.remove('hidden');
         }
         if (state === 'editing') {
-            editHook.classList.remove('hidden');
+            this.editHook.nativeElement.classList.remove('hidden');
         }
     }
+
     animationDone(state) {
         if (state === 'editing') {
-            viewHook.classList.add('hidden');
+            this.viewHook.nativeElement.classList.add('hidden');
         }
         if (state === 'viewing') {
-            editHook.classList.add('hidden');
+            this.editHook.nativeElement.classList.add('hidden');
         }
-
-
     }
 }
