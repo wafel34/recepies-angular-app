@@ -8,12 +8,12 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "run-s build run:server",
     "watch:client": "ng serve --proxy-config proxy.conf.json",
     "watch:server": "nodemon src/server/index.js",
     "watch": "run-p watch:*",
-    "build": "ng build",
-    "test": "ng test",
+    "build": "ng build --env=prod",
+    "run:server": "node src/server/index.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

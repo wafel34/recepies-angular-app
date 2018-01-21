@@ -12,6 +12,10 @@ function createExpressApp(database) {
     //routers
     app.use('/api', ApiRouter(database));
 
+    app.use('*', (req, res)=>{
+        return res.sendFile(path.join(__dirname, 'public/index.html'));
+    });
+
     //listen
     app.listen(3000, ()=>{
         console.log('App listening on port 3000');
