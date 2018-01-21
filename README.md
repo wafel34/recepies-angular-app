@@ -1,27 +1,29 @@
-# RecepiesAngularApp
+# Recepies application built in Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+## Map of the application:
+This application was build to give user access to recepies database, allow them to manage their favorites, and create and store their own ones.
 
-## Development server
+Default functionality (for not logged in users) allows to view all recepies, display them by categories, and go to each recepie page to check the details. Without logging in there's no more that user can do.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+After login, user receives more functionality. As a user you can now, add selected recepies to your favorites, and create or edit your own recepies. You can also directly access your favorites/personal recepies and display them all. To check the functionality just login with default credentials provided in 'login' section.
 
-## Code scaffolding
+There is also possibility to create your own basic account, and manag recepies from there.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies and tools used in developement process:
+Following technologies have been used for that project:
 
-## Build
+### Front-end:
+* Angular (with CLI and TypeScript)
+* SASS
+* Angular Material Design + Angular Animations
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Back-end:
+* ExpressJS as a web server
+* MondoDB - database
+### Dependencies
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* JSON Web Token - stroing token for accessing API
+* Bcrypt - for hashing passwords
+* Nodemon - for running server in developement mode
+* NPM scripts
+* Dotenv for storing enviroment variables

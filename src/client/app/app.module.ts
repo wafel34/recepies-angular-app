@@ -36,6 +36,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
 import { LoginRegisterDialogComponent } from './login-register-dialog/login-register-dialog.component';
+import { AboutComponent } from './about/about.component';
 
 // services
 import { ApiService } from './shared/api.service';
@@ -59,7 +60,8 @@ import 'hammerjs';
     FavoritesComponent,
     HomePageComponent,
     UserRecepiesComponent,
-    LoginRegisterDialogComponent
+    LoginRegisterDialogComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
