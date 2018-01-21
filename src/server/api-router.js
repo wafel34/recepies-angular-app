@@ -1,6 +1,7 @@
 const express = require('express');
 const mongodb = require('mongodb');
 const AuthRouter = require('./auth-router');
+const RegisterRouter = require('./register-router');
 const jwt = require('express-jwt');
 const router = express.Router();
 
@@ -11,6 +12,7 @@ function ApiRouter(database) {
     // protect paths for unauthorized users with execptions below (.unless({}))
     router.use(jwt({secret: process.env.SECRET}).unless({path: [
         { url: '/api/authenticate'},
+        { url: '/api/register'},
         { url: '/api/recepies', methods: ['GET']},
         { url: /\/api\/recepies\/.*/g, methods: ['GET']}
         ]})
@@ -24,6 +26,7 @@ function ApiRouter(database) {
     });
 
     router.use('/authenticate', AuthRouter(database));
+    router.use('/register', RegisterRouter(database));
 
     // GET all recepies
     router.get('/recepies', (req, res) => {

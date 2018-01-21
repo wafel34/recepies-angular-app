@@ -21,7 +21,7 @@ export class RecepiesListComponent implements OnInit {
 
         // this method will remove recepie on fly form favorites list if user is unselecting recepie fom 'favorites'
         // in 'favorites' section
-        if (this.router.url._value[0].path === 'favorites') {
+        if (this.router.snapshot.routeConfig.path === 'favorites') {
             this.recepies = this.recepies.filter((item) => {
                 return item.shortName !== recepie.shortName;
             });

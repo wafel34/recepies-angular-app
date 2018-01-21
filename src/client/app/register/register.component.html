@@ -1,34 +1,45 @@
 <div class="app-container">
-    <form [formGroup]="registerForm" class="register-form" (ngSubmit)="onSubmit()">
+    <div class="parent" [@registerAnimation]="this.state"
+        (@registerAnimation.start)="animationStart(this.state)"
+        (@registerAnimation.done)="animationDone(this.state)">
+        <form [formGroup]="registerForm" class="register-form formHook" #formHook (ngSubmit)="onSubmit()">
 
-        <mat-form-field class="register-form__form-field">
-            <mat-placeholder>Your name:</mat-placeholder>
-            <input matInput maxlength="20" class="" formControlName="name">
-            <mat-error >Field cannot be empty.</mat-error>
-        </mat-form-field><!-- headline form field -->
+            <mat-form-field class="register-form__form-field">
+                <mat-placeholder>Your name:</mat-placeholder>
+                <input matInput maxlength="20" class="" formControlName="name">
+                <mat-error >Field cannot be empty.</mat-error>
+            </mat-form-field><!-- headline form field -->
 
-        <mat-form-field class="register-form__form-field">
-            <mat-placeholder>E-mail:</mat-placeholder>
-            <input type="email" matInput maxlength="40" class="" formControlName="email">
-            <mat-error >Field cannot be empty.</mat-error>
-        </mat-form-field><!-- headline form field -->
+            <mat-form-field class="register-form__form-field">
+                <mat-placeholder>E-mail:</mat-placeholder>
+                <input type="email" matInput maxlength="45" class="" formControlName="email">
+                <mat-error *ngIf="this.registerForm.value.email === ''">Field cannot be empty.</mat-error>
+                <mat-error *ngIf="this.registerForm.value.email !== ''">Incorrect email adress</mat-error>
+            </mat-form-field><!-- headline form field -->
 
-        <mat-form-field class="register-form__form-field">
-            <mat-placeholder>Login:</mat-placeholder>
-            <input matInput maxlength="40" class="" formControlName="login">
-            <mat-error >Field cannot be empty.</mat-error>
-        </mat-form-field><!-- headline form field -->
+            <mat-form-field class="register-form__form-field">
+                <mat-placeholder>Login:</mat-placeholder>
+                <input matInput maxlength="40" class="" formControlName="username">
+                <mat-error >Field cannot be empty.</mat-error>
+            </mat-form-field><!-- headline form field -->
 
-        <mat-form-field class="register-form__form-field">
-            <mat-placeholder>Password:</mat-placeholder>
-            <input matInput type="password" maxlength="40" class="" formControlName="password">
-            <mat-error >Field cannot be empty.</mat-error>
-        </mat-form-field><!-- headline form field -->
-        <mat-form-field class="register-form__form-field">
-            <mat-placeholder>Repeat password:</mat-placeholder>
-            <input matInput type="password" maxlength="40" class="" formControlName="passwordRepeat">
-            <mat-error >Field cannot be empty.</mat-error>
-        </mat-form-field><!-- headline form field -->
-        <button type="submit" mat-raised-button color="warn">Submit</button>
-    </form>
+            <mat-form-field class="register-form__form-field">
+                <mat-placeholder>Password:</mat-placeholder>
+                <input matInput type="password" maxlength="40" class="" formControlName="password">
+                <mat-error >Field cannot be empty.</mat-error>
+            </mat-form-field><!-- headline form field -->
+            <mat-form-field class="register-form__form-field">
+                <mat-placeholder>Repeat password:</mat-placeholder>
+                <input matInput type="password" maxlength="40" class="" formControlName="passwordRepeat">
+                <mat-error >Field cannot be empty.</mat-error>
+            </mat-form-field><!-- headline form field -->
+            <mat-error *ngIf="this.formErrorMsg !== ''">{{this.formErrorMsg}}</mat-error>
+            <button type="submit" mat-raised-button color="warn">Submit</button>
+        </form>
+
+        <div class="registerHook register" #registerHook>
+            <span class="register__message">You have registered successfully. <mat-icon>done</mat-icon></span>
+            <a routerLink="/login" mat-raised-button color="accent">Go to Login.</a>
+        </div>
+    </div>
 </div>
