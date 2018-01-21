@@ -6,6 +6,7 @@ import { Recepie } from '../shared/recepie.model';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-recepie-edit-form',
@@ -27,12 +28,16 @@ export class RecepieEditFormComponent implements OnInit {
                 private auth: AuthenticationService,
                 private router: Router,
                 private shortNameService: CreateUniqueShortNameService,
-                private location: Location) {
+                private location: Location,
+                private title: Title) {
 
     }
 
     ngOnInit() {
         this.addNew = (this.router.url === '/add') ? true : false;
+        if (this.addNew) {
+            this.title.setTitle('Add a new recepie');
+        }
         this.buildForm();
     }
 

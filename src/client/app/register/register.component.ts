@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { trigger, query, style, transition, animate, group} from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,10 @@ export class RegisterComponent implements OnInit {
     @ViewChild('registerHook') registerHook: ElementRef;
     state = 'form'; // can take 2 states: form(default), registered
     constructor(private formBuilder: FormBuilder,
-                private api: ApiService) { }
+                private api: ApiService,
+                private title: Title) {
+                    this.title.setTitle('Register to application');
+                }
 
     ngOnInit() {
         this.buildForm();

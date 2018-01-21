@@ -335,6 +335,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_api_service__ = __webpack_require__("../../../../../src/client/app/shared/api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_authentication_service__ = __webpack_require__("../../../../../src/client/app/shared/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -347,11 +348,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var FavoritesComponent = (function () {
-    function FavoritesComponent(auth, api) {
+    function FavoritesComponent(auth, api, title) {
         this.auth = auth;
         this.api = api;
+        this.title = title;
         this.user = this.auth.getUserName();
+        this.title.setTitle('Your favorite recepies');
     }
     FavoritesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -371,7 +375,8 @@ var FavoritesComponent = (function () {
             styles: [__webpack_require__("../../../../../src/client/app/favorites/favorites.component.sass")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_authentication_service__["a" /* AuthenticationService */],
-            __WEBPACK_IMPORTED_MODULE_1__shared_api_service__["a" /* ApiService */]])
+            __WEBPACK_IMPORTED_MODULE_1__shared_api_service__["a" /* ApiService */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["f" /* Title */]])
     ], FavoritesComponent);
     return FavoritesComponent;
 }());
@@ -472,7 +477,8 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePageComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_api_service__ = __webpack_require__("../../../../../src/client/app/shared/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_api_service__ = __webpack_require__("../../../../../src/client/app/shared/api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -484,9 +490,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HomePageComponent = (function () {
-    function HomePageComponent(api) {
+    function HomePageComponent(api, title) {
         this.api = api;
+        this.title = title;
+        this.title.setTitle('Recpies just right for you!');
     }
     HomePageComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -501,7 +510,8 @@ var HomePageComponent = (function () {
             template: __webpack_require__("../../../../../src/client/app/home-page/home-page.component.html"),
             styles: [__webpack_require__("../../../../../src/client/app/home-page/home-page.component.sass")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_api_service__["a" /* ApiService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_api_service__["a" /* ApiService */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["f" /* Title */]])
     ], HomePageComponent);
     return HomePageComponent;
 }());
@@ -622,6 +632,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_authentication_service__ = __webpack_require__("../../../../../src/client/app/shared/authentication.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -637,13 +648,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LoginComponent = (function () {
-    function LoginComponent(formBuilder, api, auth, snackBar, router) {
+    function LoginComponent(formBuilder, api, auth, snackBar, router, title) {
         this.formBuilder = formBuilder;
         this.api = api;
         this.auth = auth;
         this.snackBar = snackBar;
         this.router = router;
+        this.title = title;
+        this.title.setTitle('Login to your account');
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.loginForm = this.formBuilder.group({
@@ -680,7 +694,8 @@ var LoginComponent = (function () {
             __WEBPACK_IMPORTED_MODULE_2__shared_api_service__["a" /* ApiService */],
             __WEBPACK_IMPORTED_MODULE_3__shared_authentication_service__["a" /* AuthenticationService */],
             __WEBPACK_IMPORTED_MODULE_5__angular_material__["o" /* MatSnackBar */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]])
+            __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["f" /* Title */]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -831,6 +846,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -847,20 +863,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RecepieEditFormComponent = (function () {
-    function RecepieEditFormComponent(formBuilder, api, auth, router, shortNameService, location) {
+    function RecepieEditFormComponent(formBuilder, api, auth, router, shortNameService, location, title) {
         this.formBuilder = formBuilder;
         this.api = api;
         this.auth = auth;
         this.router = router;
         this.shortNameService = shortNameService;
         this.location = location;
+        this.title = title;
         this.cancel = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.submitted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.addNew = false; // checks if users is editing or adding new recepie
     }
     RecepieEditFormComponent.prototype.ngOnInit = function () {
         this.addNew = (this.router.url === '/add') ? true : false;
+        if (this.addNew) {
+            this.title.setTitle('Add a new recepie');
+        }
         this.buildForm();
     };
     RecepieEditFormComponent.prototype.buildForm = function () {
@@ -985,7 +1006,8 @@ var RecepieEditFormComponent = (function () {
             __WEBPACK_IMPORTED_MODULE_2__shared_authentication_service__["a" /* AuthenticationService */],
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */],
             __WEBPACK_IMPORTED_MODULE_3__shared_create_unique_short_name_service__["a" /* CreateUniqueShortNameService */],
-            __WEBPACK_IMPORTED_MODULE_5__angular_common__["f" /* Location */]])
+            __WEBPACK_IMPORTED_MODULE_5__angular_common__["f" /* Location */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["f" /* Title */]])
     ], RecepieEditFormComponent);
     return RecepieEditFormComponent;
 }());
@@ -1031,6 +1053,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__login_register_dialog_login_register_dialog_component__ = __webpack_require__("../../../../../src/client/app/login-register-dialog/login-register-dialog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1047,11 +1070,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RecepiePageComponent = (function () {
-    function RecepiePageComponent(route, api, auth, dialog) {
+    function RecepiePageComponent(route, api, auth, dialog, title) {
         this.api = api;
         this.auth = auth;
         this.dialog = dialog;
+        this.title = title;
         this.state = 'viewing'; // can take 3 states: viewing(default), editing, deleted
         // get shortname form url
         this.routeUrl = route.snapshot.params.shortname;
@@ -1062,6 +1087,7 @@ var RecepiePageComponent = (function () {
         this.api.get("recepies/" + this.routeUrl)
             .subscribe(function (result) {
             _this.recepie = result;
+            _this.title.setTitle(_this.recepie.name);
             if (_this.auth.isLoggedIn()) {
                 // check if user login is in the 'favoriteFor' section in recepie,
                 // which means that user added this recepie to his favorites
@@ -1184,7 +1210,8 @@ var RecepiePageComponent = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
             __WEBPACK_IMPORTED_MODULE_2__shared_api_service__["a" /* ApiService */],
             __WEBPACK_IMPORTED_MODULE_3__shared_authentication_service__["a" /* AuthenticationService */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialog */]])
+            __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatDialog */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser__["f" /* Title */]])
     ], RecepiePageComponent);
     return RecepiePageComponent;
 }());
@@ -1304,6 +1331,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_api_service__ = __webpack_require__("../../../../../src/client/app/shared/api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__("../../../animations/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1317,12 +1345,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RegisterComponent = (function () {
-    function RegisterComponent(formBuilder, api) {
+    function RegisterComponent(formBuilder, api, title) {
         this.formBuilder = formBuilder;
         this.api = api;
+        this.title = title;
         this.formErrorMsg = '';
         this.state = 'form'; // can take 2 states: form(default), registered
+        this.title.setTitle('Register to application');
     }
     RegisterComponent.prototype.ngOnInit = function () {
         this.buildForm();
@@ -1400,7 +1431,8 @@ var RegisterComponent = (function () {
             ]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_api_service__["a" /* ApiService */]])
+            __WEBPACK_IMPORTED_MODULE_2__shared_api_service__["a" /* ApiService */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_platform_browser__["f" /* Title */]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -1647,6 +1679,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_api_service__ = __webpack_require__("../../../../../src/client/app/shared/api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_authentication_service__ = __webpack_require__("../../../../../src/client/app/shared/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1659,11 +1692,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var UserRecepiesComponent = (function () {
-    function UserRecepiesComponent(api, auth) {
+    function UserRecepiesComponent(api, auth, title) {
         this.api = api;
         this.auth = auth;
+        this.title = title;
         this.user = this.auth.getUserName();
+        this.title.setTitle('Recpies created by you');
     }
     UserRecepiesComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1683,7 +1719,8 @@ var UserRecepiesComponent = (function () {
             styles: [__webpack_require__("../../../../../src/client/app/user-recepies/user-recepies.component.sass")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_api_service__["a" /* ApiService */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_authentication_service__["a" /* AuthenticationService */]])
+            __WEBPACK_IMPORTED_MODULE_2__shared_authentication_service__["a" /* AuthenticationService */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["f" /* Title */]])
     ], UserRecepiesComponent);
     return UserRecepiesComponent;
 }());

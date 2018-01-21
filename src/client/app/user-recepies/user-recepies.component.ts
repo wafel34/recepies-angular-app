@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recepie } from '../shared/recepie.model';
 import { ApiService } from '../shared/api.service';
 import { AuthenticationService } from '../shared/authentication.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-recepies',
@@ -14,8 +15,10 @@ export class UserRecepiesComponent implements OnInit {
     user: string;
     notFound: boolean;
     constructor(private api: ApiService,
-                private auth: AuthenticationService) {
+                private auth: AuthenticationService,
+                private title: Title) {
                     this.user = this.auth.getUserName();
+                    this.title.setTitle('Recpies created by you');
                 }
 
     ngOnInit() {

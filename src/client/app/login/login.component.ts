@@ -4,6 +4,7 @@ import { ApiService } from '../shared/api.service';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit {
                 private api: ApiService,
                 private auth: AuthenticationService,
                 private snackBar: MatSnackBar,
-                private router: Router) { }
+                private router: Router,
+                private title: Title) {
+                    this.title.setTitle('Login to your account');
+                }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({

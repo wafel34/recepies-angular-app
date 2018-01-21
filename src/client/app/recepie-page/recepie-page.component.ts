@@ -6,6 +6,7 @@ import { AuthenticationService } from '../shared/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
 import { trigger, query, style, transition, animate, group} from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-recepie-page',
@@ -58,7 +59,8 @@ export class RecepiePageComponent implements OnInit {
     constructor(route: ActivatedRoute,
                 private api: ApiService,
                 private auth: AuthenticationService,
-                public dialog: MatDialog) {
+                public dialog: MatDialog,
+                private title: Title) {
         // get shortname form url
         this.routeUrl = route.snapshot.params.shortname;
     }
@@ -68,6 +70,7 @@ export class RecepiePageComponent implements OnInit {
         this.api.get(`recepies/${this.routeUrl}`)
             .subscribe((result) => {
                 this.recepie = result;
+                this.title.setTitle(this.recepie.name);
                 if (this.auth.isLoggedIn()) {
                     // check if user login is in the 'favoriteFor' section in recepie,
                     // which means that user added this recepie to his favorites

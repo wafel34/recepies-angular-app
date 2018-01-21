@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Recepie } from '../shared/recepie.model';
 import { ApiService } from '../shared/api.service';
 @Component({
@@ -9,7 +10,10 @@ import { ApiService } from '../shared/api.service';
 export class HomePageComponent implements OnInit {
 
     recepies: Recepie[];
-    constructor(public api: ApiService) { }
+    constructor(public api: ApiService,
+                private title: Title) {
+                    this.title.setTitle('Recpies just right for you!');
+                }
 
     ngOnInit() {
       this.api.get('recepies')
