@@ -1,6 +1,6 @@
 <div class="app-container">
     <div class="home-header" [ngStyle]="{'background-image': 'url(assets/pizza-2973200_1280.jpg)'}">
-        <h1 class="home-header__h1">My favorite recepies:</h1>
+        <h1 class="home-header__h1">My favorite recipes:</h1>
     </div>
     <div class="not-found" *ngIf="this.notFound">You don't have any favorite recepies yet.</div>
     <app-recepies-list [recepies]="recepies"></app-recepies-list>

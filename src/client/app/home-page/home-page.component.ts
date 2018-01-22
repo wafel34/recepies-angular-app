@@ -12,7 +12,7 @@ export class HomePageComponent implements OnInit {
     recepies: Recepie[];
     constructor(public api: ApiService,
                 private title: Title) {
-                    this.title.setTitle('Recpies just right for you!');
+                    this.title.setTitle('Recipes just right for you!');
                 }
 
     ngOnInit() {

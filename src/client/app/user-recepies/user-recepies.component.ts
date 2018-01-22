@@ -18,7 +18,7 @@ export class UserRecepiesComponent implements OnInit {
                 private auth: AuthenticationService,
                 private title: Title) {
                     this.user = this.auth.getUserName();
-                    this.title.setTitle('Recpies created by you');
+                    this.title.setTitle('Recipes created by you');
                 }
 
     ngOnInit() {

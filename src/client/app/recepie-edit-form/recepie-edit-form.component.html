@@ -1,7 +1,7 @@
 <div [class.app-container]="addNew">
     <div class="header-container">
-        <h1 *ngIf="!addNew" class="header-container__h1">Edit your recepie</h1>
-        <h1 *ngIf="addNew" class="header-container__h1">Add new recepie</h1>
+        <h1 *ngIf="!addNew" class="header-container__h1">Edit your recipe</h1>
+        <h1 *ngIf="addNew" class="header-container__h1">Add new recipe</h1>
         <button class="recepie-form__button" type="button" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
     </div>
     <form [formGroup]="recepiesForm" novalidate class="recepie-form" (ngSubmit)="onSubmit()">
@@ -10,7 +10,7 @@
             <mat-form-field class="section__form-field">
                 <mat-placeholder>Name:</mat-placeholder>
                 <input matInput maxlength="40" #name class="form-control" formControlName="name">
-                <mat-hint>Enter the name for your recepie (max 40 characters). {{name.value.length}}/40.</mat-hint>
+                <mat-hint>Enter the name for your recipe (max 40 characters). {{name.value.length}}/40.</mat-hint>
                 <mat-error *ngIf="recepiesForm.controls.name.invalid">Field cannot be empty.</mat-error>
             </mat-form-field><!-- name form field -->
 
@@ -49,14 +49,14 @@
             <mat-form-field class="section__form-field">
                 <mat-placeholder>Serves:</mat-placeholder>
                 <input type="number" min="1" max="20" matInput class="form-control" formControlName="serves">
-                <mat-hint>How many serves will be made from your recepie.</mat-hint>
+                <mat-hint>How many serves will be made from your recipe.</mat-hint>
                 <mat-error *ngIf="recepiesForm.controls.serves.invalid">Field cannot be empty and value must be 1-20.</mat-error>
             </mat-form-field><!-- serves form field -->
 
             <mat-form-field class="section__form-field">
                 <mat-placeholder>Photo URL:</mat-placeholder>
                 <input type="text" matInput class="form-control" formControlName="photoUrl">
-                <mat-hint>Enter the URL address for yours meal photo.</mat-hint>
+                <mat-hint>Enter the URL address of your's meal photo.</mat-hint>
                 <mat-error *ngIf="recepiesForm.controls.photoUrl.invalid">Field cannot be empty.</mat-error>
             </mat-form-field><!-- photo form field -->
         </section><!-- 2nd section -->

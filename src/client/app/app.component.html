@@ -16,9 +16,9 @@
             </a>
         </div>
         <div class="sidenav__group" *ngIf="this.auth.isLoggedIn()">
-            <a class="sidenav__link" routerLink="/my_recepies" (click)="sidenav.toggle()">
+            <a class="sidenav__link" routerLink="/my_recipes" (click)="sidenav.toggle()">
                 <mat-icon>face</mat-icon>
-                My recepies
+                My recipes
             </a>
             <a class="sidenav__link" routerLink="/favorites" (click)="sidenav.toggle()">
                 <mat-icon>favorite_border</mat-icon>
@@ -26,7 +26,7 @@
             </a>
             <a class="sidenav__link" routerLink="/add" (click)="sidenav.toggle()">
                 <mat-icon>add_circle_outline</mat-icon>
-                Add recepie
+                Add recipe
             </a>
         </div>
         <!-- sidenav elements end -->
@@ -55,7 +55,7 @@
             </button>
         </div>
     </mat-toolbar>
-    <div class="parent" [@routeAnimtion]="getDepth(myOutlet)" (@routeAnimtion.start)="startAnimation()">
+    <div class="parent" [class.parent--full-screen]="increaseScreenHeight" [@routeAnimtion]="getDepth(myOutlet)" (@routeAnimtion.start)="startAnimation()">
         <router-outlet #myOutlet="outlet"></router-outlet>
     </div>
     <app-footer></app-footer>

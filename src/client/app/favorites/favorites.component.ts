@@ -18,7 +18,7 @@ export class FavoritesComponent implements OnInit {
                 private api: ApiService,
                 private title: Title) {
                     this.user = this.auth.getUserName();
-                    this.title.setTitle('Your favorite recepies');
+                    this.title.setTitle('Your favorite recipes');
                 }
 
     ngOnInit() {
