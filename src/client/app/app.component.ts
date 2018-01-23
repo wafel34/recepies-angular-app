@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './shared/authentication.service';
 import { MatSnackBar } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { trigger, query, style, transition, animate, group} from '@angular/animations';
 
 @Component({
@@ -34,8 +34,7 @@ export class AppComponent {
     title = 'app';
     constructor(private auth: AuthenticationService,
                 private snackBar: MatSnackBar,
-                private router: Router,
-                private activatedRoute: ActivatedRoute) {
+                private router: Router) {
     }
 
     logout() {
@@ -59,11 +58,12 @@ export class AppComponent {
         If components are different, class is not applied (this is to properly display lower height components i.e. Login/Register)
         */
 
-        if (this.activatedRoute.children[0]) {
-            if (this.activatedRoute.children[0].component.name == 'RecepiePageComponent'
-                || this.activatedRoute.children[0].component.name == 'HomePageComponent')
-            this.increaseScreenHeight = true;
-        } else {
+
+        if (outlet.activatedRouteData.name == 'RecepiePage'
+        || outlet.activatedRouteData.name == 'Home') {
+                this.increaseScreenHeight = true;
+        }
+        else {
             this.increaseScreenHeight = false;
         }
 
