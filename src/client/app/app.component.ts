@@ -59,7 +59,7 @@ export class AppComponent {
         */
 
 
-        if (outlet.activatedRouteData.name == 'RecepiePage'
+        if (outlet.activatedRouteData.name == 'RecipePage'
         || outlet.activatedRouteData.name == 'Home') {
                 this.increaseScreenHeight = true;
         }

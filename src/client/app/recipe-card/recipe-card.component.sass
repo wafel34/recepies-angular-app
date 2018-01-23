@@ -1,6 +1,6 @@
 @import '~@angular/material/theming'
 @import '../../custom_theme.sass'
-@include angular-material-theme($recepies-app-theme)
+@include angular-material-theme($recipes-app-theme)
 
 .list-grid
     &__item
@@ -8,7 +8,7 @@
         box-sizing: border-box
         padding: 15px
         margin: -10px
-.recepie-card
+.recipe-card
     height: 100%
     display: flex
     flex-direction: column
@@ -42,7 +42,7 @@
 
 
 @media screen and (min-width: 600px)
-    .recepie-card
+    .recipe-card
         &__image
             margin-right: -24px
             margin-left: -24px

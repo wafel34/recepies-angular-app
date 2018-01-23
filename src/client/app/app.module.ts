@@ -25,16 +25,16 @@ import {
 } from '@angular/material';
 // components
 import { AppComponent } from './app.component';
-import { RecepiesListComponent } from './recepies-list/recepies-list.component';
-import { RecepieCardComponent } from './recepie-card/recepie-card.component';
-import { RecepiePageComponent } from './recepie-page/recepie-page.component';
-import { RecepieEditFormComponent } from './recepie-edit-form/recepie-edit-form.component';
+import { RecipesListComponent } from './recipes-list/recipes-list.component';
+import { RecipeCardComponent } from './recipe-card/recipe-card.component';
+import { RecipePageComponent } from './recipe-page/recipe-page.component';
+import { RecipeEditFormComponent } from './recipe-edit-form/recipe-edit-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { UserRecepiesComponent } from './user-recepies/user-recepies.component';
+import { UserRecipesComponent } from './user-recipes/user-recipes.component';
 import { LoginRegisterDialogComponent } from './login-register-dialog/login-register-dialog.component';
 import { AboutComponent } from './about/about.component';
 
@@ -50,16 +50,16 @@ import 'hammerjs';
 @NgModule({
   declarations: [
     AppComponent,
-    RecepiesListComponent,
-    RecepieCardComponent,
-    RecepiePageComponent,
-    RecepieEditFormComponent,
+    RecipesListComponent,
+    RecipeCardComponent,
+    RecipePageComponent,
+    RecipeEditFormComponent,
     FooterComponent,
     RegisterComponent,
     LoginComponent,
     FavoritesComponent,
     HomePageComponent,
-    UserRecepiesComponent,
+    UserRecipesComponent,
     LoginRegisterDialogComponent,
     AboutComponent
   ],

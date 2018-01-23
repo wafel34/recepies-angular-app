@@ -7,24 +7,24 @@ export class AuthenticationService {
     constructor() { }
 
     logIn(userInfo) {
-      localStorage.setItem('recepies-app-key', userInfo.token);
-      localStorage.setItem('recepies-app-login', userInfo.username);
+      localStorage.setItem('recipes-app-key', userInfo.token);
+      localStorage.setItem('recipes-app-login', userInfo.username);
     }
 
     logOut() {
-      localStorage.removeItem('recepies-app-key');
-      localStorage.removeItem('recepies-app-login');
+      localStorage.removeItem('recipes-app-key');
+      localStorage.removeItem('recipes-app-login');
     }
     getUserName () {
-        return localStorage.getItem('recepies-app-login');
+        return localStorage.getItem('recipes-app-login');
     }
 
     getToken() {
-        return (localStorage.getItem('recepies-app-key') !== null) ? localStorage.getItem('recepies-app-key') : null;
+        return (localStorage.getItem('recipes-app-key') !== null) ? localStorage.getItem('recipes-app-key') : null;
     }
 
     isLoggedIn() {
-      return (localStorage.getItem('recepies-app-key') !== null);
+      return (localStorage.getItem('recipes-app-key') !== null);
     }
 
 }

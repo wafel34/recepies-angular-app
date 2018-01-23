@@ -2,24 +2,24 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { AuthenticationService } from '../shared/authentication.service';
 import { CreateUniqueShortNameService } from '../shared/create-unique-short-name.service';
-import { Recepie } from '../shared/recepie.model';
+import { Recipe } from '../shared/recipe.model';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-recepie-edit-form',
-  templateUrl: './recepie-edit-form.component.html',
-  styleUrls: ['./recepie-edit-form.component.sass']
+  selector: 'app-recipe-edit-form',
+  templateUrl: './recipe-edit-form.component.html',
+  styleUrls: ['./recipe-edit-form.component.sass']
 })
-export class RecepieEditFormComponent implements OnInit {
+export class RecipeEditFormComponent implements OnInit {
 
-    @Input() recepie: Recepie;
+    @Input() recipe: Recipe;
     @Output() cancel = new EventEmitter();
     @Output() submitted = new EventEmitter();
-    recepiesForm: FormGroup;
-    addNew = false; // checks if users is editing or adding new recepie
+    recipesForm: FormGroup;
+    addNew = false; // checks if users is editing or adding new recipe
     ingredients: FormArray;
     instructions: FormArray;
 
@@ -36,34 +36,34 @@ export class RecepieEditFormComponent implements OnInit {
     ngOnInit() {
         this.addNew = (this.router.url === '/add') ? true : false;
         if (this.addNew) {
-            this.title.setTitle('Add a new recepie');
+            this.title.setTitle('Add a new recipe');
         }
         this.buildForm();
     }
 
     buildForm() {
-        this.recepiesForm = this.formBuilder.group({
-            name: [(this.addNew) ? '' : this.recepie.name, [Validators.required]],
-            shortname: [(this.addNew) ? '' : this.recepie.shortName],
-            headline: [(this.addNew) ? '' : this.recepie.headline, [Validators.required]],
-            summary: [(this.addNew) ? '' : this.recepie.summary, [Validators.required]],
-            category: [(this.addNew) ? '' : this.recepie.category, [Validators.required]],
-            time: [(this.addNew) ? '' : this.recepie.time, [Validators.required]],
-            serves: [(this.addNew) ? '' : this.recepie.serves, [Validators.required, Validators.max(20), Validators.min(1)]],
+        this.recipesForm = this.formBuilder.group({
+            name: [(this.addNew) ? '' : this.recipe.name, [Validators.required]],
+            shortname: [(this.addNew) ? '' : this.recipe.shortName],
+            headline: [(this.addNew) ? '' : this.recipe.headline, [Validators.required]],
+            summary: [(this.addNew) ? '' : this.recipe.summary, [Validators.required]],
+            category: [(this.addNew) ? '' : this.recipe.category, [Validators.required]],
+            time: [(this.addNew) ? '' : this.recipe.time, [Validators.required]],
+            serves: [(this.addNew) ? '' : this.recipe.serves, [Validators.required, Validators.max(20), Validators.min(1)]],
             ingredients: this.formBuilder.array([
                     this.formBuilder.control('', [Validators.required])            ]
             ),
             instructions: this.formBuilder.array([
                 this.formBuilder.control('', [Validators.required])
             ]),
-            photoUrl: [(this.addNew) ? '' : this.recepie.photoUrl, [Validators.required]],
-            _id: [(this.addNew) ? '' : this.recepie._id],
-            createdBy: [(this.addNew) ? this.auth.getUserName() : this.recepie.createdBy],
-            favoriteFor: [(this.addNew) ? [] : this.recepie.favoriteFor]
+            photoUrl: [(this.addNew) ? '' : this.recipe.photoUrl, [Validators.required]],
+            _id: [(this.addNew) ? '' : this.recipe._id],
+            createdBy: [(this.addNew) ? this.auth.getUserName() : this.recipe.createdBy],
+            favoriteFor: [(this.addNew) ? [] : this.recipe.favoriteFor]
         });
 
         if (!this.addNew) {
-            // fill form array with values from Recepie data (do it only if users is editing form, not creating new)
+            // fill form array with values from Recipe data (do it only if users is editing form, not creating new)
             this.initializeArrays('ingredients');
             this.initializeArrays('instructions');
         }
@@ -72,16 +72,16 @@ export class RecepieEditFormComponent implements OnInit {
 
     initializeArrays(arrayName) {
         // set empty array to array of items from RECEPIES array
-        this[arrayName] = this.formBuilder.array(this.recepie[arrayName]);
+        this[arrayName] = this.formBuilder.array(this.recipe[arrayName]);
         this[arrayName].controls.map((item) => {
             item.setValidators(Validators.required);
         });
-        this.recepiesForm.setControl(arrayName, this[arrayName]);
+        this.recipesForm.setControl(arrayName, this[arrayName]);
     }
 
     addStep(arrayName) {
         // takes an Form array (ingredients or instructions) and it's name and pushes new element
-        this[arrayName] = this.recepiesForm.get(arrayName) as FormArray;
+        this[arrayName] = this.recipesForm.get(arrayName) as FormArray;
         this[arrayName].push(this.formBuilder.control('', Validators.required));
     }
 
@@ -95,7 +95,7 @@ export class RecepieEditFormComponent implements OnInit {
     }
 
     onCancel() {
-        this.recepiesForm.reset();
+        this.recipesForm.reset();
         this.buildForm();
         if (this.addNew) {
             this.location.back();
@@ -105,48 +105,48 @@ export class RecepieEditFormComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.recepiesForm.valid) {
+        if (this.recipesForm.valid) {
 
             if (this.addNew) {
-                // submition when new recepie is added
+                // submition when new recipe is added
                 this.onAddSubmit();
             } else {
-                // submition when existing recepie is edited
+                // submition when existing recipe is edited
                 this.onEditSubmit();
             }
         }
     }
 
     onAddSubmit() {
-        // handling form submition when new recepie is added
-        const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
-        this.recepiesForm.get('shortname').setValue(uniqueShortname);
-        this.api.post(`recepies`, this.recepiesForm.value)
+        // handling form submition when new recipe is added
+        const uniqueShortname = this.shortNameService.createUniqueName(this.recipesForm.value.name);
+        this.recipesForm.get('shortname').setValue(uniqueShortname);
+        this.api.post(`recipes`, this.recipesForm.value)
             .subscribe((result) => {
-                this.router.navigate(['/recepies', uniqueShortname]);
+                this.router.navigate(['/recipes', uniqueShortname]);
             });
     }
 
     onEditSubmit() {
-        // handling form submition when existing recepie is edited
-        if (this.recepiesForm.value.name !== this.recepie.name) {
+        // handling form submition when existing recipe is edited
+        if (this.recipesForm.value.name !== this.recipe.name) {
             // if name has been changed, generate new unique shortName for routing
-            const uniqueShortname = this.shortNameService.createUniqueName(this.recepiesForm.value.name);
-            this.recepiesForm.get('shortname').setValue(uniqueShortname);
+            const uniqueShortname = this.shortNameService.createUniqueName(this.recipesForm.value.name);
+            this.recipesForm.get('shortname').setValue(uniqueShortname);
         }
 
-        this.api.put(`recepies/${this.recepie.shortName}`, this.recepiesForm.value)
+        this.api.put(`recipes/${this.recipe.shortName}`, this.recipesForm.value)
             .subscribe((result) => {
-                this.recepie = result.value;
+                this.recipe = result.value;
                 this.emitSubmit();
-                this.router.navigate(['/recepies', this.recepie.shortName]);
+                this.router.navigate(['/recipes', this.recipe.shortName]);
             });
     }
 
 
     emitSubmit() {
         this.cancel.emit();
-        this.submitted.emit(this.recepie);
+        this.submitted.emit(this.recipe);
     }
 
 }

@@ -1,0 +1,33 @@
+    <mat-tab-group class="tab-group" dynamicHeight="true">
+        <mat-tab label="All">
+            <div class="list-grid">
+                <ng-container >
+                    <ng-container *ngFor="let recipe of recipes">
+                        <app-recipe-card (removeFavorite)="removeFromFavoritesList($event)" class="list-grid__item" [recipe]="recipe"></app-recipe-card>
+                    </ng-container>
+                </ng-container>
+
+            </div>
+        </mat-tab>
+        <mat-tab label="Breakfast">
+            <div class="list-grid">
+                <ng-container *ngFor="let recipe of recipes">
+                    <app-recipe-card *ngIf="recipe.category === 'breakfast'" class="list-grid__item" [recipe]="recipe"></app-recipe-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Dinner">
+            <div class="list-grid">
+                <ng-container *ngFor="let recipe of recipes">
+                    <app-recipe-card *ngIf="recipe.category === 'dinner'" class="list-grid__item" [recipe]="recipe"></app-recipe-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+        <mat-tab label="Salad">
+            <div class="list-grid">
+                <ng-container *ngFor="let recipe of recipes">
+                    <app-recipe-card *ngIf="recipe.category === 'salad'" class="list-grid__item" [recipe]="recipe"></app-recipe-card>
+                </ng-container>
+            </div>
+        </mat-tab>
+    </mat-tab-group>

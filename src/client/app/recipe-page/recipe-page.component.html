@@ -1,0 +1,73 @@
+<div class="app-container" *ngIf="recipe !== undefined">
+    <div class="parent" [@recipePageAnimation]="this.state"
+        (@recipePageAnimation.start)="animationStart(this.state)"
+        (@recipePageAnimation.done)="animationDone(this.state)">
+        <div class="viewHook" #viewHook>
+            <mat-card class="recipe-page">
+                    <div class="recipe-page__image" [ngStyle]="{'background-image': 'url(' + recipe.photoUrl + ')'}">
+                    </div><!--recipe-page__image"-->
+
+                    <div class="recipe-page__panel-right">
+
+                        <div class="recipe-page__buttons-container">
+                            <button class="recipe-page__button" mat-raised-button color="accent" (click)="handleFavorite();">
+                                Favourite
+                                <mat-icon *ngIf="!this.isFavorite">favorite_border</mat-icon>
+                                <mat-icon *ngIf="this.isFavorite" color="warn">favorite</mat-icon>
+                            </button>
+                            <button *ngIf="this.auth.getUserName() === this.recipe.createdBy" class="recipe-page__button" mat-raised-button color="primary" (click)="edit()">
+                                Edit  <mat-icon>edit</mat-icon>
+                            </button>
+                            <button *ngIf="this.auth.getUserName() === this.recipe.createdBy" class="recipe-page__button" mat-raised-button color="warn" (click)="deleteRecipe()">
+                                Delete <mat-icon>remove_circle_outline</mat-icon>
+                            </button>
+                        </div><!--buttons-container-->
+
+                        <mat-card-title class="recipe-page__title">{{recipe?.name}}</mat-card-title>
+                        <mat-card-subtitle class="recipe-page__subtitle">{{recipe?.headline}}</mat-card-subtitle>
+
+                        <div class="recipe-page__details">
+                            <div class="details-icons">
+                                <mat-icon class="details-icons__icon">timer</mat-icon>
+                                <span class="details-icons__text">Time: {{recipe?.time}} minutes</span>
+                            </div>
+                            <div class="details-icons">
+                                <mat-icon class="details-icons__icon">room_service</mat-icon>
+                                <span class="details-icons__text">Serves: {{recipe?.serves}}</span>
+                            </div>
+                            <div class="details-icons">
+                                <mat-icon class="details-icons__icon">restaurant</mat-icon>
+                                <span class="details-icons__text">Category: {{recipe?.category}}</span>
+                            </div>
+                        </div><!--details (icons)-->
+                        <h3>Ingredients:</h3>
+                        <ul class="recipe-details-list">
+                            <li class="recipe-details-list__item" *ngFor="let ingredient of recipe.ingredients"> {{ingredient}} </li>
+                        </ul><!--ingredients list-->
+                    </div>
+
+                <mat-card-content class="recipe-page__content">
+                    <h3 *ngIf="recipe.summary">About:</h3>
+                    <aside *ngIf="recipe.summary" class="content__about">
+                        <p>{{recipe.summary}}</p>
+                    </aside>
+                    <h3>How to prepare:</h3>
+                    <ul class="recipe-details-list">
+                        <li class="recipe-details-list__item" *ngFor="let instruction of recipe.instructions"> {{instruction}} </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+
+        <div class="editHook" #editHook>
+            <app-recipe-edit-form [recipe]="recipe" (cancel)="cancelEdit()" (submitted)="updateRecipePage($event)"></app-recipe-edit-form>
+        </div>
+
+        <div class="deleteHook deleted" #deleteHook>
+            <span class="deleted__message">Recipe has been deleted. <mat-icon>done</mat-icon></span>
+            <a routerLink="/recipes" mat-raised-button color="accent">Go to Home Page</a>
+        </div>
+    </div>
+
+</div>

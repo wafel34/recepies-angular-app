@@ -1,6 +1,6 @@
 @import '~@angular/material/theming'
 @import '../../custom_theme.sass'
-@include angular-material-theme($recepies-app-theme)
+@include angular-material-theme($recipes-app-theme)
 
 
 .home-header
@@ -13,18 +13,18 @@
     align-items: center
     justify-content: center
     &__h1
-        background-color: rgba(mat-color($recepies-app-primary), .85)
+        background-color: rgba(mat-color($recipes-app-primary), .85)
         padding: 4px 16px
-        border-bottom: 2px solid mat-color($recepies-app-accent)
-        border-top: 2px solid mat-color($recepies-app-accent)
-        color: mat-color($recepies-app-accent)
+        border-bottom: 2px solid mat-color($recipes-app-accent)
+        border-top: 2px solid mat-color($recipes-app-accent)
+        color: mat-color($recipes-app-accent)
 
 .not-found
     text-align: center
     margin: 15px auto
     padding: 15px 20px
     border-radius: 2px
-    border: 2px solid mat-color($recepies-app-warn)
+    border: 2px solid mat-color($recipes-app-warn)
     max-width: 500px
 
 @media screen and (min-width: 560px)

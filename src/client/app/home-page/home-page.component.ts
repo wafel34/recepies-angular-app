@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Recepie } from '../shared/recepie.model';
+import { Recipe } from '../shared/recipe.model';
 import { ApiService } from '../shared/api.service';
 @Component({
   selector: 'app-home-page',
@@ -9,16 +9,16 @@ import { ApiService } from '../shared/api.service';
 })
 export class HomePageComponent implements OnInit {
 
-    recepies: Recepie[];
+    recipes: Recipe[];
     constructor(public api: ApiService,
                 private title: Title) {
                     this.title.setTitle('Recipes just right for you!');
                 }
 
     ngOnInit() {
-      this.api.get('recepies')
+      this.api.get('recipes')
           .subscribe((result) => {
-              this.recepies = result;
+              this.recipes = result;
           });
     }
 

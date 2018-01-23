@@ -1,0 +1,28 @@
+<mat-card class="recipe-card">
+    <mat-card-title routerLink="/recipes/{{recipe.shortName}}" class="recipe-card__title">{{recipe.name}}</mat-card-title>
+    <mat-card-subtitle class="recipe-card__subtitle">
+        {{recipe.headline}}
+    </mat-card-subtitle>
+    <div class="recipe-card__image" [ngStyle]="{'background-image': 'url(' + recipe.photoUrl + ')'}"></div>
+    <mat-card-content class="recipe-card__content">
+        <div class="recipe-card__content-details">
+            <mat-icon>timer</mat-icon>
+            <span>{{recipe.time}} min.</span>
+        </div>
+        <div class="recipe-card__content-details">
+            <mat-icon>restaurant</mat-icon>
+            <span>{{recipe.category}}</span>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="recipe-card__actions">
+        <button [routerLink]="['/recipes', recipe.shortName]" mat-raised-button color="primary">
+            View <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-raised-button color="accent" (click)="handleFavorite();">
+            Favourite
+                <mat-icon *ngIf="!this.isFavorite">favorite_border</mat-icon>
+                <mat-icon *ngIf="this.isFavorite" color="warn">favorite</mat-icon>
+        </button>
+    </mat-card-actions>
+
+</mat-card>

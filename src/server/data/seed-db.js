@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
-const databaseURL = "mongodb://127.0.0.1:27017/recepies-angular-db";
-const recepies = require('./recepies.json');
+const databaseURL = "mongodb://127.0.0.1:27017/recipes-angular-db";
+const recipes = require('./recipes.json');
 const users = require('./users.json');
 const bcrypt = require('bcrypt');
 
@@ -30,5 +30,5 @@ function seedDatabase(collectionName, data) {
     });
 }
 
-seedDatabase('recepies', recepies);
+seedDatabase('recipes', recipes);
 seedDatabase('users', users);

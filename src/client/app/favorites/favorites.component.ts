@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Recepie } from '../shared/recepie.model';
+import { Recipe } from '../shared/recipe.model';
 import { ApiService } from '../shared/api.service';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Title } from '@angular/platform-browser';
@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class FavoritesComponent implements OnInit {
 
-    recepies: Recepie[];
+    recipes: Recipe[];
     user: string;
     notFound: boolean;
     constructor(private auth: AuthenticationService,
@@ -24,12 +24,15 @@ export class FavoritesComponent implements OnInit {
     ngOnInit() {
         this.api.get(`${this.user}/favorites`)
             .subscribe((result) => {
-                this.recepies = result;
+                if (result === null) {
+                    this.notFound = true;
+                } else {
+                    this.recipes = result;
+                }
+                this.recipes = result;
             }, (error) => {
 
-                if (error.status === 404) {
                     this.notFound = true;
-                }
             });
     }
 

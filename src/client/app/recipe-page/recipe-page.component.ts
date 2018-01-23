@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../shared/api.service';
-import { Recepie } from '../shared/recepie.model';
+import { Recipe } from '../shared/recipe.model';
 import { AuthenticationService } from '../shared/authentication.service';
 import { MatDialog } from '@angular/material';
 import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
@@ -9,11 +9,11 @@ import { trigger, query, style, transition, animate, group} from '@angular/anima
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-recepie-page',
-  templateUrl: './recepie-page.component.html',
-  styleUrls: ['./recepie-page.component.sass'],
+  selector: 'app-recipe-page',
+  templateUrl: './recipe-page.component.html',
+  styleUrls: ['./recipe-page.component.sass'],
   animations: [
-      trigger('recepiePageAnimation', [
+      trigger('recipePageAnimation', [
           transition('viewing => editing', [
               style({height: '!'}),
               query('.editHook', style({transform: 'translateX(100%)'})),
@@ -46,9 +46,9 @@ import { Title } from '@angular/platform-browser';
 
 })
 
-export class RecepiePageComponent implements OnInit {
+export class RecipePageComponent implements OnInit {
 
-    recepie: Recepie;
+    recipe: Recipe;
     routeUrl: string;
     @ViewChild('viewHook') viewHook: ElementRef;
     @ViewChild('editHook') editHook: ElementRef;
@@ -67,15 +67,15 @@ export class RecepiePageComponent implements OnInit {
 
     ngOnInit() {
         // get data from database
-        this.api.get(`recepies/${this.routeUrl}`)
+        this.api.get(`recipes/${this.routeUrl}`)
             .subscribe((result) => {
-                this.recepie = result;
-                this.title.setTitle(this.recepie.name);
+                this.recipe = result;
+                this.title.setTitle(this.recipe.name);
                 if (this.auth.isLoggedIn()) {
-                    // check if user login is in the 'favoriteFor' section in recepie,
-                    // which means that user added this recepie to his favorites
+                    // check if user login is in the 'favoriteFor' section in recipe,
+                    // which means that user added this recipe to his favorites
                     this.username = this.auth.getUserName();
-                    this.isFavorite = this.recepie.favoriteFor.indexOf(this.username) > -1;
+                    this.isFavorite = this.recipe.favoriteFor.indexOf(this.username) > -1;
                 }
             });
 
@@ -87,12 +87,12 @@ export class RecepiePageComponent implements OnInit {
         this.state = 'editing';
     }
 
-    deleteRecepie() {
+    deleteRecipe() {
         // function is called when DELETE button is clicked.
-        const confirmation = confirm('This will permanently delete recepie. Do you still want to continue?');
+        const confirmation = confirm('This will permanently delete recipe. Do you still want to continue?');
 
         if (confirmation) {
-            this.api.delete(`recepies/${this.routeUrl}`)
+            this.api.delete(`recipes/${this.routeUrl}`)
                 .subscribe((result) => {
                     this.state = 'deleted';
                 });
@@ -105,8 +105,8 @@ export class RecepiePageComponent implements OnInit {
         window.scrollTo(0, 0);
     }
 
-    updateRecepiePage(event) {
-        this.recepie = event;
+    updateRecipePage(event) {
+        this.recipe = event;
     }
 
     handleFavorite() {
@@ -114,9 +114,9 @@ export class RecepiePageComponent implements OnInit {
             this.dialog.open(LoginRegisterDialogComponent);
         } else {
             this.isFavorite = !this.isFavorite;
-            this.api.put(`recepies/${this.recepie.shortName}/favorites`, {username: this.username})
+            this.api.put(`recipes/${this.recipe.shortName}/favorites`, {username: this.username})
                 .subscribe((result) => {
-                    this.recepie = result.result.value;
+                    this.recipe = result.result.value;
                 });
         }
     }

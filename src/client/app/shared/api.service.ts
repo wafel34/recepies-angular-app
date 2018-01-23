@@ -4,6 +4,7 @@ import { AuthenticationService } from './authentication.service';
 import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
+
 @Injectable()
 export class ApiService {
 
@@ -49,6 +50,8 @@ export class ApiService {
 
         return this.http.request(request)
             .map((res: Response) => res.json());
-  }
+    }
+
+
 
 }

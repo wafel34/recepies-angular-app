@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Recepie } from '../shared/recepie.model';
+import { Recipe } from '../shared/recipe.model';
 import { ApiService } from '../shared/api.service';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-user-recepies',
-  templateUrl: './user-recepies.component.html',
-  styleUrls: ['./user-recepies.component.sass']
+  selector: 'app-user-recipes',
+  templateUrl: './user-recipes.component.html',
+  styleUrls: ['./user-recipes.component.sass']
 })
-export class UserRecepiesComponent implements OnInit {
+export class UserRecipesComponent implements OnInit {
 
-    recepies: Recepie[];
+    recipes: Recipe[];
     user: string;
     notFound: boolean;
     constructor(private api: ApiService,
@@ -22,13 +22,15 @@ export class UserRecepiesComponent implements OnInit {
                 }
 
     ngOnInit() {
-        this.api.get(`${this.user}/recepies`)
+        this.api.get(`${this.user}/recipes`)
             .subscribe((result) => {
-                this.recepies = result;
-            }, (error) => {
-                if (error.status === 404) {
+                if (result === null) {
                     this.notFound = true;
+                } else {
+                    this.recipes = result;
                 }
+            }, (error) => {
+                    this.notFound = true;
             });
     }
 

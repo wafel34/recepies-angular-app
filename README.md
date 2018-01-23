@@ -1,13 +1,13 @@
-# Recepies application built in Angular
+# recipes application built in Angular
 
 ## Map of the application:
-This application was build to give user access to recepies database, allow them to manage their favorites, and create and store their own ones.
+This application was build to give user access to recipes database, allow them to manage their favorites, and create and store their own ones.
 
-Default functionality (for not logged in users) allows to view all recepies, display them by categories, and go to each recepie page to check the details. Without logging in there's no more that user can do.
+Default functionality (for not logged in users) allows to view all recipes, display them by categories, and go to each recipe page to check the details. Without logging in there's no more that user can do.
 
-After login, user receives more functionality. As a user you can now, add selected recepies to your favorites, and create or edit your own recepies. You can also directly access your favorites/personal recepies and display them all. To check the functionality just login with default credentials provided in 'login' section.
+After login, user receives more functionality. As a user you can now, add selected recipes to your favorites, and create or edit your own recipes. You can also directly access your favorites/personal recipes and display them all. To check the functionality just login with default credentials provided in 'login' section.
 
-There is also possibility to create your own basic account, and manag recepies from there.
+There is also possibility to create your own basic account, and manag recipes from there.
 
 ## Technologies and tools used in developement process:
 Following technologies have been used for that project:

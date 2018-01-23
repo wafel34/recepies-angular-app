@@ -24,7 +24,7 @@ function RegisterRouter(database) {
                     return res.status(409).send({error: "Username already exists in database. Please select another."});
                 }
             } else {
-            //if shortName doesn't exist - go ahead and insert the recepie
+            //if shortName doesn't exist - go ahead and insert the recipe
                 users.insertOne({
                     username: requestBody.username,
                     password: requestBody.password,

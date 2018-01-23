@@ -1,18 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Recepie } from '../shared/recepie.model';
+import { Recipe } from '../shared/recipe.model';
 import { AuthenticationService } from '../shared/authentication.service';
 import { ApiService } from '../shared/api.service';
 import { MatDialog } from '@angular/material';
 import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
 
 @Component({
-  selector: 'app-recepie-card',
-  templateUrl: './recepie-card.component.html',
-  styleUrls: ['./recepie-card.component.sass']
+  selector: 'app-recipe-card',
+  templateUrl: './recipe-card.component.html',
+  styleUrls: ['./recipe-card.component.sass']
 })
-export class RecepieCardComponent implements OnInit {
+export class RecipeCardComponent implements OnInit {
 
-    @Input() recepie: Recepie;
+    @Input() recipe: Recipe;
     @Output() removeFavorite = new EventEmitter();
     isFavorite: boolean;
     username: string;
@@ -22,10 +22,10 @@ export class RecepieCardComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
-            // check if user login is in the 'favoriteFor' section in recepie,
-            // which means that user added this recepie to his favorites
+            // check if user login is in the 'favoriteFor' section in recipe,
+            // which means that user added this recipe to his favorites
             this.username = this.auth.getUserName();
-            this.isFavorite = this.recepie.favoriteFor.indexOf(this.username) > -1;
+            this.isFavorite = this.recipe.favoriteFor.indexOf(this.username) > -1;
         }
     }
 
@@ -34,12 +34,12 @@ export class RecepieCardComponent implements OnInit {
             this.dialog.open(LoginRegisterDialogComponent);
         } else {
             this.isFavorite = !this.isFavorite;
-            this.api.put(`recepies/${this.recepie.shortName}/favorites`, {username: this.username})
+            this.api.put(`recipes/${this.recipe.shortName}/favorites`, {username: this.username})
                 .subscribe((result) => {
-                    this.recepie = result.result.value;
+                    this.recipe = result.result.value;
 
                     if (this.isFavorite === false) {
-                        this.removeFavorite.emit(this.recepie);
+                        this.removeFavorite.emit(this.recipe);
                     }
                 });
         }

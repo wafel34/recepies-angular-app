@@ -1,6 +1,6 @@
 @import '~@angular/material/theming'
 @import '../custom_theme.sass'
-@include angular-material-theme($recepies-app-theme)
+@include angular-material-theme($recipes-app-theme)
 .sidenav-container
     height: 100%
     width: 100%
@@ -16,7 +16,7 @@
     overflow-y: auto
     max-height: 100vh
     position: fixed
-    background-color: mat-color($recepies-app-accent)
+    background-color: mat-color($recipes-app-accent)
     &__button
         position: absolute
         top: 16px
@@ -28,7 +28,7 @@
         justify-content: space-around
         flex-shrink: 0
         &:first-of-type
-            border-bottom: 2px solid mat-color($recepies-app-primary, 900)
+            border-bottom: 2px solid mat-color($recipes-app-primary, 900)
             margin-bottom: 8px
     &__link
         display: flex
@@ -40,26 +40,26 @@
         border: 1px dashed
         margin-bottom: 8px
         border-radius: 2px
-        color: mat-color($recepies-app-primary, 900)
+        color: mat-color($recipes-app-primary, 900)
         transition: background-color .3s
         &:hover,
         &:focus
-            background-color: rgba(mat-color($recepies-app-primary), 0.2)
+            background-color: rgba(mat-color($recipes-app-primary), 0.2)
 
     .mat-icon.mat-accent
-        color: mat-color($recepies-app-primary)
+        color: mat-color($recipes-app-primary)
 
 .toolbar
     display: flex
     justify-content: space-between
     box-shadow: 0px 0px 2px 2px rgba(0,0,0,.25)
-    background-color: mat-color($recepies-app-primary)
+    background-color: mat-color($recipes-app-primary)
 
     &__button
-        color: mat-color($recepies-app-accent)
+        color: mat-color($recipes-app-accent)
 
     &__username
-        color: mat-color($recepies-app-accent)
+        color: mat-color($recipes-app-accent)
         font-size: 14px
         border-right: 1px solid
         padding: 0 15px
