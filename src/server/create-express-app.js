@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const ApiRouter = require('./api-router');
 const path = require('path');
-const compression = require('compression')''
+const compression = require('compression');
 
 function createExpressApp(database) {
     app.set('port', (process.env.PORT || 3000));
