@@ -14,6 +14,7 @@
     "watch": "run-p watch:*",
     "build": "ng build --env=prod",
     "run:server": "node src/server/index.js",
+    "build:prod": "ng build --env=prod --sourcemaps=false --extract-css=true --named-chunks=false --output-hashing=false && node src/server/minify",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
