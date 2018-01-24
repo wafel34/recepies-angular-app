@@ -1,7 +1,8 @@
-const MongoClient = require('mongodb').MongoClient;
-const databaseURL = "mongodb://127.0.0.1:27017/recipes-angular-db";
-const createExpressApp = require('./create-express-app');
 require('dotenv').config();
+const MongoClient = require('mongodb').MongoClient;
+const databaseURL = "mongodb://"+process.env.USER+":"+process.env.PASSWORD+"@ds115198.mlab.com:15198/recipes-angular-db";
+const createExpressApp = require('./create-express-app');
+
 MongoClient.connect(databaseURL, (err, db) => {
     if (err) {
         console.log(err);
