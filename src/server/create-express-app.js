@@ -5,6 +5,7 @@ const ApiRouter = require('./api-router');
 const path = require('path');
 
 function createExpressApp(database) {
+    app.set('port', (process.env.PORT || 3000));
     //midlewares
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, 'public')));
@@ -17,7 +18,7 @@ function createExpressApp(database) {
     });
 
     //listen
-    app.listen(3000, ()=>{
+    app.listen(app.get('port'), ()=>{
         console.log('App listening on port 3000');
     });
 }
