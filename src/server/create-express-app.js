@@ -6,6 +6,7 @@ const path = require('path');
 const compression = require('compression');
 const cache = require('apicache').middleware;
 
+
 function createExpressApp(database) {
     app.set('port', (process.env.PORT || 3000));
     //midlewares
