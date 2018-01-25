@@ -10,7 +10,7 @@ function createExpressApp(database) {
     app.set('port', (process.env.PORT || 3000));
     //midlewares
     app.use(bodyParser.json());
-    app.use(cache('1 day'));
+    app.use(cache('5 mins'));
     app.use(compression());
     app.use(express.static(path.join(__dirname, 'public')));
 
