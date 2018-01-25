@@ -4,11 +4,13 @@ const bodyParser = require('body-parser');
 const ApiRouter = require('./api-router');
 const path = require('path');
 const compression = require('compression');
+const cache = require('apicache').middleware;
 
 function createExpressApp(database) {
     app.set('port', (process.env.PORT || 3000));
     //midlewares
     app.use(bodyParser.json());
+    app.use(cache('1 day'));
     app.use(compression());
     app.use(express.static(path.join(__dirname, 'public')));
 
