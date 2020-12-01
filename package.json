@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/wafel34/fs-angular-app.git"
   },
+  "engines": {
+    "node": "8.9.4"
+  },
   "scripts": {
     "ng": "ng",
     "start": "run-s build run:server",
